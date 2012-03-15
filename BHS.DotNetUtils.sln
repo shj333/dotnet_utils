@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerwickHeights.Platform.Core", "BerwickHeights.Platform.Core\BerwickHeights.Platform.Core.csproj", "{6EAAC4D2-A84B-4123-83A4-565BD11E5B73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerwickHeights.Platform.IoC", "BerwickHeights.Platform.IoC\BerwickHeights.Platform.IoC.csproj", "{B461ECFF-C71A-4824-8B30-A637F4783B68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerwickHeights.Platform.IoC.Castle", "BerwickHeights.Platform.IoC.Castle\BerwickHeights.Platform.IoC.Castle.csproj", "{96ACA9EC-73E0-46AA-8734-3389AAE945DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerwickHeights.Platform.MethodLogging", "BerwickHeights.Platform.MethodLogging\BerwickHeights.Platform.MethodLogging.csproj", "{B9C67133-BACF-4D00-A6D2-193544A1AFDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerwickHeights.Platform.PerfTest", "BerwickHeights.Platform.PerfTest\BerwickHeights.Platform.PerfTest.csproj", "{40DF5163-D6AF-4160-BF38-EB0014146BCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerwickHeights.Platform.NHibernate", "BerwickHeights.Platform.NHibernate\BerwickHeights.Platform.NHibernate.csproj", "{2FE4A6E2-33F6-448D-BCF5-2E9C7A645ECA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6EAAC4D2-A84B-4123-83A4-565BD11E5B73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EAAC4D2-A84B-4123-83A4-565BD11E5B73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EAAC4D2-A84B-4123-83A4-565BD11E5B73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EAAC4D2-A84B-4123-83A4-565BD11E5B73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B461ECFF-C71A-4824-8B30-A637F4783B68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B461ECFF-C71A-4824-8B30-A637F4783B68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B461ECFF-C71A-4824-8B30-A637F4783B68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B461ECFF-C71A-4824-8B30-A637F4783B68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96ACA9EC-73E0-46AA-8734-3389AAE945DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96ACA9EC-73E0-46AA-8734-3389AAE945DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96ACA9EC-73E0-46AA-8734-3389AAE945DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96ACA9EC-73E0-46AA-8734-3389AAE945DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9C67133-BACF-4D00-A6D2-193544A1AFDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9C67133-BACF-4D00-A6D2-193544A1AFDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9C67133-BACF-4D00-A6D2-193544A1AFDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9C67133-BACF-4D00-A6D2-193544A1AFDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40DF5163-D6AF-4160-BF38-EB0014146BCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40DF5163-D6AF-4160-BF38-EB0014146BCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40DF5163-D6AF-4160-BF38-EB0014146BCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40DF5163-D6AF-4160-BF38-EB0014146BCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FE4A6E2-33F6-448D-BCF5-2E9C7A645ECA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FE4A6E2-33F6-448D-BCF5-2E9C7A645ECA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FE4A6E2-33F6-448D-BCF5-2E9C7A645ECA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FE4A6E2-33F6-448D-BCF5-2E9C7A645ECA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
