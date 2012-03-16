@@ -13,8 +13,8 @@
 
 using BerwickHeights.Platform.Core.Config;
 using BerwickHeights.Platform.Core.IdGen;
+using BerwickHeights.Platform.Core.Logging;
 using BerwickHeights.Platform.Core.Utils;
-using Castle.Core.Logging;
 using ServiceStack.Redis;
 
 namespace BerwickHeights.Platform.IdGen.Redis
@@ -59,7 +59,7 @@ namespace BerwickHeights.Platform.IdGen.Redis
             {
                 id = redis.IncrementValue(idKeyPrefix + applicationId + ":" + objectTypeId);
             }
-            if (logger.IsDebugEnabled) logger.Debug("Generated ID: " + id);
+            if (logger.IsDebugEnabled) logger.Debug("Generated ID from Redis: " + id);
             return id;
         }
 

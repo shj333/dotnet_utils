@@ -13,9 +13,9 @@
 
 using System;
 using BerwickHeights.Platform.Core.CurrentUser;
+using BerwickHeights.Platform.Core.Logging;
 using BerwickHeights.Platform.MethodLogging;
 using BerwickHeights.Platform.PerfTest.Svc;
-using Castle.Core.Logging;
 using Castle.DynamicProxy;
 
 namespace BerwickHeights.Platform.IoC.Castle
@@ -25,12 +25,6 @@ namespace BerwickHeights.Platform.IoC.Castle
     /// </summary>
     public class MethodLoggingInterceptor : MethodLoggingInterceptorBase, IInterceptor
     {
-        #region Private Fields
-
-        private readonly ILogger logger;
-
-        #endregion
-
         #region Constructors
 
         /// <summary>
@@ -39,9 +33,8 @@ namespace BerwickHeights.Platform.IoC.Castle
         public MethodLoggingInterceptor(IPerfTestSvc perfTestSvc, 
             ICurrentUserSvc currentUserSvc, 
             ILogger logger)
-            : base(perfTestSvc, currentUserSvc)
+            : base(perfTestSvc, currentUserSvc, logger)
         {
-            this.logger = logger;
         }
 
         /// <summary>
@@ -60,7 +53,7 @@ namespace BerwickHeights.Platform.IoC.Castle
         /// <inheritDoc/>
         public void Intercept(IInvocation invocation)
         {
-            InterceptMethodCall(invocation, logger.IsDebugEnabled, invocation.TargetType.Name, invocation.Method.Name, 
+            InterceptMethodCall(invocation, invocation.TargetType.Name, invocation.Method.Name, 
                 invocation.Method.GetParameters(), invocation.Arguments, invocation.Method.ReturnType);
         }
 
@@ -75,18 +68,6 @@ namespace BerwickHeights.Platform.IoC.Castle
             if (invocation == null) throw new Exception("Invocation data is of wrong type: " + data);
             invocation.Proceed();
             return invocation.ReturnValue;
-        }
-
-        /// <inheritDoc/>
-        protected override void LogErrorMessage(string message, Exception ex)
-        {
-            logger.Error(message, ex);
-        }
-
-        /// <inheritDoc/>
-        protected override void LogDebugMessage(string message)
-        {
-            if (logger.IsDebugEnabled) logger.Debug(message);
         }
 
         #endregion

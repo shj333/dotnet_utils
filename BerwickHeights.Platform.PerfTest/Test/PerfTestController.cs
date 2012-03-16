@@ -18,10 +18,10 @@ using System.Linq;
 using System.Management;
 using System.Reflection;
 using BerwickHeights.Platform.Core.CurrentUser;
+using BerwickHeights.Platform.Core.Logging;
 using BerwickHeights.Platform.PerfTest.Attrib;
 using BerwickHeights.Platform.PerfTest.Model;
 using BerwickHeights.Platform.PerfTest.Svc;
-using Castle.Core.Logging;
 
 namespace BerwickHeights.Platform.PerfTest.Test
 {

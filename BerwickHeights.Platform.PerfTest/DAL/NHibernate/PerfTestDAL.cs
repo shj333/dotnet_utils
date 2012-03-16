@@ -14,9 +14,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BerwickHeights.Platform.Core.Logging;
 using BerwickHeights.Platform.NHibernate;
 using BerwickHeights.Platform.PerfTest.Model;
-using Castle.Core.Logging;
 using Castle.Facilities.NHibernateIntegration;
 using NHibernate;
 

@@ -13,7 +13,7 @@
 
 using System;
 using BerwickHeights.Platform.Core.CurrentUser;
-using Castle.Core.Logging;
+using BerwickHeights.Platform.Core.Logging;
 using Castle.Facilities.NHibernateIntegration;
 using Castle.Facilities.NHibernateIntegration.Components.Dao;
 using NHibernate;

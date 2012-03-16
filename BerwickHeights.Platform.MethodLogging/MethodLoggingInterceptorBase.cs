@@ -17,6 +17,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using BerwickHeights.Platform.Core.CurrentUser;
+using BerwickHeights.Platform.Core.Logging;
 using BerwickHeights.Platform.PerfTest.Model;
 using BerwickHeights.Platform.PerfTest.Svc;
 
@@ -66,6 +67,7 @@ namespace BerwickHeights.Platform.MethodLogging
         
         private readonly IPerfTestSvc perfTestSvc;
         private readonly ICurrentUserSvc currentUserSvc;
+        private readonly ILogger logger;
 
         /// <summary>
         /// Interceptor config property name
@@ -80,16 +82,21 @@ namespace BerwickHeights.Platform.MethodLogging
         /// <summary>
         /// Constructor used when running performance tests
         /// </summary>
-        protected MethodLoggingInterceptorBase(IPerfTestSvc perfTestSvc, ICurrentUserSvc currentUserSvc)
+        protected MethodLoggingInterceptorBase(IPerfTestSvc perfTestSvc, 
+            ICurrentUserSvc currentUserSvc,
+            ILogger logger)
         {
             this.perfTestSvc = perfTestSvc;
             this.currentUserSvc = currentUserSvc;
+            this.logger = logger;
         }
 
         /// <summary>
         /// Production constructor (no PerfTest component)
         /// </summary>
-        protected MethodLoggingInterceptorBase(ICurrentUserSvc currentUserSvc) : this(null, currentUserSvc)
+        protected MethodLoggingInterceptorBase(ICurrentUserSvc currentUserSvc, 
+            ILogger logger)
+            : this(null, currentUserSvc, logger)
         {
         }
 
@@ -101,19 +108,17 @@ namespace BerwickHeights.Platform.MethodLogging
         /// </summary>
         /// <param name="data">Implementation-specific data (e.g., invocation data) that is returned in the call
         /// to ProceedWithMethodCall().</param>
-        /// <param name="isLogMethodCall">Whether or not to log this method call.</param>
         /// <param name="typeName">The type of the target class.</param>
         /// <param name="methodName">The name of the method being intercepted.</param>
         /// <param name="methodParameters">The parameters of the method being intercepted.</param>
         /// <param name="arguments">The argument values of the method being intercepted.</param>
         /// <param name="returnType">The return type of the method being intercepted.</param>
-        protected void InterceptMethodCall(object data, bool isLogMethodCall, string typeName,
-            string methodName, IList<ParameterInfo> methodParameters, IList<object> arguments,
-            Type returnType)
+        protected void InterceptMethodCall(object data, string typeName, string methodName, 
+            IList<ParameterInfo> methodParameters, IList<object> arguments, Type returnType)
         {
             StringBuilder sb = null;
 
-            if (isLogMethodCall)
+            if (logger.IsDebugEnabled)
             {
                 sb = new StringBuilder("Method Call: ");
                 DumpMethodCallData(typeName, methodName, methodParameters, arguments, false, sb);
@@ -145,17 +150,17 @@ namespace BerwickHeights.Platform.MethodLogging
                 sb = new StringBuilder("Exception executing: ");
                 DumpMethodCallData(typeName, methodName,methodParameters, arguments, true, sb);
                 sb.AppendLine(currentUserSvc.GetCurrentUserData().ToString());
-                LogErrorMessage(sb.ToString(), ex);
+                logger.Error(sb.ToString(), ex);
                 throw;
             }
 
-            if (isLogMethodCall && Config.DumpMethodReturnValue)
+            if (logger.IsDebugEnabled && Config.DumpMethodReturnValue)
             {
                 DumpMethodResult(typeName, returnType, returnValue, sb);
             }
             if (sb != null)
             {
-                LogDebugMessage(sb.ToString());
+                logger.Debug(sb.ToString());
             }
         }
         
@@ -167,19 +172,6 @@ namespace BerwickHeights.Platform.MethodLogging
         /// <param name="data">The value that was originally passed to InterceptMethodCall()</param>
         /// <returns>Returns the value that is returned from the intercepted method call.</returns>
         protected abstract object ProceedWithMethodCall(object data);
-
-        /// <summary>
-        /// Inheriting type implements this by logging the given error message and exception information.
-        /// </summary>
-        /// <param name="message">The error message.</param>
-        /// <param name="ex">The exception thrown by the intercepted method call.</param>
-        protected abstract void LogErrorMessage(string message, Exception ex);
-
-        /// <summary>
-        /// Inheriting type implements this by logging the given message.
-        /// </summary>
-        /// <param name="message">The message to log.</param>
-        protected abstract void LogDebugMessage(string message);
 
         private void DumpMethodCallData(string typeName, string methodName, IList<ParameterInfo> methodParameters, 
             IList<object> arguments, bool isException, StringBuilder sb)

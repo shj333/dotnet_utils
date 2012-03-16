@@ -13,6 +13,7 @@
 
 using System;
 using System.Configuration;
+using BerwickHeights.Platform.Core.Logging;
 
 namespace BerwickHeights.Platform.Core.Config
 {
@@ -21,6 +22,27 @@ namespace BerwickHeights.Platform.Core.Config
     /// </summary>
     public abstract class ConfigurationSvcBase : IConfigurationSvc
     {
+        #region Private Fields
+
+        /// <summary>
+        /// Logger
+        /// </summary>
+        protected readonly ILogger Logger;
+
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        protected ConfigurationSvcBase(ILogger logger)
+        {
+            Logger = logger;
+        }
+
+        #endregion
+
         #region Implementation of IConfigurationSvc
 
         /// <inheritDoc/>
@@ -28,6 +50,7 @@ namespace BerwickHeights.Platform.Core.Config
         {
             string cfgVal = GetValue(key);
             bool returnVal = (string.IsNullOrEmpty(cfgVal)) ? defaultVal : bool.Parse(cfgVal);
+            if (Logger.IsDebugEnabled) Logger.Debug("Config " + key + ": " + cfgVal);
             return returnVal;
         }
 
@@ -46,6 +69,7 @@ namespace BerwickHeights.Platform.Core.Config
                 if ((isMandatory) && (defaultVal == null)) throw new ConfigurationErrorsException("Configuration value '" + key + "' cannot be null");
                 cfgVal = defaultVal ?? string.Empty;
             }
+            if (Logger.IsDebugEnabled) Logger.Debug("Config " + key + ": " + cfgVal);
             return cfgVal;
         }
 
@@ -71,17 +95,20 @@ namespace BerwickHeights.Platform.Core.Config
         public int GetIntConfig(string key, bool isMandatory, int defaultVal = 0)
         {
             string valStr = GetStringConfig(key, isMandatory);
+            int cfgVal;
             try
             {
-                return int.Parse(valStr);
+                cfgVal = int.Parse(valStr);
             }
             catch (Exception e)
             {
                 if (!string.IsNullOrEmpty(valStr)) throw new ConfigurationErrorsException("Configuration value (" + key + "=" + valStr + ")  must be a number", e);
 
                 // Configuration data not available, use given default value
-                return defaultVal;
+                cfgVal = defaultVal;
             }
+            if (Logger.IsDebugEnabled) Logger.Debug("Config " + key + ": " + cfgVal);
+            return cfgVal;
         }
 
         #endregion

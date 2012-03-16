@@ -116,6 +116,18 @@ namespace BerwickHeights.Platform.IoC.Castle
         }
 
         /// <inheritDoc/>
+        public void RegisterComponent(Type serviceType, Type implType)
+        {
+            container.Register(Component.For(serviceType).ImplementedBy(implType));
+        }
+
+        /// <inheritDoc/>
+        public void RegisterComponentInstance(Type serviceType, object instance, string componentId)
+        {
+            container.Register(Component.For(serviceType).Named(componentId).Instance(instance));
+        }
+
+        /// <inheritDoc/>
         public void SetupASPNetMVCIntegration()
         {
             // If we're using ASP.Net MVC, then set up a controller factory that integrates with Castle Windsor container
