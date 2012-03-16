@@ -39,7 +39,7 @@ namespace BerwickHeights.Platform.PerfTest.Test
 
         /// <summary>
         /// Sets up a performance test so that results can be kept for the test. All results from calls 
-        /// to this method with the same testID are associated with a single test suite result record
+        /// to this method with the same testId are associated with a single test suite result record
         /// in the data store. Call EndPerfTest() when this performance test concludes so that
         /// results can be persisted to data store.
         /// </summary>
@@ -62,7 +62,7 @@ namespace BerwickHeights.Platform.PerfTest.Test
 
         /// <summary>
         /// Persists all test results for the given test ID in the data store. The results for 
-        /// all calls to BeginPerfTest() and EndPerfTest() for the given testID are aggregated
+        /// all calls to BeginPerfTest() and EndPerfTest() for the given testId are aggregated
         /// into a suite of test results and persisted.
         /// </summary>
         /// <param name="testId">Application-defined, unique ID for the current suite of tests. 

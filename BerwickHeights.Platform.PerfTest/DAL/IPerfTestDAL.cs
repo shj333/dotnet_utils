@@ -13,6 +13,7 @@
 
 using System;
 using System.Collections.Generic;
+using BerwickHeights.Platform.Core.IoC;
 using BerwickHeights.Platform.PerfTest.Model;
 
 namespace BerwickHeights.Platform.PerfTest.DAL
@@ -20,7 +21,7 @@ namespace BerwickHeights.Platform.PerfTest.DAL
     /// <summary>
     /// Data access layer for storing and retrieving performance monitoring results in data store.
     /// </summary>
-    public interface IPerfTestDAL
+    public interface IPerfTestDAL : IIoCComponent
     {
         /// <summary>
         /// Save given performance test results in data store.

@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MethodLoggingInterceptor.cs" />
     <Compile Include="CastleContainerManager.cs" />
     <Compile Include="CastleMVCControllerFactory.cs" />
     <Compile Include="InterceptorSelector.cs" />
@@ -70,6 +71,14 @@
     <ProjectReference Include="..\BerwickHeights.Platform.Core\BerwickHeights.Platform.Core.csproj">
       <Project>{6EAAC4D2-A84B-4123-83A4-565BD11E5B73}</Project>
       <Name>BerwickHeights.Platform.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BerwickHeights.Platform.MethodLogging\BerwickHeights.Platform.MethodLogging.csproj">
+      <Project>{B9C67133-BACF-4D00-A6D2-193544A1AFDF}</Project>
+      <Name>BerwickHeights.Platform.MethodLogging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BerwickHeights.Platform.PerfTest\BerwickHeights.Platform.PerfTest.csproj">
+      <Project>{40DF5163-D6AF-4160-BF38-EB0014146BCA}</Project>
+      <Name>BerwickHeights.Platform.PerfTest</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

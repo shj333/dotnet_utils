@@ -25,7 +25,7 @@ namespace BerwickHeights.Platform.PerfTest.Svc
     {
         /// <summary>
         /// Create or update the record for the given performance test results in data store. 
-        /// If the TestSuiteResultID property is set in the given data, then the record is
+        /// If the TestSuiteResultId property is set in the given data, then the record is
         /// updated in the data store; otherwise, a new record is created in the data store.
         /// All data associated with the test suite results (e.g., test results, system 
         /// information, timing data) are cascade persisted.

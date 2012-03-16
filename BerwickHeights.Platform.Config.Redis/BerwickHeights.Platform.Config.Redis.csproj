@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6EAAC4D2-A84B-4123-83A4-565BD11E5B73}</ProjectGuid>
+    <ProjectGuid>{DDF6C3AD-40EC-4C4B-9885-1C598E450EE6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BerwickHeights.Platform.Core</RootNamespace>
-    <AssemblyName>BerwickHeights.Platform.Core</AssemblyName>
+    <RootNamespace>BerwickHeights.Platform.Config.Redis</RootNamespace>
+    <AssemblyName>BerwickHeights.Platform.Config.Redis</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\BerwickHeights.Platform.Core.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\BerwickHeights.Platform.Config.Redis.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,9 +30,24 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\BerwickHeights.Platform.Core.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\BerwickHeights.Platform.Config.Redis.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.0.0.4001\lib\net40-client\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common">
+      <HintPath>..\packages\ServiceStack.Common.3.6.2\lib\net35\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\packages\ServiceStack.Common.3.6.2\lib\net35\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis">
+      <HintPath>..\packages\ServiceStack.Redis.3.5.8\lib\net35\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\packages\ServiceStack.Text.3.6.0\lib\net35\ServiceStack.Text.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -43,25 +58,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\ConfigurationSvcBase.cs" />
-    <Compile Include="Config\IConfigurationSvc.cs" />
-    <Compile Include="CurrentUser\CurrentUserData.cs" />
-    <Compile Include="CurrentUser\CurrentUserSvc.cs" />
-    <Compile Include="CurrentUser\ICurrentUserSvc.cs" />
-    <Compile Include="IdGen\IIdGeneratorSvc.cs" />
-    <Compile Include="IoC\IIoCComponent.cs" />
-    <Compile Include="IoC\IIoCContainerManager.cs" />
-    <Compile Include="IoC\InterceptorDescriptor.cs" />
-    <Compile Include="Model\AuditInfoBase.cs" />
+    <Compile Include="ConfigurationSvc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\DateTimeComparison.cs" />
-    <Compile Include="Utils\ParamChecker.cs" />
-    <Compile Include="Utils\StringUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BerwickHeights.Platform.Core\BerwickHeights.Platform.Core.csproj">
+      <Project>{6EAAC4D2-A84B-4123-83A4-565BD11E5B73}</Project>
+      <Name>BerwickHeights.Platform.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -93,7 +93,20 @@ namespace BerwickHeights.Platform.MethodLogging
         {
         }
 
-        
+        /// <summary>
+        /// Implementing type can use this to log the method call (if isLogMethodCall is set to true) and log any 
+        /// exceptions that are caught. The method calls the abstract method ProceedWithMethodCall() when it is
+        /// time to call the intercepted method. The data object passed into this method is returned in the call
+        /// to ProceedWithMethodCall().
+        /// </summary>
+        /// <param name="data">Implementation-specific data (e.g., invocation data) that is returned in the call
+        /// to ProceedWithMethodCall().</param>
+        /// <param name="isLogMethodCall">Whether or not to log this method call.</param>
+        /// <param name="typeName">The type of the target class.</param>
+        /// <param name="methodName">The name of the method being intercepted.</param>
+        /// <param name="methodParameters">The parameters of the method being intercepted.</param>
+        /// <param name="arguments">The argument values of the method being intercepted.</param>
+        /// <param name="returnType">The return type of the method being intercepted.</param>
         protected void InterceptMethodCall(object data, bool isLogMethodCall, string typeName,
             string methodName, IList<ParameterInfo> methodParameters, IList<object> arguments,
             Type returnType)

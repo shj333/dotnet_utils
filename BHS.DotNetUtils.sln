@@ -1,4 +1,3 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerwickHeights.Platform.Core", "BerwickHeights.Platform.Core\BerwickHeights.Platform.Core.csproj", "{6EAAC4D2-A84B-4123-83A4-565BD11E5B73}"
@@ -12,6 +11,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerwickHeights.Platform.PerfTest", "BerwickHeights.Platform.PerfTest\BerwickHeights.Platform.PerfTest.csproj", "{40DF5163-D6AF-4160-BF38-EB0014146BCA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerwickHeights.Platform.NHibernate", "BerwickHeights.Platform.NHibernate\BerwickHeights.Platform.NHibernate.csproj", "{2FE4A6E2-33F6-448D-BCF5-2E9C7A645ECA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerwickHeights.Platform.Config.Redis", "BerwickHeights.Platform.Config.Redis\BerwickHeights.Platform.Config.Redis.csproj", "{DDF6C3AD-40EC-4C4B-9885-1C598E450EE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +44,10 @@ Global
 		{2FE4A6E2-33F6-448D-BCF5-2E9C7A645ECA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FE4A6E2-33F6-448D-BCF5-2E9C7A645ECA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FE4A6E2-33F6-448D-BCF5-2E9C7A645ECA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDF6C3AD-40EC-4C4B-9885-1C598E450EE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDF6C3AD-40EC-4C4B-9885-1C598E450EE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDF6C3AD-40EC-4C4B-9885-1C598E450EE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDF6C3AD-40EC-4C4B-9885-1C598E450EE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
