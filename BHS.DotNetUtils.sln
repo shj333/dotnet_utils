@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerwickHeights.Platform.NHi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerwickHeights.Platform.Config.Redis", "BerwickHeights.Platform.Config.Redis\BerwickHeights.Platform.Config.Redis.csproj", "{DDF6C3AD-40EC-4C4B-9885-1C598E450EE6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerwickHeights.Platform.IdGen.Redis", "BerwickHeights.Platform.IdGen.Redis\BerwickHeights.Platform.IdGen.Redis.csproj", "{F2F39917-F554-4BF1-80A9-984529295FBB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{DDF6C3AD-40EC-4C4B-9885-1C598E450EE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDF6C3AD-40EC-4C4B-9885-1C598E450EE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDF6C3AD-40EC-4C4B-9885-1C598E450EE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2F39917-F554-4BF1-80A9-984529295FBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2F39917-F554-4BF1-80A9-984529295FBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2F39917-F554-4BF1-80A9-984529295FBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2F39917-F554-4BF1-80A9-984529295FBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -28,15 +28,16 @@ namespace BerwickHeights.Platform.Core.Config
 
         /// <summary>
         /// Returns a string configuration value based on the given key. Throws a ConfigurationErrorsException if 
-        /// the given key does not match any configuration values.
+        /// the given key does not match any configuration values and the provided defaultVal is null.
         /// </summary>
-        string GetStringConfig(string key);
+        string GetStringConfig(string key, string defaultVal = null);
 
         /// <summary>
         /// Returns a string configuration value based on the given key. Throws a ConfigurationErrorsException if 
-        /// isMandatory is true and the given key does not match any configuration values.
+        /// isMandatory is true, the provided defaultVal is null and the given key does not match any 
+        /// configuration values.
         /// </summary>
-        string GetStringConfig(string key, bool isMandatory);
+        string GetStringConfig(string key, bool isMandatory, string defaultVal = null);
 
         /// <summary>
         /// Returns a string array of configuration values by splitting the string value based on the given key into 
@@ -53,9 +54,8 @@ namespace BerwickHeights.Platform.Core.Config
         string[] GetStringArrayConfig(string key, bool isMandatory);
 
         /// <summary>
-        /// Returns an integer configuration value based on the given key.
-        /// Throws a ConfigurationErrorsException if isMandatory is true
-        /// and the given key does not match any configuration values.
+        /// Returns an integer configuration value based on the given key. Throws a ConfigurationErrorsException if 
+        /// isMandatory is true and the given key does not match any configuration values.
         /// </summary>
         int GetIntConfig(string key);
 

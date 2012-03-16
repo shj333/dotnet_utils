@@ -13,6 +13,7 @@
 
 using System.Configuration;
 using BerwickHeights.Platform.Core.Config;
+using BerwickHeights.Platform.Core.Utils;
 using Castle.Core.Logging;
 using ServiceStack.Redis;
 
@@ -46,6 +47,7 @@ namespace BerwickHeights.Platform.Config.Redis
             this.logger = logger;
             string tmp = ConfigurationManager.AppSettings["BHSConfigKeyPrefix"];
             configKeyPrefix = (!string.IsNullOrEmpty(tmp)) ? tmp : "BHS:ConfigKey:";
+            configKeyPrefix = StringUtils.MustEndWith(configKeyPrefix, ":");
             logger.Info("Using " + configKeyPrefix + " as prefix for configuration keys in Redis");
         }
 
@@ -59,12 +61,13 @@ namespace BerwickHeights.Platform.Config.Redis
         /// <param name="key">Key to configuration value.</param>
         protected override string GetValue(string key)
         {
+            string cfgVal;
             using (var redis = redisManager.GetReadOnlyClient())
             {
-                string cfgVal = redis.GetValue(configKeyPrefix + key);
-                if (logger.IsDebugEnabled) logger.Debug("Config " + key + ": " + cfgVal);
-                return cfgVal;
+                cfgVal = redis.GetValue(configKeyPrefix + key);
             }
+            if (logger.IsDebugEnabled) logger.Debug("Config " + key + ": " + cfgVal);
+            return cfgVal;
         }
 
         #endregion

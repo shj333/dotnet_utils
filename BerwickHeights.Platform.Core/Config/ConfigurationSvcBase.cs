@@ -32,19 +32,19 @@ namespace BerwickHeights.Platform.Core.Config
         }
 
         /// <inheritDoc/>
-        public string GetStringConfig(string key)
+        public string GetStringConfig(string key, string defaultVal)
         {
-            return GetStringConfig(key, true);
+            return GetStringConfig(key, true, defaultVal);
         }
 
         /// <inheritDoc/>
-        public string GetStringConfig(string key, bool isMandatory)
+        public string GetStringConfig(string key, bool isMandatory, string defaultVal = null)
         {
             string cfgVal = GetValue(key);
             if (string.IsNullOrEmpty(cfgVal))
             {
-                if (isMandatory) throw new ConfigurationErrorsException("Configuration value '" + key + "' cannot be null");
-                cfgVal = string.Empty;
+                if ((isMandatory) && (defaultVal == null)) throw new ConfigurationErrorsException("Configuration value '" + key + "' cannot be null");
+                cfgVal = defaultVal ?? string.Empty;
             }
             return cfgVal;
         }

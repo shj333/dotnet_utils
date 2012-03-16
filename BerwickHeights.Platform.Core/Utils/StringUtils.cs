@@ -26,5 +26,19 @@ namespace BerwickHeights.Platform.Core.Utils
         {
             return (obj == null) ? string.Empty : obj.ToString();
         }
+
+        /// <summary>
+        /// Returns a string that ends with the given endsWith parameter. Trims all leading and trailing 
+        /// white-space characters before checking to see if the given string ends with the given
+        /// endsWith parameter.
+        /// </summary>
+        /// <param name="str">The string to check.</param>
+        /// <param name="endsWith">The string that should end the given string.</param>
+        public static string MustEndWith(string str, string endsWith)
+        {
+            str = str.Trim();
+            if (!str.EndsWith(endsWith)) endsWith += ":";
+            return str;
+        }
     }
 }
