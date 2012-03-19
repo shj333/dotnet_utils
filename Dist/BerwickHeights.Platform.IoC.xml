@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BerwickHeights.Platform.IoC</name>
+    </assembly>
+    <members>
+        <member name="T:BerwickHeights.Platform.IoC.IoCContainerManagerFactory">
+            <summary>
+            Static class factory to get singleton instance of the IoC container manager.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerFactory.GetIoCContainerManager">
+            <summary>
+            Returns the IoC container manager configured in application configuration according to the key 
+            "IoCContainerType". The configured value should be the fully qualified type name of the IoC 
+            container manager (full type name and assembly). Defaults to Castle Windsor if configuration
+            key is not available.
+            </summary>
+        </member>
+    </members>
+</doc>

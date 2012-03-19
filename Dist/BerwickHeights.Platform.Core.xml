@@ -1,0 +1,590 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BerwickHeights.Platform.Core</name>
+    </assembly>
+    <members>
+        <member name="T:BerwickHeights.Platform.Core.Utils.DateTimeComparison">
+            <summary>
+            Utility static class for comparing DateTime objects.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Utils.DateTimeComparison.DateTimesAreEqualExcludingMilliseconds(System.DateTime,System.DateTime)">
+            <summary>
+            Compare two DateTime objects to see if they're equal excluding milliseconds.
+            </summary>
+            <param name="datetime1">The first DateTime</param>
+            <param name="datetime2">The second DateTime</param>
+        </member>
+        <member name="T:BerwickHeights.Platform.Core.Model.AuditInfoBase">
+            <summary>
+            Abstract base class for auditing information (who and when the row was created/last modified)
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Model.AuditInfoBase.#ctor">
+            <summary>
+            Empty constructor.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Model.AuditInfoBase.#ctor(System.DateTime,System.String,System.DateTime,System.String)">
+            <summary>
+            Constructor for new instance from database record.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Model.AuditInfoBase.#ctor(BerwickHeights.Platform.Core.Model.AuditInfoBase)">
+            <summary>
+            Constructor for cloning.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Model.AuditInfoBase.ToString">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Model.AuditInfoBase.Equals(System.Object)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Model.AuditInfoBase.GetHashCode">
+            <inheritDoc/>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.Model.AuditInfoBase.Created">
+            <summary>
+            When the record was created.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.Model.AuditInfoBase.CreatedBy">
+            <summary>
+            Who created the record.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.Model.AuditInfoBase.Modified">
+            <summary>
+            When the record was last modified.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.Model.AuditInfoBase.ModifiedBy">
+            <summary>
+            Who last modifed the record.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.Model.AuditInfoBase.DoNotSetModified">
+            <summary>
+            Used by NHibernate interceptor. If set to true, then the interceptor will
+            not set the Modified and ModifedBy columns to the current time and current
+            user before saving. Instead, the Modified and ModifiedBy columns will be 
+            saved as these values exist in the object. This is useful for cloning GBO
+            elements since these values should remain consistent between the original
+            and the clone. NB: This value is not persisted in the database.
+            </summary>
+        </member>
+        <member name="T:BerwickHeights.Platform.Core.Config.ConfigurationSvcBase">
+            <summary>
+            Abstract base class to be used by implementations of IConfiguration.
+            </summary>
+        </member>
+        <member name="T:BerwickHeights.Platform.Core.Config.IConfigurationSvc">
+            <summary>
+            Interface to a service that provides application configuration.
+            </summary>
+        </member>
+        <member name="T:BerwickHeights.Platform.Core.IoC.IIoCComponent">
+            <summary>
+            Empty interface that is used to find components to install in registration-by-convention logic. 
+            All components that are to be automatically registered using configuration-by-convention should
+            have their interfaces inherit this interface so that they'll be registered in the IoC container.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Config.IConfigurationSvc.GetBooleanConfig(System.String,System.Boolean)">
+            <summary>
+            Returns a boolean configuration value based on the given key or the given default value if the 
+            configuration key does not match.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Config.IConfigurationSvc.GetStringConfig(System.String,System.String)">
+            <summary>
+            Returns a string configuration value based on the given key. Throws a ConfigurationErrorsException if 
+            the given key does not match any configuration values and the provided defaultVal is null.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Config.IConfigurationSvc.GetStringConfig(System.String,System.Boolean,System.String)">
+            <summary>
+            Returns a string configuration value based on the given key. Throws a ConfigurationErrorsException if 
+            isMandatory is true, the provided defaultVal is null and the given key does not match any 
+            configuration values.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Config.IConfigurationSvc.GetStringArrayConfig(System.String)">
+            <summary>
+            Returns a string array of configuration values by splitting the string value based on the given key into 
+            a string array using a comma as a separator. Throws a ConfigurationErrorsException if the given key
+            does not match any configuration values.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Config.IConfigurationSvc.GetStringArrayConfig(System.String,System.Boolean)">
+            <summary>
+            Returns a string array of configuration values by splitting the string value based on the given key into a 
+            string array using a comma as a separator. Throws a ConfigurationErrorsException if isMandatory is true 
+            and the given key does not match any configuration values.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Config.IConfigurationSvc.GetIntConfig(System.String)">
+            <summary>
+            Returns an integer configuration value based on the given key. Throws a ConfigurationErrorsException if 
+            isMandatory is true and the given key does not match any configuration values.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Config.IConfigurationSvc.GetIntConfig(System.String,System.Boolean,System.Int32)">
+            <summary>
+            Returns an integer configuration value based on the given key.
+            Throws a ConfigurationErrorsException if isMandatory is true
+            and the given key does not match any configuration values.
+            </summary>
+        </member>
+        <member name="F:BerwickHeights.Platform.Core.Config.ConfigurationSvcBase.Logger">
+            <summary>
+            Logger
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Config.ConfigurationSvcBase.#ctor(BerwickHeights.Platform.Core.Logging.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Config.ConfigurationSvcBase.GetBooleanConfig(System.String,System.Boolean)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Config.ConfigurationSvcBase.GetStringConfig(System.String,System.String)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Config.ConfigurationSvcBase.GetStringConfig(System.String,System.Boolean,System.String)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Config.ConfigurationSvcBase.GetStringArrayConfig(System.String)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Config.ConfigurationSvcBase.GetStringArrayConfig(System.String,System.Boolean)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Config.ConfigurationSvcBase.GetIntConfig(System.String)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Config.ConfigurationSvcBase.GetIntConfig(System.String,System.Boolean,System.Int32)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Config.ConfigurationSvcBase.GetValue(System.String)">
+            <summary>
+            Implemented by inheriting class to retrieve configuration value from configuration data store.
+            </summary>
+            <param name="key">Key to configuration value.</param>
+        </member>
+        <member name="T:BerwickHeights.Platform.Core.Utils.StringUtils">
+            <summary>
+            Static utility methods for handling strings.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Utils.StringUtils.SafeToString(System.Object)">
+            <summary>
+            If the given object is null, then returns string.empty. Otherwise, returns obj.ToString(). 
+            This can be safely used to stringify an object, even if it is null.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Utils.StringUtils.MustEndWith(System.String,System.String)">
+            <summary>
+            Returns a string that ends with the given endsWith parameter. Trims all leading and trailing 
+            white-space characters before checking to see if the given string ends with the given
+            endsWith parameter.
+            </summary>
+            <param name="str">The string to check.</param>
+            <param name="endsWith">The string that should end the given string.</param>
+        </member>
+        <member name="T:BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc">
+            <summary>
+            Provides information about the user who is currently using this thread. The information is 
+            kept in the thread's local storage so that it can be retrieved at any point in the 
+            architectural stack.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc.GetCurrentUserData">
+            <summary>
+            Retrieves information about the user who currently using this thread. If the returned
+            object has the IsInitialized property set to false, then you must not use the 
+            retrieved information.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc.SetCurrentUserData(BerwickHeights.Platform.Core.CurrentUser.CurrentUserData)">
+            <summary>
+            Sets the user data in the thread's local storage according to the given current user data.
+            </summary>
+            <param name="currentUserData">The user data to be set in thread's local storage.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc.ResetCurrentUserData">
+            <summary>
+            Un-sets the user data in the thread's local storage so that it is no longer intialized. This is
+            important in multi-threaded situation so that the thread's local storage is cleared out before
+            another user begins using the thread.
+            </summary>
+        </member>
+        <member name="T:BerwickHeights.Platform.Core.Logging.ILogger">
+            <summary>
+            Interface to a loggging service. This is a facade to abstract away the logging implementation.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Logging.ILogger.Debug(System.String)">
+            <summary>
+            Logs a debug message.
+            </summary>
+            <param name="message">The message to log</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Logging.ILogger.Debug(System.String,System.Exception)">
+            <summary>
+            Logs a debug message.
+            </summary>
+            <param name="message">The message to log</param>
+            <param name="exception">The exception to log</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Logging.ILogger.Error(System.String)">
+            <summary>
+            Logs an error message.
+            </summary>
+            <param name="message">The message to log</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Logging.ILogger.Error(System.String,System.Exception)">
+            <summary>
+            Logs an error message.
+            </summary>
+            <param name="message">The message to log</param>
+            <param name="exception">The exception to log</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Logging.ILogger.Fatal(System.String)">
+            <summary>
+            Logs a fatal message.
+            </summary>
+            <param name="message">The message to log</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Logging.ILogger.Fatal(System.String,System.Exception)">
+            <summary>
+            Logs a fatal message.
+            </summary>
+            <param name="message">The message to log</param>
+            <param name="exception">The exception to log</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Logging.ILogger.Info(System.String)">
+            <summary>
+            Logs an info message.
+            </summary>
+            <param name="message">The message to log</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Logging.ILogger.Info(System.String,System.Exception)">
+            <summary>
+            Logs an info message.
+            </summary>
+            <param name="message">The message to log</param>
+            <param name="exception">The exception to log</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Logging.ILogger.Warn(System.String)">
+            <summary>
+            Logs a warn message.
+            </summary>
+            <param name="message">The message to log</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Logging.ILogger.Warn(System.String,System.Exception)">
+            <summary>
+            Logs a warn message.
+            </summary>
+            <param name="message">The message to log</param>
+            <param name="exception">The exception to log</param>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.Logging.ILogger.IsDebugEnabled">
+            <summary>
+            Determines if messages of priority "debug" will be logged.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.Logging.ILogger.IsErrorEnabled">
+            <summary>
+            Determines if messages of priority "error" will be logged.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.Logging.ILogger.IsFatalEnabled">
+            <summary>
+            Determines if messages of priority "fatal" will be logged.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.Logging.ILogger.IsInfoEnabled">
+            <summary>
+            Determines if messages of priority "info" will be logged.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.Logging.ILogger.IsWarnEnabled">
+            <summary>
+            Determines if messages of priority "warn" will be logged.
+            </summary>
+        </member>
+        <member name="T:BerwickHeights.Platform.Core.IoC.IIoCContainerManager">
+            <summary>
+            Interface to a type that manages an IoC container.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterInterceptors(System.Collections.Generic.IEnumerable{BerwickHeights.Platform.Core.IoC.InterceptorDescriptor})">
+            <summary>
+            Registers the given interceptors with the IoC container.
+            </summary>
+            <param name="descriptors">A list of descriptors for each interceptor.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterAutomatedDBTransactions">
+            <summary>
+            Registers any components neede for automated database transactions.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterComponentsFromAppConfig">
+            <summary>
+            Registers any components listed in the application configuration file.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterComponentsFromExternalFile(System.String)">
+            <summary>
+            Registers any components listed in an external configuration file.
+            </summary>
+            <param name="configFile">The name of the external config file.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterInProcComponents(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Registers components that are called in-process by looking for any types in the given assemblies that 
+            implement an interface that inherits from IIocComponent.
+            </summary>
+            <param name="assemblyNames">The list of assemblies to check for types that implement an interface that
+            inherits from IIocComponent.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterWCFClientComponents(System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+            Registers components that are proxied to a remote component by looking for any types in the given 
+            assemblies that implement an interface that inherits from IIocComponent.
+            </summary>
+            <param name="assemblyNames">The list of assemblies to check for types that implement an interface that
+            inherits from IIocComponent.</param>
+            <param name="wcfServiceUrl">The URL to the remote service that is hosting the remote component.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterWCFServiceComponents(System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+            Registers components that service remote requests by looking for any types in the given assemblies that 
+            implement an interface that inherits from IIocComponent.
+            </summary>
+            <param name="assemblyNames">The list of assemblies to check for types that implement an interface that
+            inherits from IIocComponent.</param>
+            <param name="wcfServiceUrl">The URL of the service that is hosting the component.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterComponent(System.Type,System.Type)">
+            <summary>
+            Registers the given implementation type as a singleton component in the IoC container with the given
+            service (interface) type.
+            </summary>
+            <param name="serviceType">The type (interface) of the component service.</param>
+            <param name="implType">The implementation type for the component.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterComponentInstance(System.Type,System.Object,System.String)">
+            <summary>
+            Registers the given instance as a component in the IoC container. The service type and component id are 
+            set as given.
+            </summary>
+            <param name="serviceType">The type (interface) of the component service.</param>
+            <param name="instance">The instance to register as a component.</param>
+            <param name="componentId">The id of the component.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.SetupASPNetMVCIntegration">
+            <summary>
+            Sets up integration between the IoC container and ASP.Net MVC so that controllers are generated by
+            the IoC container instead of ASP.NEt MVC framework.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.Resolve``1">
+            <summary>
+            Returns a component that implements the given interface.
+            </summary>
+            <typeparam name="T">The requested component interface.</typeparam>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.Resolve``1(System.String)">
+            <summary>
+            Returns a component that implements the given interface and has the given component id.
+            </summary>
+            <typeparam name="T">The requested component interface.</typeparam>
+            <param name="componentId">The id of the requested component.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.ResolveAll``1">
+            <summary>
+            Returns all components that implement the given interface.
+            </summary>
+            <typeparam name="T">The requested component interface.</typeparam>
+        </member>
+        <member name="T:BerwickHeights.Platform.Core.Utils.ParamChecker">
+            <summary>
+            Static class that checks the validity of method parameters.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Utils.ParamChecker.CheckParam(System.String,System.String)">
+            <summary>
+            If the given string parameter is null or empty, then throws an ArgumentException.
+            </summary>
+            <param name="paramValue">The string value of the parameter to check</param>
+            <param name="paramName">The name of the parameter (used in exception message if thrown)</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Utils.ParamChecker.CheckParamLength(System.String,System.String,System.Int32)">
+            <summary>
+            If the length of the given string parameter is greater than the given max length, then throws an ArgumentException.
+            </summary>
+            <param name="paramValue">The string value of the parameter to check</param>
+            <param name="paramName">The name of the parameter (used in exception message if thrown)</param>
+            <param name="maxLength">The maximum allowed length of the string parameter</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Utils.ParamChecker.CheckParam(System.Object,System.String)">
+            <summary>
+            If the given object parameter is null, then throws an ArgumentException.
+            </summary>
+            <param name="paramValue">The value of the parameter to check</param>
+            <param name="paramName">The name of the parameter (used in exception message if thrown)</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Utils.ParamChecker.CheckParam``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+            If the given object parameter is null or an empty list, then throws an ArgumentException.
+            </summary>
+            <param name="paramValue">The value of the parameter to check</param>
+            <param name="paramName">The name of the parameter (used in exception message if thrown)</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Utils.ParamChecker.CheckParamGT(System.Int32,System.Int32,System.String)">
+            <summary>
+            If the given object parameter is not greater than the given minimum, then throws an ArgumentException.
+            </summary>
+            <param name="paramValue">The value of the parameter to check</param>
+            <param name="minValue">The parameter 'paramValue' must be greater than this value</param>
+            <param name="paramName">The name of the parameter (used in exception message if thrown)</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Utils.ParamChecker.CheckParam(System.IO.Stream,System.String)">
+            <summary>
+            Checks the input stream. Throws an argument exception if the stream is null, zero length, or not readable.
+            </summary>
+            <param name="inputStream">The value of the parameter to check.</param>
+            <param name="paramName">The name of the parameter (used in exception message if thrown)</param>
+        </member>
+        <member name="T:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData">
+            <summary>
+            Holds information about the user who is currently using this thread. The information is 
+            kept in the thread's local storage so that it can be retrieved at any point in the 
+            architecture stack.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor for cases where current user has no additional attributes.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.#ctor(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Constructor for user that has additional attributes.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.GetAttribute(System.String)">
+            <summary>
+            Returns the attribute for this user that matches the given key or an empty string if no match is found.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.ToString">
+            <inheritDoc />
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.UserId">
+            <summary>
+            The unique ID of the user generated by the authentication system.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.UserName">
+            <summary>
+            The name of the current user (used for display purposes).
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.SessionId">
+            <summary>
+            This user's session.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.OperationId">
+            <summary>
+            The operation ID is used to group all operations that occur in a single transaction.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.IsInitialized">
+            <summary>
+            Whether or not the user information has been initialized for this thread. If the 
+            value of this property is false, then the data in this object must not be 
+            used.
+            </summary>
+        </member>
+        <member name="T:BerwickHeights.Platform.Core.IoC.InterceptorDescriptor">
+            <summary>
+            Describes an instance of an interceptor registered in the IoC container. Interceptors are typically used for 
+            Aspect Oriented Programming (AOP).
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.IoC.InterceptorDescriptor.#ctor(System.Type,System.Collections.IDictionary,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="interceptorType">The type of this interceptor.</param>
+            <param name="config">Interceptor-specific configuration for this instance as key-value pairs.</param>
+            <param name="namespacePrefixes">If the full type name of a component starts with one of these 
+            namespace prefixes, then this interceptor will intercept the component.</param>
+            <param name="ignoredTypes">The list of full type names for components that will not be 
+            intercepted by this interceptor. Used to prevent endless recursion in the IoC container of internal types 
+            that should not be intercepted.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.IoC.InterceptorDescriptor.ToString">
+            <inheritDoc />
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.IoC.InterceptorDescriptor.InterceptorType">
+            <summary>
+            The type of this interceptor.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.IoC.InterceptorDescriptor.Config">
+            <summary>
+            Interceptor-specific configuration for this instance as key-value pairs.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.IoC.InterceptorDescriptor.NamespacePrefixes">
+            <summary>
+            If the full type name of a component starts with one of these namespace prefixes, then this
+            interceptor will intercept the component.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.IoC.InterceptorDescriptor.IgnoredTypes">
+            <summary>
+            The list of full type names for components that will not be intercepted by this interceptor.  
+            Used to prevent endless recursion in the IoC container of internal types that should not be intercepted.
+            </summary>
+        </member>
+        <member name="T:BerwickHeights.Platform.Core.IdGen.IIdGeneratorSvc">
+            <summary>
+            ID Generator service.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.IdGen.IIdGeneratorSvc.GetNextId(System.String,System.Int32)">
+            <summary>
+            Returns a unique ID for the given application and application-defined object type. Uses a data store 
+            to guarantee uniqueness of the returned id's within the application/object type space.
+            </summary>
+            <param name="applicationId">The unique ID of the application.</param>
+            <param name="objectTypeId">The application-defined ID of the object type.</param>
+        </member>
+        <member name="T:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.GetCurrentUserData">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.SetCurrentUserData(BerwickHeights.Platform.Core.CurrentUser.CurrentUserData)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.ResetCurrentUserData">
+            <inheritDoc/>
+        </member>
+    </members>
+</doc>

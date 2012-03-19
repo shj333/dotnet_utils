@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BerwickHeights.Platform.Config.Redis</name>
+    </assembly>
+    <members>
+        <member name="T:BerwickHeights.Platform.Config.Redis.ConfigurationSvc">
+            <summary>
+            Implementation of IConfiguration service using Redis as a data store. All configuration keys are prefixed
+            by "BHS:ConfigKey" unless this prefix is overridden in DotNet application configuration using the 
+            "BHSConfigKeyPrefix" key in application configuration.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Config.Redis.ConfigurationSvc.#ctor(ServiceStack.Redis.IRedisClientsManager,BerwickHeights.Platform.Core.Logging.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Config.Redis.ConfigurationSvc.GetValue(System.String)">
+            <summary>
+            Gets configuration value for given key from Redis data store.
+            </summary>
+            <param name="key">Key to configuration value.</param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BerwickHeights.Platform.Email</name>
+    </assembly>
+    <members>
+        <member name="T:BerwickHeights.Platform.Email.EmailDeliveryResult">
+            <summary>
+            Result type for the EmailDeliverySvc.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Email.EmailDeliveryResult.#ctor(System.String)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="failureMessage">Message indicating nature of failure. Set to null if successful.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Email.EmailDeliveryResult.ToString">
+            <inheritDoc/>
+        </member>
+        <member name="P:BerwickHeights.Platform.Email.EmailDeliveryResult.IsSuccess">
+            <summary>
+            Whether or not the email was delivered successfully to SMTP server.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Email.EmailDeliveryResult.FailureMessage">
+            <summary>
+            A message as to why the email was not delivered successfully to SMTP server.
+            </summary>
+        </member>
+        <member name="T:BerwickHeights.Platform.Email.IEmailDeliverySvc">
+            <summary>
+            Interface to a service that sends email to an SMTP server for delivery.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Email.IEmailDeliverySvc.DeliverEmail(System.String,System.Collections.Generic.IEnumerable{System.String},System.String,System.String,System.Boolean,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.Net.Mail.Attachment})">
+            <summary>
+            Delivers given message to the configured SMTP server.
+            </summary>
+            <param name="from">The sender of the email.</param>
+            <param name="toList">The list of email recipients.</param>
+            <param name="subject">The subject of the email.</param>
+            <param name="messageBody">The message body for the email.</param>
+            <param name="isBodyHtml">Whether or not the message body is in HTML format.</param>
+            <param name="ccList">An optional list of people to receive a copy of the message. Set to
+            <code>null</code> if not applicable to the email message.</param>
+            <param name="bccList">An optional list of people to receive a blind copy of the message. Set to
+            <code>null</code> if not applicable to the email message.</param>
+            <param name="attachments">An optional list of attached files for the message. Set to <code>null</code> if 
+            email message as no attachments.</param>
+        </member>
+        <member name="T:BerwickHeights.Platform.Email.EmailDeliverySvc">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Email.EmailDeliverySvc.#ctor(BerwickHeights.Platform.Core.Config.IConfigurationSvc,BerwickHeights.Platform.Core.Logging.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Email.EmailDeliverySvc.DeliverEmail(System.String,System.Collections.Generic.IEnumerable{System.String},System.String,System.String,System.Boolean,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.Net.Mail.Attachment})">
+            <inheritDoc/>
+        </member>
+    </members>
+</doc>

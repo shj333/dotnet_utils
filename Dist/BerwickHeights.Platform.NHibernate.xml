@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BerwickHeights.Platform.NHibernate</name>
+    </assembly>
+    <members>
+        <member name="T:BerwickHeights.Platform.NHibernate.AuditInterceptor">
+            <summary>
+            NHibernate interceptor that fills in the Created, CreatedBy, Modified and
+            ModifiedBy columns before the record is written to the database.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.AuditInterceptor.#ctor(BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc)">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.AuditInterceptor.OnFlushDirty(System.Object,System.Object,System.Object[],System.Object[],System.String[],NHibernate.Type.IType[])">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.AuditInterceptor.OnSave(System.Object,System.Object,System.Object[],System.String[],NHibernate.Type.IType[])">
+            <inheritDoc/>
+        </member>
+        <member name="T:BerwickHeights.Platform.NHibernate.PersistenceDALBase">
+            <summary>
+            Abstract base class for DAL components.
+            </summary>
+        </member>
+        <member name="F:BerwickHeights.Platform.NHibernate.PersistenceDALBase.SessionManager">
+            <summary>
+            Used to manage NHibnerate sessions
+            </summary>
+        </member>
+        <member name="F:BerwickHeights.Platform.NHibernate.PersistenceDALBase.GenericDao">
+            <summary>
+            A set of methods that provide common functionality for NHibnerate
+            </summary>
+        </member>
+        <member name="F:BerwickHeights.Platform.NHibernate.PersistenceDALBase.Logger">
+            <summary>
+            Standard Castle logging component
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.PersistenceDALBase.#ctor(Castle.Facilities.NHibernateIntegration.ISessionManager,BerwickHeights.Platform.Core.Logging.ILogger)">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.PersistenceDALBase.#ctor(BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,Castle.Facilities.NHibernateIntegration.ISessionManager,BerwickHeights.Platform.Core.Logging.ILogger)">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.PersistenceDALBase.GetCurrentUserData">
+            <summary>
+            Get information about current user on this thread; throws exception if information is not set.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.PersistenceDALBase.GetAuditInfoHQL(System.String)">
+            <summary>
+            Adds Modified and ModifiedBy updates to HQL update query string.
+            </summary>
+            <param name="objectName">The name of the object that holds the Modified and ModifiedBy properties.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.PersistenceDALBase.AddAuditInfoVals(NHibernate.IQuery)">
+            <summary>
+            Sets Modified and ModifiedBy values in HQL update query. Modified value is set to now; ModifiedBy is set using CurrentUserSvc.
+            </summary>
+            <param name="query">The HQL update query.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.PersistenceDALBase.SetupPaging(NHibernate.IQuery,System.Int32,System.Int32)">
+            <summary>
+            Sets up NHibernate paging information if pageSize set to a number > 0.
+            </summary>
+            <param name="query">The NHibernate query.</param>
+            <param name="pageSize">The number of database records in each page. If set to 0, then this call does nothing.</param>
+            <param name="pageNumber">The 1-based page number.</param>
+        </member>
+    </members>
+</doc>

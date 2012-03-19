@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BerwickHeights.Platform.IdGen.Redis</name>
+    </assembly>
+    <members>
+        <member name="T:BerwickHeights.Platform.IdGen.Redis.IdGeneratorSvc">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.IdGen.Redis.IdGeneratorSvc.#ctor(ServiceStack.Redis.IRedisClientsManager,BerwickHeights.Platform.Core.Config.IConfigurationSvc,BerwickHeights.Platform.Core.Logging.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.IdGen.Redis.IdGeneratorSvc.GetNextId(System.String,System.Int32)">
+            <inheritDoc/>
+        </member>
+    </members>
+</doc>
