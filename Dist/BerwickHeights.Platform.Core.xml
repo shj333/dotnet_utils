@@ -133,9 +133,8 @@
         </member>
         <member name="M:BerwickHeights.Platform.Core.Config.IConfigurationSvc.GetIntConfig(System.String,System.Boolean,System.Int32)">
             <summary>
-            Returns an integer configuration value based on the given key.
-            Throws a ConfigurationErrorsException if isMandatory is true
-            and the given key does not match any configuration values.
+            Returns an integer configuration value based on the given key. Throws a ConfigurationErrorsException if 
+            isMandatory is true and the given key does not match any configuration values.
             </summary>
         </member>
         <member name="F:BerwickHeights.Platform.Core.Config.ConfigurationSvcBase.Logger">
@@ -481,6 +480,11 @@
         <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.GetAttribute(System.String)">
             <summary>
             Returns the attribute for this user that matches the given key or an empty string if no match is found.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.HasAttribute(System.String)">
+            <summary>
+            Returns whether or not the attributes list for this user contains the given key.
             </summary>
         </member>
         <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.ToString">
