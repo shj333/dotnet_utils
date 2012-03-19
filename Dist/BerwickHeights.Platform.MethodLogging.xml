@@ -10,27 +10,32 @@
             the method call.
             </summary>
         </member>
+        <member name="F:BerwickHeights.Platform.MethodLogging.MethodLoggingInterceptorBase.TraceMethodsConfigKey">
+            <summary>
+            Configuration key that turns method tracing on or off
+            </summary>
+        </member>
         <member name="F:BerwickHeights.Platform.MethodLogging.MethodLoggingInterceptorBase.ConfigPropertyName">
             <summary>
             Interceptor config property name
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.MethodLogging.MethodLoggingInterceptorBase.#ctor(BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc,BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,BerwickHeights.Platform.Core.Logging.ILogger)">
+        <member name="M:BerwickHeights.Platform.MethodLogging.MethodLoggingInterceptorBase.#ctor(BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc,BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,BerwickHeights.Platform.Core.Config.IConfigurationSvc,BerwickHeights.Platform.Core.Logging.ILogger)">
             <summary>
             Constructor used when running performance tests
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.MethodLogging.MethodLoggingInterceptorBase.#ctor(BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,BerwickHeights.Platform.Core.Logging.ILogger)">
+        <member name="M:BerwickHeights.Platform.MethodLogging.MethodLoggingInterceptorBase.#ctor(BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,BerwickHeights.Platform.Core.Config.IConfigurationSvc,BerwickHeights.Platform.Core.Logging.ILogger)">
             <summary>
             Production constructor (no PerfTest component)
             </summary>
         </member>
         <member name="M:BerwickHeights.Platform.MethodLogging.MethodLoggingInterceptorBase.InterceptMethodCall(System.Object,System.String,System.String,System.Collections.Generic.IList{System.Reflection.ParameterInfo},System.Collections.Generic.IList{System.Object},System.Type)">
             <summary>
-            Implementing type can use this to log the method call (if isLogMethodCall is set to true) and log any 
-            exceptions that are caught. The method calls the abstract method ProceedWithMethodCall() when it is
-            time to call the intercepted method. The data object passed into this method is returned in the call
-            to ProceedWithMethodCall().
+            Implementing type can use this to log the method call (if configured via 
+            MethodLoggingInterceptBase.TraceMethodsConfigKey configuration key) and log any exceptions that are caught.
+            The method calls the abstract method ProceedWithMethodCall() when it is time to call the intercepted 
+            method. The data object passed into this method is returned in the call to ProceedWithMethodCall().
             </summary>
             <param name="data">Implementation-specific data (e.g., invocation data) that is returned in the call
             to ProceedWithMethodCall().</param>

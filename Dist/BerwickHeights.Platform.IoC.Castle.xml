@@ -140,12 +140,12 @@
             Castle Windsor interceptor that logs method calls and any exceptions that occur during method call.
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.MethodLoggingInterceptor.#ctor(BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc,BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,BerwickHeights.Platform.Core.Logging.ILogger)">
+        <member name="M:BerwickHeights.Platform.IoC.Castle.MethodLoggingInterceptor.#ctor(BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc,BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,BerwickHeights.Platform.Core.Config.IConfigurationSvc,BerwickHeights.Platform.Core.Logging.ILogger)">
             <summary>
             Constructor used when running performance tests
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.MethodLoggingInterceptor.#ctor(BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,BerwickHeights.Platform.Core.Logging.ILogger)">
+        <member name="M:BerwickHeights.Platform.IoC.Castle.MethodLoggingInterceptor.#ctor(BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,BerwickHeights.Platform.Core.Config.IConfigurationSvc,BerwickHeights.Platform.Core.Logging.ILogger)">
             <summary>
             Production constructor (no PerfTest component)
             </summary>
