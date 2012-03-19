@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="Virtify.Platform.PerfTest"
+                   namespace="Virtify.Platform.PerfTest.Model">
+
+  <class name="TimingData" table="PERF_TimingData">
+    <id name="TimingDataID" access="property">
+      <generator class="identity" />
+    </id>
+    <property name="ClassName" access="property" />
+    <property name="MethodName" access="property" />
+    <property name="StartTime" access="property" />
+    <property name="EndTime" access="property" />
+    <property name="ElapsedTimeMSecs" access="property" />
+    <property name="Annotation" access="property" />
+
+    <many-to-one name="TestResult" column="TestResultID" class="TestResult" access="property" />
+  </class>
+</hibernate-mapping>
