@@ -55,7 +55,7 @@ namespace BerwickHeights.Platform.NHibernate
         {
             // Get user info from authentication system
             CurrentUserData curUserData = currentUserSvc.GetCurrentUserData();
-            Guid curUserId = (curUserData.Initialized) ? Guid.Parse(curUserData.UserId) : Guid.Empty;
+            Guid curUserId = (curUserData.IsInitialized) ? Guid.Parse(curUserData.UserId) : Guid.Empty;
 
             // See if setting Modified and ModifiedBy has been turned off by the caller
             AuditInfoBase info = entity as AuditInfoBase;
@@ -72,7 +72,7 @@ namespace BerwickHeights.Platform.NHibernate
                         state[i] = DateTime.UtcNow;
                     }
                     // Set CreatedBy to current user if not set yet and user info is available
-                    else if (("CreatedBy" == propertyNames[i]) && ((Guid)state[i] == Guid.Empty) && (curUserData.Initialized))
+                    else if (("CreatedBy" == propertyNames[i]) && ((Guid)state[i] == Guid.Empty) && (curUserData.IsInitialized))
                     {
                         state[i] = curUserId;
                     }
@@ -82,7 +82,7 @@ namespace BerwickHeights.Platform.NHibernate
                         state[i] = DateTime.UtcNow;
                     }
                     // Set ModifiedBy to current user if available
-                    else if (("ModifiedBy" == propertyNames[i]) && (!doNotSetModified) && (curUserData.Initialized))
+                    else if (("ModifiedBy" == propertyNames[i]) && (!doNotSetModified) && (curUserData.IsInitialized))
                     {
                         state[i] = curUserId;
                     }

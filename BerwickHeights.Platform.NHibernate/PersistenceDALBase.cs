@@ -68,7 +68,7 @@ namespace BerwickHeights.Platform.NHibernate
         {
             if (currentUserSvc == null) throw new Exception("CurrentUserSvc is not set");
             CurrentUserData currentUserData = currentUserSvc.GetCurrentUserData();
-            if (!currentUserData.Initialized)
+            if (!currentUserData.IsInitialized)
             {
                 throw new Exception("Current user data is uninitialized");
             }
