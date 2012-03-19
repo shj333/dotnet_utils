@@ -60,9 +60,8 @@ namespace BerwickHeights.Platform.Core.Config
         int GetIntConfig(string key);
 
         /// <summary>
-        /// Returns an integer configuration value based on the given key.
-        /// Throws a ConfigurationErrorsException if isMandatory is true
-        /// and the given key does not match any configuration values.
+        /// Returns an integer configuration value based on the given key. Throws a ConfigurationErrorsException if 
+        /// isMandatory is true and the given key does not match any configuration values.
         /// </summary>
         int GetIntConfig(string key, bool isMandatory, int defaultVal = 0);
     }

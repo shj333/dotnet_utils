@@ -49,6 +49,7 @@ namespace BerwickHeights.Platform.IoC.Castle
 
             // Register component for logging
             container.AddFacility(new LoggingFacility(LoggerImplementation.Log4net, "Log4Net.config"));
+            RegisterComponent(typeof(Core.Logging.ILogger), typeof(Logger));
         }
 
         #endregion

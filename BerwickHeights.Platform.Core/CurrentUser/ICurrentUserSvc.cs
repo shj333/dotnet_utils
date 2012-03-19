@@ -24,7 +24,7 @@ namespace BerwickHeights.Platform.Core.CurrentUser
     {
         /// <summary>
         /// Retrieves information about the user who currently using this thread. If the returned
-        /// object has the Initialized property set to false, then you must not use the 
+        /// object has the IsInitialized property set to false, then you must not use the 
         /// retrieved information.
         /// </summary>
         CurrentUserData GetCurrentUserData();

@@ -49,11 +49,11 @@ namespace BerwickHeights.Platform.Core.CurrentUser
         /// </summary>
         public CurrentUserData(string userId, string userName, string sessionId, IDictionary<string, string> attributes)
         {
-            Initialized = !string.IsNullOrEmpty(userId);
+            IsInitialized = !string.IsNullOrEmpty(userId);
             UserId = userId;
             UserName = userName;
             SessionId = sessionId;
-            OperationId = (Initialized) ? Guid.NewGuid().ToString() : string.Empty;
+            OperationId = (IsInitialized) ? Guid.NewGuid().ToString() : string.Empty;
             this.attributes = attributes ?? new Dictionary<string, string>();
         }
 
@@ -90,11 +90,19 @@ namespace BerwickHeights.Platform.Core.CurrentUser
         }
 
         /// <summary>
+        /// Returns whether or not the attributes list for this user contains the given key.
+        /// </summary>
+        public bool HasAttribute(string key)
+        {
+            return attributes.ContainsKey(key);
+        }
+
+        /// <summary>
         /// Whether or not the user information has been initialized for this thread. If the 
         /// value of this property is false, then the data in this object must not be 
         /// used.
         /// </summary>
-        public bool Initialized { get; private set; }
+        public bool IsInitialized { get; private set; }
 
         #endregion
 
@@ -108,7 +116,7 @@ namespace BerwickHeights.Platform.Core.CurrentUser
                    + ", UserName: " + UserName
                    + ", SessionId: " + SessionId
                    + ", OperationId: " + OperationId
-                   + ", Initialized: " + Initialized;
+                   + ", IsInitialized: " + IsInitialized;
         }
 
         #endregion
