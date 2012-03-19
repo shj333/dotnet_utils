@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerwickHeights.Platform.Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerwickHeights.Platform.IdGen.Redis.Test", "BerwickHeights.Platform.IdGen.Redis.Test\BerwickHeights.Platform.IdGen.Redis.Test.csproj", "{325E5D44-5FE9-4634-83F2-6D9E20BAD183}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerwickHeights.Platform.MethodLogging.Test", "BerwickHeights.Platform.MethodLogging.Test\BerwickHeights.Platform.MethodLogging.Test.csproj", "{D71CB96A-4122-40AD-A6C2-D2447919FE0B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +80,10 @@ Global
 		{325E5D44-5FE9-4634-83F2-6D9E20BAD183}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{325E5D44-5FE9-4634-83F2-6D9E20BAD183}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{325E5D44-5FE9-4634-83F2-6D9E20BAD183}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D71CB96A-4122-40AD-A6C2-D2447919FE0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D71CB96A-4122-40AD-A6C2-D2447919FE0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D71CB96A-4122-40AD-A6C2-D2447919FE0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D71CB96A-4122-40AD-A6C2-D2447919FE0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using BerwickHeights.Platform.Core.Config;
 using BerwickHeights.Platform.Core.CurrentUser;
 using BerwickHeights.Platform.Core.Logging;
 using BerwickHeights.Platform.PerfTest.Model;
@@ -67,8 +68,13 @@ namespace BerwickHeights.Platform.MethodLogging
         
         private readonly IPerfTestSvc perfTestSvc;
         private readonly ICurrentUserSvc currentUserSvc;
+        private readonly IConfigurationSvc configurationSvc;
         private readonly ILogger logger;
 
+        /// <summary>
+        /// Configuration key that turns method tracing on or off
+        /// </summary>
+        public const string TraceMethodsConfigKey = "TraceMethods";
         /// <summary>
         /// Interceptor config property name
         /// </summary>
@@ -84,10 +90,12 @@ namespace BerwickHeights.Platform.MethodLogging
         /// </summary>
         protected MethodLoggingInterceptorBase(IPerfTestSvc perfTestSvc, 
             ICurrentUserSvc currentUserSvc,
+            IConfigurationSvc configurationSvc,
             ILogger logger)
         {
             this.perfTestSvc = perfTestSvc;
             this.currentUserSvc = currentUserSvc;
+            this.configurationSvc = configurationSvc;
             this.logger = logger;
         }
 
@@ -95,16 +103,17 @@ namespace BerwickHeights.Platform.MethodLogging
         /// Production constructor (no PerfTest component)
         /// </summary>
         protected MethodLoggingInterceptorBase(ICurrentUserSvc currentUserSvc, 
+            IConfigurationSvc configurationSvc,
             ILogger logger)
-            : this(null, currentUserSvc, logger)
+            : this(null, currentUserSvc, configurationSvc, logger)
         {
         }
 
         /// <summary>
-        /// Implementing type can use this to log the method call (if isLogMethodCall is set to true) and log any 
-        /// exceptions that are caught. The method calls the abstract method ProceedWithMethodCall() when it is
-        /// time to call the intercepted method. The data object passed into this method is returned in the call
-        /// to ProceedWithMethodCall().
+        /// Implementing type can use this to log the method call (if configured via 
+        /// MethodLoggingInterceptBase.TraceMethodsConfigKey configuration key) and log any exceptions that are caught.
+        /// The method calls the abstract method ProceedWithMethodCall() when it is time to call the intercepted 
+        /// method. The data object passed into this method is returned in the call to ProceedWithMethodCall().
         /// </summary>
         /// <param name="data">Implementation-specific data (e.g., invocation data) that is returned in the call
         /// to ProceedWithMethodCall().</param>
@@ -117,8 +126,9 @@ namespace BerwickHeights.Platform.MethodLogging
             IList<ParameterInfo> methodParameters, IList<object> arguments, Type returnType)
         {
             StringBuilder sb = null;
+            bool isTraceMethods = configurationSvc.GetBooleanConfig(TraceMethodsConfigKey, false);
 
-            if (logger.IsDebugEnabled)
+            if (isTraceMethods)
             {
                 sb = new StringBuilder("Method Call: ");
                 DumpMethodCallData(typeName, methodName, methodParameters, arguments, false, sb);
@@ -154,13 +164,13 @@ namespace BerwickHeights.Platform.MethodLogging
                 throw;
             }
 
-            if (logger.IsDebugEnabled && Config.DumpMethodReturnValue)
+            if (isTraceMethods && Config.DumpMethodReturnValue)
             {
                 DumpMethodResult(typeName, returnType, returnValue, sb);
             }
-            if (sb != null)
+            if (isTraceMethods)
             {
-                logger.Debug(sb.ToString());
+                logger.Info(sb.ToString());
             }
         }
         

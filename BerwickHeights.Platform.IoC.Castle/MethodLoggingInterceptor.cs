@@ -12,6 +12,7 @@
  */
 
 using System;
+using BerwickHeights.Platform.Core.Config;
 using BerwickHeights.Platform.Core.CurrentUser;
 using BerwickHeights.Platform.Core.Logging;
 using BerwickHeights.Platform.MethodLogging;
@@ -32,8 +33,9 @@ namespace BerwickHeights.Platform.IoC.Castle
         /// </summary>
         public MethodLoggingInterceptor(IPerfTestSvc perfTestSvc, 
             ICurrentUserSvc currentUserSvc, 
+            IConfigurationSvc configurationSvc,
             ILogger logger)
-            : base(perfTestSvc, currentUserSvc, logger)
+            : base(perfTestSvc, currentUserSvc, configurationSvc, logger)
         {
         }
 
@@ -41,8 +43,9 @@ namespace BerwickHeights.Platform.IoC.Castle
         /// Production constructor (no PerfTest component)
         /// </summary>
         public MethodLoggingInterceptor(ICurrentUserSvc currentUserSvc,
+            IConfigurationSvc configurationSvc,
             ILogger logger)
-            : this(null, currentUserSvc, logger)
+            : this(null, currentUserSvc, configurationSvc, logger)
         {
         }
         
