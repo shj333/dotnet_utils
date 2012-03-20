@@ -398,6 +398,13 @@
             </summary>
             <typeparam name="T">The requested component interface.</typeparam>
         </member>
+        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.TryResolve``1">
+            <summary>
+            Attempts to return a component that implements the given interface; if not found in IoC container, then
+            returns default(T).
+            </summary>
+            <typeparam name="T">The requested component interface.</typeparam>
+        </member>
         <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.Resolve``1(System.String)">
             <summary>
             Returns a component that implements the given interface and has the given component id.

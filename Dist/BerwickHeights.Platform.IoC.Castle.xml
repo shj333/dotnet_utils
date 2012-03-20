@@ -97,10 +97,16 @@
         <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.Resolve``1">
             <inheritDoc/>
         </member>
+        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.TryResolve``1">
+            <inheritDoc/>
+        </member>
         <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.Resolve``1(System.String)">
             <inheritDoc/>
         </member>
         <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.ResolveAll``1">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.Dispose">
             <inheritDoc/>
         </member>
         <member name="T:BerwickHeights.Platform.IoC.Castle.CastleMVCControllerFactory">
