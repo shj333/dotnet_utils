@@ -29,7 +29,7 @@ namespace BerwickHeights.Platform.IoC.Castle
     /// <summary>
     /// Manages the IoC container for Windsor Castle.
     /// </summary>
-    public class CastleContainerManager : IIoCContainerManager
+    public class CastleContainerManager : IIoCContainerManager, IDisposable
     {
         #region Private Fields
 
@@ -145,6 +145,17 @@ namespace BerwickHeights.Platform.IoC.Castle
         }
 
         /// <inheritDoc/>
+        public T TryResolve<T>()
+        {
+            if (container.Kernel.HasComponent(typeof(T)))
+            {
+                return (T)container.Resolve(typeof(T));
+            }
+
+            return default(T);
+        }
+
+        /// <inheritDoc/>
         public T Resolve<T>(string componentId)
         {
             return container.Resolve<T>(componentId);
@@ -154,6 +165,16 @@ namespace BerwickHeights.Platform.IoC.Castle
         public IEnumerable<T> ResolveAll<T>()
         {
             return container.ResolveAll<T>();
+        }
+
+        #endregion
+
+        #region Implementation of IDisposable
+
+        /// <inheritDoc/>
+        public void Dispose()
+        {
+            container.Dispose();
         }
 
         #endregion

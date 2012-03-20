@@ -99,6 +99,13 @@ namespace BerwickHeights.Platform.Core.IoC
         T Resolve<T>();
 
         /// <summary>
+        /// Attempts to return a component that implements the given interface; if not found in IoC container, then
+        /// returns default(T).
+        /// </summary>
+        /// <typeparam name="T">The requested component interface.</typeparam>
+        T TryResolve<T>();
+
+        /// <summary>
         /// Returns a component that implements the given interface and has the given component id.
         /// </summary>
         /// <typeparam name="T">The requested component interface.</typeparam>
