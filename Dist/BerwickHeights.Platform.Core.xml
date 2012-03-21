@@ -277,6 +277,40 @@
             another user begins using the thread.
             </summary>
         </member>
+        <member name="T:BerwickHeights.Platform.Core.Xml.XsdDescriptor">
+            <summary>
+            Describes an embedded XSD file that is loaded by IXmlProcessorSvc.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Xml.XsdDescriptor.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="assemblyFileName">The file name of the assembly where the XSD file is embedded.</param>
+            <param name="xsdFileName">The file name of the embedded XSD file. Note that this is the key used to find 
+            the embedded resource within the assembly, so it may be more than just the original file name.</param>
+            <param name="targetNamespace">The schema targetNamespace property, or null to use the targetNamespace 
+            specified in the schema.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Xml.XsdDescriptor.ToString">
+            <inheritDoc />
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.Xml.XsdDescriptor.AssemblyFileName">
+            <summary>
+            The file name of the assembly where the XSD file is embedded.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.Xml.XsdDescriptor.XsdFileName">
+            <summary>
+            The file name of the embedded XSD file. Note that this is the key used to find the embedded
+            resource within the assembly, so it may be more than just the original file name.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.Xml.XsdDescriptor.TargetNamespace">
+            <summary>
+            The schema targetNamespace property, or null to use the targetNamespace specified in the schema.
+            </summary>
+        </member>
         <member name="T:BerwickHeights.Platform.Core.Logging.ILogger">
             <summary>
             Interface to a loggging service. This is a facade to abstract away the logging implementation.
@@ -672,40 +706,6 @@
         </member>
         <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.ResetCurrentUserData">
             <inheritDoc/>
-        </member>
-        <member name="T:BerwickHeights.Platform.Core.Xml.XsdDescriptor">
-            <summary>
-            Describes an embedded XSD file that is loaded by IXmlProcessorSvc.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.Core.Xml.XsdDescriptor.#ctor(System.String,System.String,System.String)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="assemblyFileName">The file name of the assembly where the XSD file is embedded.</param>
-            <param name="xsdFileName">The file name of the embedded XSD file. Note that this is the key used to find 
-            the embedded resource within the assembly, so it may be more than just the original file name.</param>
-            <param name="targetNamespace">The schema targetNamespace property, or null to use the targetNamespace 
-            specified in the schema.</param>
-        </member>
-        <member name="M:BerwickHeights.Platform.Core.Xml.XsdDescriptor.ToString">
-            <inheritDoc />
-        </member>
-        <member name="P:BerwickHeights.Platform.Core.Xml.XsdDescriptor.AssemblyFileName">
-            <summary>
-            The file name of the assembly where the XSD file is embedded.
-            </summary>
-        </member>
-        <member name="P:BerwickHeights.Platform.Core.Xml.XsdDescriptor.XsdFileName">
-            <summary>
-            The file name of the embedded XSD file. Note that this is the key used to find the embedded
-            resource within the assembly, so it may be more than just the original file name.
-            </summary>
-        </member>
-        <member name="P:BerwickHeights.Platform.Core.Xml.XsdDescriptor.TargetNamespace">
-            <summary>
-            The schema targetNamespace property, or null to use the targetNamespace specified in the schema.
-            </summary>
         </member>
     </members>
 </doc>
