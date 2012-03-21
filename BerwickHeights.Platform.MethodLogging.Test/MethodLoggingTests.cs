@@ -57,7 +57,7 @@ namespace BerwickHeights.Platform.MethodLogging.Test
                 "BerwickHeights.Platform.IoC.Castle.Logger",
                 "BerwickHeights.Platform.Config.Redis.ConfigurationSvc"
             };
-            iocContainer.RegisterInterceptors(new InterceptorDescriptor[] { new InterceptorDescriptor(typeof (MethodLoggingInterceptor), config, namespacePrefixes, ignoredTypes) });
+            iocContainer.RegisterInterceptors(new InterceptorDescriptor(typeof (MethodLoggingInterceptor), config, namespacePrefixes, ignoredTypes));
         }
 
         [TestFixtureTearDown]

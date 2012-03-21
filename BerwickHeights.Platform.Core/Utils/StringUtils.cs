@@ -37,7 +37,7 @@ namespace BerwickHeights.Platform.Core.Utils
         public static string MustEndWith(string str, string endsWith)
         {
             str = str.Trim();
-            if (!str.EndsWith(endsWith)) endsWith += ":";
+            if (!str.EndsWith(endsWith)) str += ":";
             return str;
         }
     }

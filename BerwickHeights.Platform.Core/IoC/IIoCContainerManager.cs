@@ -25,7 +25,7 @@ namespace BerwickHeights.Platform.Core.IoC
         /// Registers the given interceptors with the IoC container.
         /// </summary>
         /// <param name="descriptors">A list of descriptors for each interceptor.</param>
-        void RegisterInterceptors(IEnumerable<InterceptorDescriptor> descriptors);
+        void RegisterInterceptors(params InterceptorDescriptor[] descriptors);
 
         /// <summary>
         /// Registers any components neede for automated database transactions.
@@ -49,25 +49,25 @@ namespace BerwickHeights.Platform.Core.IoC
         /// </summary>
         /// <param name="assemblyNames">The list of assemblies to check for types that implement an interface that
         /// inherits from IIocComponent.</param>
-        void RegisterInProcComponents(IEnumerable<string> assemblyNames);
+        void RegisterInProcComponents(params string[] assemblyNames);
 
         /// <summary>
         /// Registers components that are proxied to a remote component by looking for any types in the given 
         /// assemblies that implement an interface that inherits from IIocComponent.
         /// </summary>
+        /// <param name="wcfServiceUrl">The URL to the remote service that is hosting the remote component.</param>
         /// <param name="assemblyNames">The list of assemblies to check for types that implement an interface that
         /// inherits from IIocComponent.</param>
-        /// <param name="wcfServiceUrl">The URL to the remote service that is hosting the remote component.</param>
-        void RegisterWCFClientComponents(IEnumerable<string> assemblyNames, string wcfServiceUrl);
+        void RegisterWCFClientComponents(string wcfServiceUrl, params string[] assemblyNames);
 
         /// <summary>
         /// Registers components that service remote requests by looking for any types in the given assemblies that 
         /// implement an interface that inherits from IIocComponent.
         /// </summary>
+        /// <param name="wcfServiceUrl">The URL of the service that is hosting the component.</param>
         /// <param name="assemblyNames">The list of assemblies to check for types that implement an interface that
         /// inherits from IIocComponent.</param>
-        /// <param name="wcfServiceUrl">The URL of the service that is hosting the component.</param>
-        void RegisterWCFServiceComponents(IEnumerable<string> assemblyNames, string wcfServiceUrl);
+        void RegisterWCFServiceComponents(string wcfServiceUrl, params string[] assemblyNames);
 
         /// <summary>
         /// Registers the given implementation type as a singleton component in the IoC container with the given

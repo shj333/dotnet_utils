@@ -37,7 +37,7 @@ namespace BerwickHeights.Platform.IoC.Castle
         /// Sets up a Castle InterceptorSelector (implements IModelInterceptorsSelector interface) which adds the 
         /// given interceptors to classes that are in the given namespaces but not in the given ignore list.
         /// </summary>
-        public InterceptorsInstaller(IEnumerable<InterceptorDescriptor> descriptors)
+        public InterceptorsInstaller(params InterceptorDescriptor[] descriptors)
         {
             this.descriptors = descriptors;
         }

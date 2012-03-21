@@ -57,7 +57,7 @@ namespace BerwickHeights.Platform.IoC.Castle
         #region Implementation of IIoCContainerManager
 
         /// <inheritDoc/>
-        public void RegisterInterceptors(IEnumerable<InterceptorDescriptor> descriptors)
+        public void RegisterInterceptors(params InterceptorDescriptor[] descriptors)
         {
             container.Install(new InterceptorsInstaller(descriptors));
         }
@@ -81,7 +81,7 @@ namespace BerwickHeights.Platform.IoC.Castle
         }
 
         /// <inheritDoc/>
-        public void RegisterInProcComponents(IEnumerable<string> assemblyNames)
+        public void RegisterInProcComponents(params string[] assemblyNames)
         {
             // Loop through given assembly names -- trim off leading/trailing space
             ILogger logger = container.Resolve<ILogger>();
@@ -105,13 +105,13 @@ namespace BerwickHeights.Platform.IoC.Castle
         }
 
         /// <inheritDoc/>
-        public void RegisterWCFClientComponents(IEnumerable<string> assemblyNames, string wcfServiceUrl)
+        public void RegisterWCFClientComponents(string wcfServiceUrl, params string[] assemblyNames)
         {
             throw new System.NotImplementedException();
         }
 
         /// <inheritDoc/>
-        public void RegisterWCFServiceComponents(IEnumerable<string> assemblyNames, string wcfServiceUrl)
+        public void RegisterWCFServiceComponents(string wcfServiceUrl, params string[] assemblyNames)
         {
             throw new System.NotImplementedException();
         }

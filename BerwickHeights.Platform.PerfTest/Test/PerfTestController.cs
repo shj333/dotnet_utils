@@ -56,8 +56,7 @@ namespace BerwickHeights.Platform.PerfTest.Test
         #region IPerfTestController Implementation
 
         /// <inheritDoc/>
-        public TestSuiteResult RunPerfTestsInAssemblies(IEnumerable<string> assemblyNames,
-            string annotation)
+        public TestSuiteResult RunPerfTestsInAssemblies(string annotation, params string[] assemblyNames)
         {
             if ((assemblyNames == null) || (!assemblyNames.Any()))
             {

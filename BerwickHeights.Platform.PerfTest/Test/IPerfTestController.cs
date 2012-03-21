@@ -11,7 +11,6 @@
  *  
  */
 
-using System.Collections.Generic;
 using BerwickHeights.Platform.Core.IoC;
 using BerwickHeights.Platform.PerfTest.Model;
 
@@ -31,11 +30,11 @@ namespace BerwickHeights.Platform.PerfTest.Test
         /// method. This method returns the resultant test run data, which is also stored 
         /// in the data store.
         /// </summary>
+        /// <param name="annotation">The user-supplied annotation for this test run.</param>
         /// <param name="assemblyNames">The list of assemblies to inspect for performance tests
         /// to run.</param>
-        /// <param name="annotation">The user-supplied annotation for this test run.</param>
         /// <returns>The resultant test run data, which is also stored in the data store.</returns>
-        TestSuiteResult RunPerfTestsInAssemblies(IEnumerable<string> assemblyNames, string annotation);
+        TestSuiteResult RunPerfTestsInAssemblies(string annotation, params string[] assemblyNames);
 
         /// <summary>
         /// Sets up a performance test so that results can be kept for the test. All results from calls 
