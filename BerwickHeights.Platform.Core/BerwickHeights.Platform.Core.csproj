@@ -58,6 +58,10 @@
     <Compile Include="Utils\DateTimeComparison.cs" />
     <Compile Include="Utils\ParamChecker.cs" />
     <Compile Include="Utils\StringUtils.cs" />
+    <Compile Include="Xml\IXmlProcessorSvc.cs" />
+    <Compile Include="Xml\ValidationResult.cs" />
+    <Compile Include="Xml\XmlProcessorSvc.cs" />
+    <Compile Include="Xml\XsdDescriptor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

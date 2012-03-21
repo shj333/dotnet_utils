@@ -51,6 +51,7 @@
       <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -59,16 +60,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestCore.cs" />
+    <Compile Include="CoreTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test.designer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="Log4Net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <EmbeddedResource Include="Test.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BerwickHeights.Platform.Config.Redis\BerwickHeights.Platform.Config.Redis.csproj">
+      <Project>{DDF6C3AD-40EC-4C4B-9885-1C598E450EE6}</Project>
+      <Name>BerwickHeights.Platform.Config.Redis</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BerwickHeights.Platform.Core\BerwickHeights.Platform.Core.csproj">
       <Project>{6EAAC4D2-A84B-4123-83A4-565BD11E5B73}</Project>
       <Name>BerwickHeights.Platform.Core</Name>
