@@ -229,7 +229,7 @@
             Controller for running performance tests. 
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Test.IPerfTestController.RunPerfTestsInAssemblies(System.Collections.Generic.IEnumerable{System.String},System.String)">
+        <member name="M:BerwickHeights.Platform.PerfTest.Test.IPerfTestController.RunPerfTestsInAssemblies(System.String,System.String[])">
             <summary>
             Runs all performance tests found in the given list of assemblies. Uses reflection
             to find any classes in the given list of assemblies that have methods marked with
@@ -239,9 +239,9 @@
             method. This method returns the resultant test run data, which is also stored 
             in the data store.
             </summary>
+            <param name="annotation">The user-supplied annotation for this test run.</param>
             <param name="assemblyNames">The list of assemblies to inspect for performance tests
             to run.</param>
-            <param name="annotation">The user-supplied annotation for this test run.</param>
             <returns>The resultant test run data, which is also stored in the data store.</returns>
         </member>
         <member name="M:BerwickHeights.Platform.PerfTest.Test.IPerfTestController.BeginPerfTest(System.String,System.String,System.String,System.String)">
@@ -290,7 +290,7 @@
             Constructor
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Test.PerfTestController.RunPerfTestsInAssemblies(System.Collections.Generic.IEnumerable{System.String},System.String)">
+        <member name="M:BerwickHeights.Platform.PerfTest.Test.PerfTestController.RunPerfTestsInAssemblies(System.String,System.String[])">
             <inheritDoc/>
         </member>
         <member name="M:BerwickHeights.Platform.PerfTest.Test.PerfTestController.BeginPerfTest(System.String,System.String,System.String,System.String)">
@@ -510,6 +510,11 @@
             <inheritDoc/>
         </member>
         <member name="M:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL.GetTestResults(System.DateTime,System.DateTime)">
+            <inheritDoc/>
+        </member>
+    </members>
+</doc>
+e)">
             <inheritDoc/>
         </member>
     </members>

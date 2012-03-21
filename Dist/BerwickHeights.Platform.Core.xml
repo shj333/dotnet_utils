@@ -431,7 +431,7 @@
             Interface to a type that manages an IoC container.
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterInterceptors(System.Collections.Generic.IEnumerable{BerwickHeights.Platform.Core.IoC.InterceptorDescriptor})">
+        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterInterceptors(BerwickHeights.Platform.Core.IoC.InterceptorDescriptor[])">
             <summary>
             Registers the given interceptors with the IoC container.
             </summary>
@@ -453,7 +453,7 @@
             </summary>
             <param name="configFile">The name of the external config file.</param>
         </member>
-        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterInProcComponents(System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterInProcComponents(System.String[])">
             <summary>
             Registers components that are called in-process by looking for any types in the given assemblies that 
             implement an interface that inherits from IIocComponent.
@@ -461,23 +461,23 @@
             <param name="assemblyNames">The list of assemblies to check for types that implement an interface that
             inherits from IIocComponent.</param>
         </member>
-        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterWCFClientComponents(System.Collections.Generic.IEnumerable{System.String},System.String)">
+        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterWCFClientComponents(System.String,System.String[])">
             <summary>
             Registers components that are proxied to a remote component by looking for any types in the given 
             assemblies that implement an interface that inherits from IIocComponent.
             </summary>
+            <param name="wcfServiceUrl">The URL to the remote service that is hosting the remote component.</param>
             <param name="assemblyNames">The list of assemblies to check for types that implement an interface that
             inherits from IIocComponent.</param>
-            <param name="wcfServiceUrl">The URL to the remote service that is hosting the remote component.</param>
         </member>
-        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterWCFServiceComponents(System.Collections.Generic.IEnumerable{System.String},System.String)">
+        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterWCFServiceComponents(System.String,System.String[])">
             <summary>
             Registers components that service remote requests by looking for any types in the given assemblies that 
             implement an interface that inherits from IIocComponent.
             </summary>
+            <param name="wcfServiceUrl">The URL of the service that is hosting the component.</param>
             <param name="assemblyNames">The list of assemblies to check for types that implement an interface that
             inherits from IIocComponent.</param>
-            <param name="wcfServiceUrl">The URL of the service that is hosting the component.</param>
         </member>
         <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterComponent(System.Type,System.Type)">
             <summary>
@@ -705,6 +705,11 @@
             <inheritDoc/>
         </member>
         <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.ResetCurrentUserData">
+            <inheritDoc/>
+        </member>
+    </members>
+</doc>
+M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.ResetCurrentUserData">
             <inheritDoc/>
         </member>
     </members>

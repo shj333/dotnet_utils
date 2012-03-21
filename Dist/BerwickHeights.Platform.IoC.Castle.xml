@@ -64,7 +64,7 @@
             Manages the IoC container for Windsor Castle.
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.RegisterInterceptors(System.Collections.Generic.IEnumerable{BerwickHeights.Platform.Core.IoC.InterceptorDescriptor})">
+        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.RegisterInterceptors(BerwickHeights.Platform.Core.IoC.InterceptorDescriptor[])">
             <inheritDoc/>
         </member>
         <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.RegisterAutomatedDBTransactions">
@@ -76,13 +76,13 @@
         <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.RegisterComponentsFromExternalFile(System.String)">
             <inheritDoc/>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.RegisterInProcComponents(System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.RegisterInProcComponents(System.String[])">
             <inheritDoc/>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.RegisterWCFClientComponents(System.Collections.Generic.IEnumerable{System.String},System.String)">
+        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.RegisterWCFClientComponents(System.String,System.String[])">
             <inheritDoc/>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.RegisterWCFServiceComponents(System.Collections.Generic.IEnumerable{System.String},System.String)">
+        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.RegisterWCFServiceComponents(System.String,System.String[])">
             <inheritDoc/>
         </member>
         <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.RegisterComponent(System.Type,System.Type)">
@@ -167,7 +167,7 @@
             Castle Windsor Installer that handles the insertion of interceptors into Castle components.
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.InterceptorsInstaller.#ctor(System.Collections.Generic.IEnumerable{BerwickHeights.Platform.Core.IoC.InterceptorDescriptor})">
+        <member name="M:BerwickHeights.Platform.IoC.Castle.InterceptorsInstaller.#ctor(BerwickHeights.Platform.Core.IoC.InterceptorDescriptor[])">
             <summary>
             Sets up a Castle InterceptorSelector (implements IModelInterceptorsSelector interface) which adds the 
             given interceptors to classes that are in the given namespaces but not in the given ignore list.
@@ -179,6 +179,11 @@
             given interceptors to classes that are in the given namespaces but not in the given ignore list.
             </summary>
             <param name="container">The Castle Windsor dependency injection container.</param>
+            <param name="store">Configuration for this container.</param>
+        </member>
+    </members>
+</doc>
+"container">The Castle Windsor dependency injection container.</param>
             <param name="store">Configuration for this container.</param>
         </member>
     </members>
