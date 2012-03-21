@@ -26,7 +26,7 @@ namespace BerwickHeights.Platform.Core.Xml
         /// the embedded resource within the assembly, so it may be more than just the original file name.</param>
         /// <param name="targetNamespace">The schema targetNamespace property, or null to use the targetNamespace 
         /// specified in the schema.</param>
-        public XsdDescriptor(string assemblyFileName, string xsdFileName, string targetNamespace)
+        public XsdDescriptor(string assemblyFileName, string xsdFileName, string targetNamespace = null)
         {
             AssemblyFileName = assemblyFileName;
             XsdFileName = xsdFileName;

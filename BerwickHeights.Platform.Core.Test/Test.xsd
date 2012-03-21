@@ -3,8 +3,12 @@
     targetNamespace="http://xsd.berwickheights.com/Test"
     elementFormDefault="qualified"
     xmlns="http://xsd.berwickheights.com/Test"
+    xmlns:test2="http://xsd.berwickheights.com/Test2"
     xmlns:mstns="http://tempuri.org/Test.xsd"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  
+  <xsd:import schemaLocation="XSD/Other/Test2.xsd" namespace="http://xsd.berwickheights.com/Test2" />
+
   <xsd:element name="TestData" type="TestDataType">
   </xsd:element>
   <xsd:complexType name="TestDataType">
@@ -13,7 +17,9 @@
       </xsd:element>
       <xsd:element name="Data2" type="xsd:string">
       </xsd:element>
+      <xsd:element name="Data3" type="test2:TestDataType2">
+      </xsd:element>
     </xsd:sequence>
-    <xsd:attribute name="Data3" type="xsd:string" />
+    <xsd:attribute name="Data4" type="xsd:string" />
   </xsd:complexType>
 </xsd:schema>

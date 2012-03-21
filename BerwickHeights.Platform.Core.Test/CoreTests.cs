@@ -83,16 +83,19 @@ namespace BerwickHeights.Platform.Core.Test
         public void TestXml()
         {
             xmlProcessorSvc = iocContainer.Resolve<IXmlProcessorSvc>();
-            xmlProcessorSvc.LoadXsdSchema(new XsdDescriptor("BerwickHeights.Platform.Core.Test.dll", "BerwickHeights.Platform.Core.Test.Test.xsd", null));
+            xmlProcessorSvc.LoadXsdSchema(new XsdDescriptor("BerwickHeights.Platform.Core.Test.dll", "BerwickHeights.Platform.Core.Test.Test.xsd"));
+            xmlProcessorSvc.LoadXsdSchema(new XsdDescriptor("BerwickHeights.Platform.Core.Test.dll", "BerwickHeights.Platform.Core.Test.XSD.Other.Test2.xsd"));
 
-            TestDataType data = new TestDataType() { Data1 = "data1", Data2 = "data2", Data3 = "data3" };
+            TestDataType data = new TestDataType() { Data1 = "data1", Data2 = "data2", Data3 = new TestDataType2() { Data21="data21", Data22 = "data22"} };
             string xml = xmlProcessorSvc.Serialize(data);
             ValidationResult result = xmlProcessorSvc.Validate(xml);
             Assert.IsTrue(result.IsValid);
             TestDataType data2 = xmlProcessorSvc.Deserialize<TestDataType>(xml);
             Assert.AreEqual(data.Data1, data2.Data1);
             Assert.AreEqual(data.Data2, data2.Data2);
-            Assert.AreEqual(data.Data3, data2.Data3);
+            Assert.AreEqual(data.Data3.Data21, data2.Data3.Data21);
+            Assert.AreEqual(data.Data3.Data22, data2.Data3.Data22);
+            Assert.AreEqual(data.Data4, data2.Data4);
 
             result = xmlProcessorSvc.Validate("<?xml version=\"1.0\"?><TestData xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" Data4=\"data3\" xmlns=\"http://xsd.berwickheights.com/Test\"><Data5>data1</Data5><Data6>data2</Data6></TestData>");
             Assert.IsFalse(result.IsValid);

@@ -73,6 +73,9 @@
     <EmbeddedResource Include="Test.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="XSD\Other\Test2.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BerwickHeights.Platform.Config.Redis\BerwickHeights.Platform.Config.Redis.csproj">
@@ -92,6 +95,7 @@
       <Name>BerwickHeights.Platform.IoC</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

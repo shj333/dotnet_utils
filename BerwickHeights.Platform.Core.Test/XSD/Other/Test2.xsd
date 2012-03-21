@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema id="Test2"
+    targetNamespace="http://xsd.berwickheights.com/Test2"
+    elementFormDefault="qualified"
+    xmlns="http://xsd.berwickheights.com/Test2"
+    xmlns:mstns="http://tempuri.org/Test2.xsd"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="TestDataType2">
+    <xsd:sequence>
+      <xsd:element name="Data21" type="xsd:string">
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="Data22" type="xsd:string" />
+  </xsd:complexType>  
+</xsd:schema>
