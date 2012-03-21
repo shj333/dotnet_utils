@@ -4,6 +4,30 @@
         <name>BerwickHeights.Platform.Core</name>
     </assembly>
     <members>
+        <member name="T:BerwickHeights.Platform.Core.Xml.ValidationResult">
+            <summary>
+            Model class for the response to XML validation in IXmlProcessorSvc.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Xml.ValidationResult.#ctor(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="validationErrors">List of validation errors, each on a new line.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Xml.ValidationResult.ToString">
+            <inheritDoc/>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.Xml.ValidationResult.IsValid">
+            <summary>
+            Whether or not the given XML is valid.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.Xml.ValidationResult.ValidationErrors">
+            <summary>
+            List of validation errors, each on a new line.
+            </summary>
+        </member>
         <member name="T:BerwickHeights.Platform.Core.Utils.DateTimeComparison">
             <summary>
             Utility static class for comparing DateTime objects.
@@ -174,6 +198,38 @@
             </summary>
             <param name="key">Key to configuration value.</param>
         </member>
+        <member name="T:BerwickHeights.Platform.Core.Xml.IXmlProcessorSvc">
+            <summary>
+            Interface to a service that provides XML processing (serialization, deserialization, validation).
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Xml.IXmlProcessorSvc.LoadXsdSchema(BerwickHeights.Platform.Core.Xml.XsdDescriptor)">
+            <summary>
+            Loads the given XSD into the set of schemas used to validate XML. The given XSD descriptor includes
+            the file name of the assembly where the XSD is embedded.
+            </summary>
+            <param name="xsd"></param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Xml.IXmlProcessorSvc.Serialize``1(``0)">
+            <summary>
+            Serialize the given object into an XML string.
+            </summary>
+            <typeparam name="T">The type of the object to serialize.</typeparam>
+            <param name="objectInstance">The object to serialize.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Xml.IXmlProcessorSvc.Deserialize``1(System.String)">
+            <summary>
+            Deserialize the given XML string into an object of the given type.
+            </summary>
+            <typeparam name="T">The type of the object that is deserialized.</typeparam>
+            <param name="xml">The XML string to deserialize into an object.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Xml.IXmlProcessorSvc.Validate(System.String)">
+            <summary>
+            Validates the given XML against the loaded XSD schemas (see IXmlProcessorSvc.LoadXsdSchema()).
+            </summary>
+            <param name="xml">The XML string to validate.</param>
+        </member>
         <member name="T:BerwickHeights.Platform.Core.Utils.StringUtils">
             <summary>
             Static utility methods for handling strings.
@@ -315,6 +371,26 @@
             <summary>
             Determines if messages of priority "warn" will be logged.
             </summary>
+        </member>
+        <member name="T:BerwickHeights.Platform.Core.Xml.XmlProcessorSvc">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Xml.XmlProcessorSvc.#ctor(BerwickHeights.Platform.Core.Logging.ILogger)">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Xml.XmlProcessorSvc.LoadXsdSchema(BerwickHeights.Platform.Core.Xml.XsdDescriptor)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Xml.XmlProcessorSvc.Serialize``1(``0)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Xml.XmlProcessorSvc.Deserialize``1(System.String)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Xml.XmlProcessorSvc.Validate(System.String)">
+            <inheritDoc/>
         </member>
         <member name="T:BerwickHeights.Platform.Core.IoC.IIoCContainerManager">
             <summary>
@@ -596,6 +672,40 @@
         </member>
         <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.ResetCurrentUserData">
             <inheritDoc/>
+        </member>
+        <member name="T:BerwickHeights.Platform.Core.Xml.XsdDescriptor">
+            <summary>
+            Describes an embedded XSD file that is loaded by IXmlProcessorSvc.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Xml.XsdDescriptor.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="assemblyFileName">The file name of the assembly where the XSD file is embedded.</param>
+            <param name="xsdFileName">The file name of the embedded XSD file. Note that this is the key used to find 
+            the embedded resource within the assembly, so it may be more than just the original file name.</param>
+            <param name="targetNamespace">The schema targetNamespace property, or null to use the targetNamespace 
+            specified in the schema.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Xml.XsdDescriptor.ToString">
+            <inheritDoc />
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.Xml.XsdDescriptor.AssemblyFileName">
+            <summary>
+            The file name of the assembly where the XSD file is embedded.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.Xml.XsdDescriptor.XsdFileName">
+            <summary>
+            The file name of the embedded XSD file. Note that this is the key used to find the embedded
+            resource within the assembly, so it may be more than just the original file name.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.Xml.XsdDescriptor.TargetNamespace">
+            <summary>
+            The schema targetNamespace property, or null to use the targetNamespace specified in the schema.
+            </summary>
         </member>
     </members>
 </doc>
