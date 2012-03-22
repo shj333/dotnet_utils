@@ -54,13 +54,13 @@ namespace BerwickHeights.Platform.Core.Xml
             Assembly schemaAssembly;
             try
             {
-                schemaAssembly = Assembly.LoadFrom(xsd.AssemblyFileName);
+                schemaAssembly = Assembly.Load(xsd.AssemblyName);
             }
             catch (Exception e)
             {
-                throw new Exception("Could not load assembly for embedded XSD " + xsd, e);
+                throw new Exception("Could not load assembly for " + xsd, e);
             }
-            Stream schemaStream = schemaAssembly.GetManifestResourceStream(xsd.XsdFileName);
+            Stream schemaStream = schemaAssembly.GetManifestResourceStream(xsd.XsdName);
             if (schemaStream == null)
             {
                 logger.Warn("Schema not found for " + xsd);

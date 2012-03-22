@@ -14,37 +14,35 @@
 namespace BerwickHeights.Platform.Core.Xml
 {
     /// <summary>
-    /// Describes an embedded XSD file that is loaded by IXmlProcessorSvc.
+    /// Describes an embedded XSD resource that is loaded from an assembly.
     /// </summary>
     public class XsdDescriptor
     {
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="assemblyFileName">The file name of the assembly where the XSD file is embedded.</param>
-        /// <param name="xsdFileName">The file name of the embedded XSD file. Note that this is the key used to find 
-        /// the embedded resource within the assembly, so it may be more than just the original file name.</param>
+        /// <param name="assemblyName">The long form of the assembly name for the assembly that contains the XSD file.</param>
+        /// <param name="xsdName">The case-sensitive name of the embedded XSD resource within the assembly.</param>
         /// <param name="targetNamespace">The schema targetNamespace property, or null to use the targetNamespace 
         /// specified in the schema.</param>
-        public XsdDescriptor(string assemblyFileName, string xsdFileName, string targetNamespace = null)
+        public XsdDescriptor(string assemblyName, string xsdName, string targetNamespace = null)
         {
-            AssemblyFileName = assemblyFileName;
-            XsdFileName = xsdFileName;
+            AssemblyName = assemblyName;
+            XsdName = xsdName;
             TargetNamespace = targetNamespace;
         }
 
         #region Public Properties
 
         /// <summary>
-        /// The file name of the assembly where the XSD file is embedded.
+        /// The long form of the assembly name for the assembly that contains the XSD file.
         /// </summary>
-        public string AssemblyFileName { get; private set; }
+        public string AssemblyName { get; private set; }
 
         /// <summary>
-        /// The file name of the embedded XSD file. Note that this is the key used to find the embedded
-        /// resource within the assembly, so it may be more than just the original file name.
+        /// The case-sensitive name of the embedded XSD resource within the assembly.
         /// </summary>
-        public string XsdFileName { get; private set; }
+        public string XsdName { get; private set; }
 
         /// <summary>
         /// The schema targetNamespace property, or null to use the targetNamespace specified in the schema.
@@ -59,8 +57,8 @@ namespace BerwickHeights.Platform.Core.Xml
         public override string ToString()
         {
             return "XsdDescriptor: "
-                   + "AssemblyFileName: " + AssemblyFileName
-                   + ", XsdFileName: " + XsdFileName
+                   + "AssemblyName: " + AssemblyName
+                   + ", XsdName: " + XsdName
                    + ", TargetNamespace: " + TargetNamespace;
         }
 

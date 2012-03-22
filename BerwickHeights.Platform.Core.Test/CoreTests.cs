@@ -83,8 +83,8 @@ namespace BerwickHeights.Platform.Core.Test
         public void TestXml()
         {
             xmlProcessorSvc = iocContainer.Resolve<IXmlProcessorSvc>();
-            xmlProcessorSvc.LoadXsdSchema(new XsdDescriptor("BerwickHeights.Platform.Core.Test.dll", "BerwickHeights.Platform.Core.Test.Test.xsd"));
-            xmlProcessorSvc.LoadXsdSchema(new XsdDescriptor("BerwickHeights.Platform.Core.Test.dll", "BerwickHeights.Platform.Core.Test.XSD.Other.Test2.xsd"));
+            xmlProcessorSvc.LoadXsdSchema(new XsdDescriptor("BerwickHeights.Platform.Core.Test", "BerwickHeights.Platform.Core.Test.Test.xsd"));
+            xmlProcessorSvc.LoadXsdSchema(new XsdDescriptor("BerwickHeights.Platform.Core.Test", "BerwickHeights.Platform.Core.Test.XSD.Other.Test2.xsd"));
 
             TestDataType data = new TestDataType() { Data1 = "data1", Data2 = "data2", Data3 = new TestDataType2() { Data21="data21", Data22 = "data22"} };
             string xml = xmlProcessorSvc.Serialize(data);
