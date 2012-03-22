@@ -279,31 +279,29 @@
         </member>
         <member name="T:BerwickHeights.Platform.Core.Xml.XsdDescriptor">
             <summary>
-            Describes an embedded XSD file that is loaded by IXmlProcessorSvc.
+            Describes an embedded XSD resource that is loaded from an assembly.
             </summary>
         </member>
         <member name="M:BerwickHeights.Platform.Core.Xml.XsdDescriptor.#ctor(System.String,System.String,System.String)">
             <summary>
             Constructor
             </summary>
-            <param name="assemblyFileName">The file name of the assembly where the XSD file is embedded.</param>
-            <param name="xsdFileName">The file name of the embedded XSD file. Note that this is the key used to find 
-            the embedded resource within the assembly, so it may be more than just the original file name.</param>
+            <param name="assemblyName">The long form of the assembly name for the assembly that contains the XSD file.</param>
+            <param name="xsdName">The case-sensitive name of the embedded XSD resource within the assembly.</param>
             <param name="targetNamespace">The schema targetNamespace property, or null to use the targetNamespace 
             specified in the schema.</param>
         </member>
         <member name="M:BerwickHeights.Platform.Core.Xml.XsdDescriptor.ToString">
             <inheritDoc />
         </member>
-        <member name="P:BerwickHeights.Platform.Core.Xml.XsdDescriptor.AssemblyFileName">
+        <member name="P:BerwickHeights.Platform.Core.Xml.XsdDescriptor.AssemblyName">
             <summary>
-            The file name of the assembly where the XSD file is embedded.
+            The long form of the assembly name for the assembly that contains the XSD file.
             </summary>
         </member>
-        <member name="P:BerwickHeights.Platform.Core.Xml.XsdDescriptor.XsdFileName">
+        <member name="P:BerwickHeights.Platform.Core.Xml.XsdDescriptor.XsdName">
             <summary>
-            The file name of the embedded XSD file. Note that this is the key used to find the embedded
-            resource within the assembly, so it may be more than just the original file name.
+            The case-sensitive name of the embedded XSD resource within the assembly.
             </summary>
         </member>
         <member name="P:BerwickHeights.Platform.Core.Xml.XsdDescriptor.TargetNamespace">
@@ -703,6 +701,13 @@
         </member>
         <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.SetCurrentUserData(BerwickHeights.Platform.Core.CurrentUser.CurrentUserData)">
             <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.ResetCurrentUserData">
+            <inheritDoc/>
+        </member>
+    </members>
+</doc>
+nheritDoc/>
         </member>
         <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.ResetCurrentUserData">
             <inheritDoc/>
