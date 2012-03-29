@@ -23,29 +23,37 @@ namespace BerwickHeights.Platform.IoC
     /// </summary>
     public static class IoCContainerManagerFactory
     {
+        private static IIoCContainerManager containerManager;
+        private static readonly object containerManagerLock = new object();
+
         /// <summary>
-        /// Returns the IoC container manager configured in application configuration according to the key 
-        /// "IoCContainerType". The configured value should be the fully qualified type name of the IoC 
-        /// container manager (full type name and assembly). Defaults to Castle Windsor if configuration
-        /// key is not available.
+        /// Returns the singleton instance of the IoC container manager configured in application configuration 
+        /// according to the key "IoCContainerType". The configured value should be the fully qualified type name 
+        /// of the IoC container manager (full type name and assembly). Defaults to Castle Windsor if 
+        /// application configuration data is not available for key "IoCContainerType".
         /// </summary>
         public static IIoCContainerManager GetIoCContainerManager()
         {
-            IIoCContainerManager containerManager;
-            string containerType = ConfigurationManager.AppSettings["IoCContainerType"];
-            if (string.IsNullOrEmpty(containerType))
+            lock (containerManagerLock)
             {
-                containerManager = new CastleContainerManager();
-            }
-            else
-            {
-                Type type = Type.GetType(containerType);
-                if (type == null) throw new Exception("Unknown IoC container manager type: " + containerType);
-                containerManager = Activator.CreateInstance(type) as IIoCContainerManager;
-                if (containerManager == null) throw new Exception("Configured IoC container manager type does not implement IIoCContainerManager: " + containerType);
-            }
+                if (containerManager == null)
+                {
+                    string containerType = ConfigurationManager.AppSettings["IoCContainerType"];
+                    if (string.IsNullOrEmpty(containerType))
+                    {
+                        containerManager = new CastleContainerManager();
+                    }
+                    else
+                    {
+                        Type type = Type.GetType(containerType);
+                        if (type == null) throw new Exception("Unknown IoC container manager type: " + containerType);
+                        containerManager = Activator.CreateInstance(type) as IIoCContainerManager;
+                        if (containerManager == null) throw new Exception("Configured IoC container manager type does not implement IIoCContainerManager: " + containerType);
+                    }
+                }
 
-            return containerManager;
+                return containerManager;
+            }
         }
     }
 }
