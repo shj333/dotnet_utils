@@ -11,10 +11,10 @@
         </member>
         <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerFactory.GetIoCContainerManager">
             <summary>
-            Returns the IoC container manager configured in application configuration according to the key 
-            "IoCContainerType". The configured value should be the fully qualified type name of the IoC 
-            container manager (full type name and assembly). Defaults to Castle Windsor if configuration
-            key is not available.
+            Returns the singleton instance of the IoC container manager configured in application configuration 
+            according to the key "IoCContainerType". The configured value should be the fully qualified type name 
+            of the IoC container manager (full type name and assembly). Defaults to Castle Windsor if 
+            application configuration data is not available for key "IoCContainerType".
             </summary>
         </member>
     </members>

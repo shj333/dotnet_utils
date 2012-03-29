@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BerwickHeights.Platform.ServiceStack</name>
+    </assembly>
+    <members>
+        <member name="T:BerwickHeights.Platform.ServiceStack.Logging.BHSLogFactory">
+            <summary>
+            ServiceStack Log Factory that produces a logger that uses the logger provided by the 
+            BerwickHeights.Platform.Core interface (BerwickHeights.Platform.Core.Logging.ILogger).
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogFactory.GetLogger(System.Type)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogFactory.GetLogger(System.String)">
+            <inheritDoc/>
+        </member>
+        <member name="T:BerwickHeights.Platform.ServiceStack.Logging.BHSLogger">
+            <summary>
+            ServiceStack Logger that uses the logger provided by BerwickHeights.Platform.Core interface 
+            (BerwickHeights.Platform.Core.Logging.ILogger).
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogger.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="typeName">Type name for object that is loging message.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogger.Debug(System.Object)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogger.Debug(System.Object,System.Exception)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogger.DebugFormat(System.String,System.Object[])">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogger.Error(System.Object)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogger.Error(System.Object,System.Exception)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogger.ErrorFormat(System.String,System.Object[])">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogger.Fatal(System.Object)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogger.Fatal(System.Object,System.Exception)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogger.FatalFormat(System.String,System.Object[])">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogger.Info(System.Object)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogger.Info(System.Object,System.Exception)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogger.InfoFormat(System.String,System.Object[])">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogger.Warn(System.Object)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogger.Warn(System.Object,System.Exception)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogger.WarnFormat(System.String,System.Object[])">
+            <inheritDoc/>
+        </member>
+        <member name="P:BerwickHeights.Platform.ServiceStack.Logging.BHSLogger.IsDebugEnabled">
+            <inheritDoc/>
+        </member>
+    </members>
+</doc>
