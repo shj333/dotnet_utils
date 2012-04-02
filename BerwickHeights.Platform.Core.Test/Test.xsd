@@ -17,9 +17,15 @@
       </xsd:element>
       <xsd:element name="Data2" type="xsd:string">
       </xsd:element>
-      <xsd:element name="Data3" type="test2:TestDataType2">
+      <xsd:element name="Data3" type="test2:TestDataType2" minOccurs="0" maxOccurs="1">
       </xsd:element>
+      <xsd:element name="AnyData" type="AnyDataType"/>
     </xsd:sequence>
-    <xsd:attribute name="Data4" type="xsd:string" />
+    <xsd:attribute name="Data4" type="xsd:string" />  
+  </xsd:complexType>
+  <xsd:complexType name="AnyDataType">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:any namespace="##any" minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </xsd:sequence>
   </xsd:complexType>
 </xsd:schema>

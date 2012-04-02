@@ -97,6 +97,11 @@ namespace BerwickHeights.Platform.Core.Test
             Assert.AreEqual(data.Data3.Data22, data2.Data3.Data22);
             Assert.AreEqual(data.Data4, data2.Data4);
 
+            // Test validating xsd:any
+            result = xmlProcessorSvc.Validate("<?xml version=\"1.0\"?><TestData xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" Data4=\"data3\" xmlns=\"http://xsd.berwickheights.com/Test\"><Data1>data1</Data1><Data2>data2</Data2><AnyData><xyx>foo</xyx></AnyData></TestData>");
+            Assert.IsTrue(result.IsValid);
+
+            // Test validating bad xml input
             result = xmlProcessorSvc.Validate("<?xml version=\"1.0\"?><TestData xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" Data4=\"data3\" xmlns=\"http://xsd.berwickheights.com/Test\"><Data5>data1</Data5><Data6>data2</Data6></TestData>");
             Assert.IsFalse(result.IsValid);
         }
