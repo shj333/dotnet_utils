@@ -20,7 +20,7 @@ namespace BerwickHeights.Platform.PerfTest.Model
     /// </summary>
     public abstract class PerfTestBase
     {
-        private const int AnnotationMaxLen = 500;
+        private const int annotationMaxLen = 500;
 
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace BerwickHeights.Platform.PerfTest.Model
         {
             StartTime = startTime;
             EndTime = endTime;
-            Annotation = (annotation.Length < AnnotationMaxLen) ? annotation : annotation.Substring(0, AnnotationMaxLen);
+            Annotation = (annotation.Length < annotationMaxLen) ? annotation : annotation.Substring(0, annotationMaxLen);
         }
 
 

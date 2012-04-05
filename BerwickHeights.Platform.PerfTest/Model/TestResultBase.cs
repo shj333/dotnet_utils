@@ -20,8 +20,8 @@ namespace BerwickHeights.Platform.PerfTest.Model
     /// </summary>
     public abstract class TestResultBase : PerfTestBase
     {
-        private const int ClassNameMaxLen = 200;
-        private const int MethodNameMaxLen = 200;
+        private const int classNameMaxLen = 200;
+        private const int methodNameMaxLen = 200;
         
         
         /// <summary>
@@ -60,8 +60,8 @@ namespace BerwickHeights.Platform.PerfTest.Model
 
         private void InitInstance(string className, string methodName)
         {
-            ClassName = (className.Length < ClassNameMaxLen) ? className : className.Substring(0, ClassNameMaxLen);
-            MethodName = (methodName.Length < MethodNameMaxLen) ? methodName : methodName.Substring(0, MethodNameMaxLen);
+            ClassName = (className.Length < classNameMaxLen) ? className : className.Substring(0, classNameMaxLen);
+            MethodName = (methodName.Length < methodNameMaxLen) ? methodName : methodName.Substring(0, methodNameMaxLen);
         }
 
 
