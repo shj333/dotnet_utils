@@ -91,12 +91,12 @@ namespace BerwickHeights.Platform.MethodLogging
         protected MethodLoggingInterceptorBase(IPerfTestSvc perfTestSvc, 
             ICurrentUserSvc currentUserSvc,
             IConfigurationSvc configurationSvc,
-            ILogger logger)
+            ILoggerFactory loggerFactory)
         {
             this.perfTestSvc = perfTestSvc;
             this.currentUserSvc = currentUserSvc;
             this.configurationSvc = configurationSvc;
-            this.logger = logger;
+            logger = loggerFactory.GetLogger(GetType());
         }
 
         /// <summary>
@@ -104,8 +104,8 @@ namespace BerwickHeights.Platform.MethodLogging
         /// </summary>
         protected MethodLoggingInterceptorBase(ICurrentUserSvc currentUserSvc, 
             IConfigurationSvc configurationSvc,
-            ILogger logger)
-            : this(null, currentUserSvc, configurationSvc, logger)
+            ILoggerFactory loggerFactory)
+            : this(null, currentUserSvc, configurationSvc, loggerFactory)
         {
         }
 

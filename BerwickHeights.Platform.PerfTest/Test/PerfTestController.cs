@@ -43,11 +43,11 @@ namespace BerwickHeights.Platform.PerfTest.Test
         /// Constructor
         /// </summary>
         public PerfTestController(IPerfTestSvc perfTestSvc, ICurrentUserSvc currentUserSvc,
-            ILogger logger)
+            ILoggerFactory loggerFactory)
         {
             this.perfTestSvc = perfTestSvc;
             this.currentUserSvc = currentUserSvc;
-            this.logger = logger;
+            logger = loggerFactory.GetLogger(GetType());
             resultsMap = new Dictionary<string, TestSuiteResult>();
         }
 

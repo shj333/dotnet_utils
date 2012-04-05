@@ -17,6 +17,7 @@ using System.Linq;
 using BerwickHeights.Platform.Core.Config;
 using BerwickHeights.Platform.Core.IoC;
 using BerwickHeights.Platform.IoC;
+using BerwickHeights.Platform.Logging.Log4Net;
 using NUnit.Framework;
 using ServiceStack.Redis;
 
@@ -26,21 +27,22 @@ namespace BerwickHeights.Platform.Config.Redis.Test
     public class ConfigRedisTests
     {
         private IIoCContainerManager iocContainer;
-        private const string TestKeyPrefix = "BHS:ConfigKey:";
-        private const string TestBoolCfgTrueKey = "TestBoolCfgTrue";
-        private const string TestBoolCfgFalseKey = "TestBoolFalseTrue";
-        private const string TestIntCfgKey = "TestIntCfg";
-        private const int TestInt = 753;
-        private const string TestStrCfgKey = "TestStrCfg";
-        private const string TestStr = "Test string 135";
-        private const string TestDfltStr = "Test string default";
-        private const string TestStrArrayCfgKey = "TestStrArrayCfg";
+        private const string testKeyPrefix = "BHS:ConfigKey:";
+        private const string testBoolCfgTrueKey = "TestBoolCfgTrue";
+        private const string testBoolCfgFalseKey = "TestBoolFalseTrue";
+        private const string testIntCfgKey = "TestIntCfg";
+        private const int testInt = 753;
+        private const string testStrCfgKey = "TestStrCfg";
+        private const string testStr = "Test string 135";
+        private const string testDfltStr = "Test string default";
+        private const string testStrArrayCfgKey = "TestStrArrayCfg";
         private readonly string[] testStrArray = new string[] { "aaa", "bbb", "ccc"};
 
         [TestFixtureSetUp]
         public void Init()
         {
             iocContainer = IoCContainerManagerFactory.GetIoCContainerManager();
+            iocContainer.RegisterLoggerFactory(new Log4NetLoggerFactory());
 
             string redisNetAddr = ConfigurationManager.AppSettings["RedisNetAddr"];
             if (string.IsNullOrEmpty(redisNetAddr)) throw new Exception("Network address for Redis server not configured (RedisNetAddr)");
@@ -49,13 +51,13 @@ namespace BerwickHeights.Platform.Config.Redis.Test
 
             using (IRedisClient redis = iocContainer.Resolve<IRedisClientsManager>().GetClient())
             {
-                redis.SetEntry(TestKeyPrefix + TestBoolCfgTrueKey, "true");
-                redis.SetEntry(TestKeyPrefix + TestBoolCfgFalseKey, "false");
-                redis.SetEntry(TestKeyPrefix + TestIntCfgKey, TestInt + "");
-                redis.SetEntry(TestKeyPrefix + TestStrCfgKey, TestStr);
+                redis.SetEntry(testKeyPrefix + testBoolCfgTrueKey, "true");
+                redis.SetEntry(testKeyPrefix + testBoolCfgFalseKey, "false");
+                redis.SetEntry(testKeyPrefix + testIntCfgKey, testInt + "");
+                redis.SetEntry(testKeyPrefix + testStrCfgKey, testStr);
                 string val = testStrArray.Aggregate("", (current, str) => current + (str + ","));
                 val = val.Substring(0, val.Length - 1);
-                redis.SetEntry(TestKeyPrefix + TestStrArrayCfgKey, val);
+                redis.SetEntry(testKeyPrefix + testStrArrayCfgKey, val);
             }
         }
 
@@ -65,40 +67,40 @@ namespace BerwickHeights.Platform.Config.Redis.Test
         {
             // Boolean config
             IConfigurationSvc configurationSvc = iocContainer.Resolve<IConfigurationSvc>();
-            Assert.IsTrue(configurationSvc.GetBooleanConfig(TestBoolCfgTrueKey, false));
-            Assert.IsFalse(configurationSvc.GetBooleanConfig(TestBoolCfgFalseKey, true));
-            Assert.IsTrue(configurationSvc.GetBooleanConfig(TestBoolCfgTrueKey + Guid.NewGuid(), true));
+            Assert.IsTrue(configurationSvc.GetBooleanConfig(testBoolCfgTrueKey, false));
+            Assert.IsFalse(configurationSvc.GetBooleanConfig(testBoolCfgFalseKey, true));
+            Assert.IsTrue(configurationSvc.GetBooleanConfig(testBoolCfgTrueKey + Guid.NewGuid(), true));
 
             // Int config
-            Assert.AreEqual(TestInt, configurationSvc.GetIntConfig(TestIntCfgKey));
+            Assert.AreEqual(testInt, configurationSvc.GetIntConfig(testIntCfgKey));
             bool exceptThrown = false;
             try
             {
-                Assert.AreEqual(TestInt, configurationSvc.GetIntConfig(TestIntCfgKey + Guid.NewGuid(), true));
+                Assert.AreEqual(testInt, configurationSvc.GetIntConfig(testIntCfgKey + Guid.NewGuid(), true));
             }
             catch (ConfigurationErrorsException)
             {
                 exceptThrown = true;
             }
             Assert.IsTrue(exceptThrown);
-            Assert.AreEqual(13, configurationSvc.GetIntConfig(TestIntCfgKey + Guid.NewGuid(), false, 13));
+            Assert.AreEqual(13, configurationSvc.GetIntConfig(testIntCfgKey + Guid.NewGuid(), false, 13));
 
             // String config
-            Assert.AreEqual(TestStr, configurationSvc.GetStringConfig(TestStrCfgKey, true));
+            Assert.AreEqual(testStr, configurationSvc.GetStringConfig(testStrCfgKey, true));
             exceptThrown = false;
             try
             {
-                Assert.AreEqual(TestStr, configurationSvc.GetStringConfig(TestStrCfgKey + Guid.NewGuid(), true));
+                Assert.AreEqual(testStr, configurationSvc.GetStringConfig(testStrCfgKey + Guid.NewGuid(), true));
             }
             catch (ConfigurationErrorsException)
             {
                 exceptThrown = true;
             }
             Assert.IsTrue(exceptThrown);
-            Assert.AreEqual(TestDfltStr, configurationSvc.GetStringConfig(TestStrCfgKey + Guid.NewGuid(), false, TestDfltStr));
+            Assert.AreEqual(testDfltStr, configurationSvc.GetStringConfig(testStrCfgKey + Guid.NewGuid(), false, testDfltStr));
 
             // String array config
-            string[] val = configurationSvc.GetStringArrayConfig(TestStrArrayCfgKey);
+            string[] val = configurationSvc.GetStringArrayConfig(testStrArrayCfgKey);
             Assert.AreEqual(testStrArray.Length, val.Length);
             for (int idx = 0; idx < testStrArray.Length; idx++) Assert.AreEqual(testStrArray[idx], val[idx]);
         }

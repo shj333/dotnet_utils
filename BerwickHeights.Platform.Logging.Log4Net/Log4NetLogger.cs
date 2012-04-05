@@ -12,19 +12,22 @@
  */
 
 using System;
-using BerwickHeights.Platform.Core.Logging;
-using CastleLogger=Castle.Core.Logging;
+using System.Reflection;
+using log4net.Core;
+using ILogger = BerwickHeights.Platform.Core.Logging.ILogger;
+using L4N = log4net;
 
-namespace BerwickHeights.Platform.IoC.Castle
+namespace BerwickHeights.Platform.Logging.Log4Net
 {
     /// <summary>
-    ///  Implementation of ILogger using Castle's logger.
+    ///  Implementation of ILogger using Log4Net logger.
     /// </summary>
-    public class Logger : ILogger
+    public class Log4NetLogger : ILogger
     {
         #region Private Fields
 
-        private readonly CastleLogger.ILogger logger;
+        private readonly L4N.Core.ILogger logger;
+        private static readonly Type declaringType = typeof(Log4NetLogger);
 
         #endregion
 
@@ -33,9 +36,17 @@ namespace BerwickHeights.Platform.IoC.Castle
         /// <summary>
         /// Constructor
         /// </summary>
-        public Logger(CastleLogger.ILogger logger)
+        public Log4NetLogger(Type consumerType)
         {
-            this.logger = logger;
+            logger = L4N.LogManager.GetLogger(Assembly.GetCallingAssembly(), consumerType).Logger;
+        }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public Log4NetLogger(string name)
+        {
+            logger = L4N.LogManager.GetLogger(Assembly.GetCallingAssembly(), name).Logger;
         }
 
         #endregion
@@ -43,78 +54,78 @@ namespace BerwickHeights.Platform.IoC.Castle
         #region Implementation of ILogger
 
         /// <inheritDoc/>
-        public bool IsDebugEnabled { get { return logger.IsDebugEnabled; } }
+        public bool IsDebugEnabled { get { return logger.IsEnabledFor(Level.Debug); } }
 
         /// <inheritDoc/>
-        public bool IsErrorEnabled { get { return logger.IsErrorEnabled; } }
+        public bool IsErrorEnabled { get { return logger.IsEnabledFor(Level.Error); } }
 
         /// <inheritDoc/>
-        public bool IsFatalEnabled { get { return logger.IsFatalEnabled; } }
+        public bool IsFatalEnabled { get { return logger.IsEnabledFor(Level.Fatal); } }
 
         /// <inheritDoc/>
-        public bool IsInfoEnabled { get { return logger.IsInfoEnabled; } }
+        public bool IsInfoEnabled { get { return logger.IsEnabledFor(Level.Info); } }
 
         /// <inheritDoc/>
-        public bool IsWarnEnabled { get { return logger.IsWarnEnabled; } }
+        public bool IsWarnEnabled { get { return logger.IsEnabledFor(Level.Warn); } }
 
         /// <inheritDoc/>
         public void Debug(string message)
         {
-            logger.Debug(message);
+            Debug(message, null);
         }
 
         /// <inheritDoc/>
         public void Debug(string message, Exception exception)
         {
-            logger.Debug(message, exception);
+            logger.Log(declaringType, Level.Debug, message, exception);
         }
 
         /// <inheritDoc/>
         public void Error(string message)
         {
-            logger.Error(message);
+            Error(message, null);
         }
 
         /// <inheritDoc/>
         public void Error(string message, Exception exception)
         {
-            logger.Error(message, exception);
+            logger.Log(declaringType, Level.Error, message, exception);
         }
 
         /// <inheritDoc/>
         public void Fatal(string message)
         {
-            logger.Fatal(message);
+            Fatal(message, null);
         }
 
         /// <inheritDoc/>
         public void Fatal(string message, Exception exception)
         {
-            logger.Fatal(message, exception);
+            logger.Log(declaringType, Level.Fatal, message, exception);
         }
 
         /// <inheritDoc/>
         public void Info(string message)
         {
-            logger.Info(message);
+            Info(message, null);
         }
 
         /// <inheritDoc/>
         public void Info(string message, Exception exception)
         {
-            logger.Info(message, exception);
+            logger.Log(declaringType, Level.Info, message, exception);
         }
 
         /// <inheritDoc/>
         public void Warn(string message)
         {
-            logger.Warn(message);
+            Warn(message, null);
         }
 
         /// <inheritDoc/>
         public void Warn(string message, Exception exception)
         {
-            logger.Warn(message, exception);
+            logger.Log(declaringType, Level.Warn, message, exception);
         }
 
         #endregion

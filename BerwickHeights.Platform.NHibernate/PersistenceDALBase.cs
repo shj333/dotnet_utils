@@ -17,6 +17,7 @@ using BerwickHeights.Platform.Core.Logging;
 using Castle.Facilities.NHibernateIntegration;
 using Castle.Facilities.NHibernateIntegration.Components.Dao;
 using NHibernate;
+using ILoggerFactory = BerwickHeights.Platform.Core.Logging.ILoggerFactory;
 
 namespace BerwickHeights.Platform.NHibernate
 {
@@ -28,15 +29,15 @@ namespace BerwickHeights.Platform.NHibernate
         /// <summary>
         /// Used to manage NHibnerate sessions
         /// </summary>
-        protected readonly ISessionManager SessionManager;
+        protected readonly ISessionManager sessionManager;
         /// <summary>
         /// A set of methods that provide common functionality for NHibnerate
         /// </summary>
-        protected readonly NHibernateGenericDao GenericDao;
+        protected readonly NHibernateGenericDao genericDao;
         /// <summary>
         /// Standard Castle logging component
         /// </summary>
-        protected readonly ILogger Logger;
+        protected readonly ILogger logger;
 
         private readonly ICurrentUserSvc currentUserSvc;
 
@@ -44,20 +45,23 @@ namespace BerwickHeights.Platform.NHibernate
         /// <summary>
         /// Constructor.
         /// </summary>
-        protected PersistenceDALBase(ISessionManager sessionManager, ILogger logger)
-            : this(null, sessionManager, logger)
+        protected PersistenceDALBase(ISessionManager sessionManager, 
+            ILoggerFactory loggerFactory)
+            : this(null, sessionManager, loggerFactory)
         {
         }
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        protected PersistenceDALBase(ICurrentUserSvc currentUserSvc, ISessionManager sessionManager, ILogger logger)
+        protected PersistenceDALBase(ICurrentUserSvc currentUserSvc, 
+            ISessionManager sessionManager, 
+            ILoggerFactory loggerFactory)
         {
             this.currentUserSvc = currentUserSvc;
-            Logger = logger;
-            SessionManager = sessionManager;
-            GenericDao = new NHibernateGenericDao(sessionManager);
+            this.sessionManager = sessionManager;
+            logger = loggerFactory.GetLogger(GetType());
+            genericDao = new NHibernateGenericDao(sessionManager);
         }
 
 

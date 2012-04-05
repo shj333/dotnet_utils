@@ -14,7 +14,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BerwickHeights.Platform.Core.Logging;
 using BerwickHeights.Platform.NHibernate;
 using BerwickHeights.Platform.PerfTest.Model;
 using Castle.Facilities.NHibernateIntegration;
@@ -26,8 +25,8 @@ namespace BerwickHeights.Platform.PerfTest.DAL.NHibernate
     public class PerfTestDAL : PersistenceDALBase, IPerfTestDAL
     {
         /// <inheritDoc/>
-        public PerfTestDAL(ISessionManager sessionManager, ILogger logger)
-            : base(sessionManager, logger)
+        public PerfTestDAL(ISessionManager sessionManager, Core.Logging.ILoggerFactory loggerFactory)
+            : base(sessionManager, loggerFactory)
         {
         }
 
@@ -51,18 +50,18 @@ namespace BerwickHeights.Platform.PerfTest.DAL.NHibernate
             }
 
             // Cascades save to persist/update children performance test data as well
-            GenericDao.Save(testSuiteResult);
+            genericDao.Save(testSuiteResult);
         }
 
         /// <inheritDoc/>
         public virtual TestSuiteResult GetTestResults(string testSuiteResultId)
         {
             TestSuiteResult testSuiteResult;
-            using (SessionManager.OpenSession())
+            using (sessionManager.OpenSession())
             {
                 try
                 {
-                    testSuiteResult = GenericDao.FindById(typeof(TestSuiteResult),
+                    testSuiteResult = genericDao.FindById(typeof(TestSuiteResult),
                         testSuiteResultId) as TestSuiteResult;
                     NHibernateUtil.Initialize(testSuiteResult);
                 }
@@ -78,7 +77,7 @@ namespace BerwickHeights.Platform.PerfTest.DAL.NHibernate
         /// <inheritDoc/>
         public virtual IEnumerable<TestSuiteResult> GetTestResults(DateTime startTime, DateTime endTime)
         {
-            using (ISession session = SessionManager.OpenSession())
+            using (ISession session = sessionManager.OpenSession())
             {
                 const string hql = "from TestSuiteResult tr "
                     + "where tr.StartTime >= :startTime "

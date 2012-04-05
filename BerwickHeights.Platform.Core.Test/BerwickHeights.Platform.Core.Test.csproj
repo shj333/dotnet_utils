@@ -94,6 +94,10 @@
       <Project>{B461ECFF-C71A-4824-8B30-A637F4783B68}</Project>
       <Name>BerwickHeights.Platform.IoC</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BerwickHeights.Platform.Logging.Log4Net\BerwickHeights.Platform.Logging.Log4Net.csproj">
+      <Project>{2B736EB1-14D9-40F3-ADA5-CFC6B611BD47}</Project>
+      <Name>BerwickHeights.Platform.Logging.Log4Net</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

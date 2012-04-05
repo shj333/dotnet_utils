@@ -16,9 +16,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using BerwickHeights.Platform.Core.IoC;
-using Castle.Core.Logging;
+using BerwickHeights.Platform.Core.Logging;
 using Castle.Facilities.AutoTx;
-using Castle.Facilities.Logging;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.Windsor;
@@ -46,10 +45,6 @@ namespace BerwickHeights.Platform.IoC.Castle
 
             // Add the CollectionResolver so that a collection of components can be found for a given type
             container.Kernel.Resolver.AddSubResolver(new CollectionResolver(container.Kernel));
-
-            // Register component for logging
-            container.AddFacility(new LoggingFacility(LoggerImplementation.Log4net, "Log4Net.config"));
-            RegisterComponent(typeof(Core.Logging.ILogger), typeof(Logger));
         }
 
         #endregion
@@ -60,6 +55,12 @@ namespace BerwickHeights.Platform.IoC.Castle
         public void RegisterInterceptors(params InterceptorDescriptor[] descriptors)
         {
             container.Install(new InterceptorsInstaller(descriptors));
+        }
+
+        /// <inheritDoc/>
+        public void RegisterLoggerFactory(ILoggerFactory loggerFactory)
+        {
+            RegisterComponentInstance(typeof(ILoggerFactory), loggerFactory, "LoggerFactory");
         }
 
         /// <inheritDoc/>
@@ -84,7 +85,7 @@ namespace BerwickHeights.Platform.IoC.Castle
         public void RegisterInProcComponents(params string[] assemblyNames)
         {
             // Loop through given assembly names -- trim off leading/trailing space
-            ILogger logger = container.Resolve<ILogger>();
+            ILogger logger = container.Resolve<ILoggerFactory>().GetLogger(GetType());
             foreach (string assemblyName in assemblyNames.Select(assembly => assembly.Trim()))
             {
                 try
@@ -107,13 +108,13 @@ namespace BerwickHeights.Platform.IoC.Castle
         /// <inheritDoc/>
         public void RegisterWCFClientComponents(string wcfServiceUrl, params string[] assemblyNames)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         /// <inheritDoc/>
         public void RegisterWCFServiceComponents(string wcfServiceUrl, params string[] assemblyNames)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         /// <inheritDoc/>

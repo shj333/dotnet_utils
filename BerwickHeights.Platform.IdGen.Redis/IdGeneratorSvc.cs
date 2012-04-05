@@ -38,10 +38,10 @@ namespace BerwickHeights.Platform.IdGen.Redis
         /// </summary>
         public IdGeneratorSvc(IRedisClientsManager redisManager,
             IConfigurationSvc configurationSvc, 
-            ILogger logger)
+            ILoggerFactory loggerFactory)
         {
             this.redisManager = redisManager;
-            this.logger = logger;
+            logger = loggerFactory.GetLogger(GetType());
             idKeyPrefix = configurationSvc.GetStringConfig("IdGenerator:$Internal$:KeyPrefix", "BHS:IdGenKey:");
             idKeyPrefix = StringUtils.MustEndWith(idKeyPrefix, ":");
             logger.Info("Using " + idKeyPrefix + " as prefix for id generation keys in Redis");

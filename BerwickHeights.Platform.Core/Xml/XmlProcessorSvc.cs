@@ -38,9 +38,9 @@ namespace BerwickHeights.Platform.Core.Xml
         /// <summary>
         /// Constructor.
         /// </summary>
-        public XmlProcessorSvc(ILogger logger)
+        public XmlProcessorSvc(ILoggerFactory loggerFactory)
         {
-            this.logger = logger;
+            logger = loggerFactory.GetLogger(GetType());
             schemaSet = new XmlSchemaSet();
         }
 

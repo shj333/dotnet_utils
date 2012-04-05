@@ -45,9 +45,9 @@ namespace BerwickHeights.Platform.Email
         /// Constructor
         /// </summary>
         public EmailDeliverySvc(IConfigurationSvc configurationSvc,
-            ILogger logger)
+            ILoggerFactory loggerFactory)
         {
-            this.logger = logger;
+            logger = loggerFactory.GetLogger(GetType());
 
             port = configurationSvc.GetIntConfig("SMTPPort", false, 25);
             enableSsl = configurationSvc.GetBooleanConfig("STMPEnableSSL", false);

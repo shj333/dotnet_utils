@@ -12,6 +12,7 @@
  */
 
 using System;
+using BerwickHeights.Platform.Core.Logging;
 
 namespace BerwickHeights.Platform.Core.CurrentUser
 {
@@ -19,7 +20,9 @@ namespace BerwickHeights.Platform.Core.CurrentUser
     public class CurrentUserSvc : ICurrentUserSvc
     {
         #region Private Fields
-        
+
+        private readonly ILogger logger;
+
         //
         // NB: By adding the ThreadStatic attribute to these private static fields, we keep the 
         // current user's information in the thread's local storage so that it can be 
@@ -35,8 +38,9 @@ namespace BerwickHeights.Platform.Core.CurrentUser
         /// <summary>
         /// Constructor
         /// </summary>
-        public CurrentUserSvc()
+        public CurrentUserSvc(ILoggerFactory loggerFactory)
         {
+            logger = loggerFactory.GetLogger(GetType());
         }
 
         #endregion
@@ -46,18 +50,22 @@ namespace BerwickHeights.Platform.Core.CurrentUser
         /// <inheritDoc/>
         public CurrentUserData GetCurrentUserData()
         {
-            return currentUserData ?? (currentUserData = new CurrentUserData());
+            CurrentUserData result = currentUserData ?? (currentUserData = new CurrentUserData());
+            if (logger.IsDebugEnabled) logger.Debug("Returning " + result);
+            return result;
         }
 
         /// <inheritDoc/>
         public void SetCurrentUserData(CurrentUserData currentUserData)
         {
+            if (logger.IsDebugEnabled) logger.Debug("Setting " + currentUserData);
             CurrentUserSvc.currentUserData = currentUserData;
         }
 
         /// <inheritDoc/>
         public void ResetCurrentUserData()
         {
+            if (logger.IsDebugEnabled) logger.Debug("Resetting " + currentUserData);
             currentUserData = new CurrentUserData();
         }
 

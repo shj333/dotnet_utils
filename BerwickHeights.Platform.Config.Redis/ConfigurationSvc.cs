@@ -40,13 +40,13 @@ namespace BerwickHeights.Platform.Config.Redis
         /// Constructor
         /// </summary>
         public ConfigurationSvc(IRedisClientsManager redisManager,
-            ILogger logger) : base(logger)
+            ILoggerFactory loggerFactory) : base(loggerFactory)
         {
             this.redisManager = redisManager;
             string tmp = ConfigurationManager.AppSettings["BHSConfigKeyPrefix"];
             configKeyPrefix = (!string.IsNullOrEmpty(tmp)) ? tmp : "BHS:ConfigKey:";
             configKeyPrefix = StringUtils.MustEndWith(configKeyPrefix, ":");
-            Logger.Info("Using " + configKeyPrefix + " as prefix for configuration keys in Redis");
+            logger.Info("Using " + configKeyPrefix + " as prefix for configuration keys in Redis");
         }
 
         #endregion
@@ -64,7 +64,6 @@ namespace BerwickHeights.Platform.Config.Redis
             {
                 cfgVal = redis.GetValue(configKeyPrefix + key);
             }
-            if (Logger.IsDebugEnabled) Logger.Debug("Config " + key + " in Redis: " + cfgVal);
             return cfgVal;
         }
 

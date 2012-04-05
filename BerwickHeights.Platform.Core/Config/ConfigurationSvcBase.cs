@@ -12,7 +12,9 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using BerwickHeights.Platform.Core.Logging;
 
 namespace BerwickHeights.Platform.Core.Config
@@ -27,7 +29,9 @@ namespace BerwickHeights.Platform.Core.Config
         /// <summary>
         /// Logger
         /// </summary>
-        protected readonly ILogger Logger;
+        protected readonly ILogger logger;
+
+        private IEnumerable<string> keysToHideInLog;
 
         #endregion
 
@@ -36,9 +40,9 @@ namespace BerwickHeights.Platform.Core.Config
         /// <summary>
         /// Constructor
         /// </summary>
-        protected ConfigurationSvcBase(ILogger logger)
+        protected ConfigurationSvcBase(ILoggerFactory loggerFactory)
         {
-            Logger = logger;
+            logger = loggerFactory.GetLogger(GetType());
         }
 
         #endregion
@@ -50,7 +54,7 @@ namespace BerwickHeights.Platform.Core.Config
         {
             string cfgVal = GetValue(key);
             bool returnVal = (string.IsNullOrEmpty(cfgVal)) ? defaultVal : bool.Parse(cfgVal);
-            if (Logger.IsDebugEnabled) Logger.Debug("Config " + key + ": " + cfgVal);
+            if (logger.IsDebugEnabled) logger.Debug("Config " + key + ": " + IsHideInLog(key, cfgVal));
             return returnVal;
         }
 
@@ -69,7 +73,7 @@ namespace BerwickHeights.Platform.Core.Config
                 if ((isMandatory) && (defaultVal == null)) throw new ConfigurationErrorsException("Configuration value '" + key + "' cannot be null");
                 cfgVal = defaultVal ?? string.Empty;
             }
-            if (Logger.IsDebugEnabled) Logger.Debug("Config " + key + ": " + cfgVal);
+            if (logger.IsDebugEnabled) logger.Debug("Config " + key + ": " + IsHideInLog(key, cfgVal));
             return cfgVal;
         }
 
@@ -107,7 +111,7 @@ namespace BerwickHeights.Platform.Core.Config
                 // Configuration data not available, use given default value
                 cfgVal = defaultVal;
             }
-            if (Logger.IsDebugEnabled) Logger.Debug("Config " + key + ": " + cfgVal);
+            if (logger.IsDebugEnabled) logger.Debug("Config " + key + ": " + IsHideInLog(key, cfgVal + ""));
             return cfgVal;
         }
 
@@ -120,6 +124,29 @@ namespace BerwickHeights.Platform.Core.Config
         /// </summary>
         /// <param name="key">Key to configuration value.</param>
         protected abstract string GetValue(string key);
+
+        #endregion
+
+        #region Protected Methods
+
+        /// <summary>
+        /// Checks the config key against the list of keys that should hide the value in the log file (e.g., passwords).
+        /// </summary>
+        /// <param name="key">Configuration key.</param>
+        /// <param name="value">Configuration value.</param>
+        /// <returns>"****" if the value should be hidden in the log; otherwise returns the configuration value.</returns>
+        protected string IsHideInLog(string key, string value)
+        {
+            if (keysToHideInLog == null)
+            {
+                // First time need to set the keys to search for hiding values
+                keysToHideInLog = new List<string>(new string[] { "pass" });
+                ((List<string>)keysToHideInLog).AddRange(GetStringArrayConfig("KeysToHideInLog", false)
+                    .Where(k => !string.IsNullOrEmpty(k)));
+            }
+
+            return (keysToHideInLog.Any(key.Contains)) ? "****" : value;
+        }
 
         #endregion
     }

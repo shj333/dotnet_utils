@@ -18,6 +18,7 @@ using BerwickHeights.Platform.Core.CurrentUser;
 using BerwickHeights.Platform.Core.IoC;
 using BerwickHeights.Platform.Core.Xml;
 using BerwickHeights.Platform.IoC;
+using BerwickHeights.Platform.Logging.Log4Net;
 using NUnit.Framework;
 
 namespace BerwickHeights.Platform.Core.Test
@@ -33,6 +34,7 @@ namespace BerwickHeights.Platform.Core.Test
         public void Init()
         {
             iocContainer = IoCContainerManagerFactory.GetIoCContainerManager();
+            iocContainer.RegisterLoggerFactory(new Log4NetLoggerFactory());
             iocContainer.RegisterComponent(typeof(ICurrentUserSvc), typeof(CurrentUserSvc));
             iocContainer.RegisterComponent(typeof(IXmlProcessorSvc), typeof(XmlProcessorSvc));
         }

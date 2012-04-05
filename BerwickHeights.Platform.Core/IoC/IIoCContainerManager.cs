@@ -13,6 +13,7 @@
 
 using System;
 using System.Collections.Generic;
+using BerwickHeights.Platform.Core.Logging;
 
 namespace BerwickHeights.Platform.Core.IoC
 {
@@ -26,6 +27,12 @@ namespace BerwickHeights.Platform.Core.IoC
         /// </summary>
         /// <param name="descriptors">A list of descriptors for each interceptor.</param>
         void RegisterInterceptors(params InterceptorDescriptor[] descriptors);
+
+        /// <summary>
+        /// Registers the given logger factory instance.
+        /// </summary>
+        /// <param name="loggerFactory">The instance of the logger factory to register.</param>
+        void RegisterLoggerFactory(ILoggerFactory loggerFactory);
 
         /// <summary>
         /// Registers any components neede for automated database transactions.

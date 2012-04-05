@@ -34,8 +34,8 @@ namespace BerwickHeights.Platform.IoC.Castle
         public MethodLoggingInterceptor(IPerfTestSvc perfTestSvc, 
             ICurrentUserSvc currentUserSvc, 
             IConfigurationSvc configurationSvc,
-            ILogger logger)
-            : base(perfTestSvc, currentUserSvc, configurationSvc, logger)
+            ILoggerFactory loggerFactory)
+            : base(perfTestSvc, currentUserSvc, configurationSvc, loggerFactory)
         {
         }
 
@@ -44,8 +44,8 @@ namespace BerwickHeights.Platform.IoC.Castle
         /// </summary>
         public MethodLoggingInterceptor(ICurrentUserSvc currentUserSvc,
             IConfigurationSvc configurationSvc,
-            ILogger logger)
-            : this(null, currentUserSvc, configurationSvc, logger)
+            ILoggerFactory loggerFactory)
+            : this(null, currentUserSvc, configurationSvc, loggerFactory)
         {
         }
         

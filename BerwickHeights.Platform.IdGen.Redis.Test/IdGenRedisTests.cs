@@ -18,6 +18,7 @@ using BerwickHeights.Platform.Core.Config;
 using BerwickHeights.Platform.Core.IdGen;
 using BerwickHeights.Platform.Core.IoC;
 using BerwickHeights.Platform.IoC;
+using BerwickHeights.Platform.Logging.Log4Net;
 using NUnit.Framework;
 using ServiceStack.Redis;
 
@@ -33,6 +34,7 @@ namespace BerwickHeights.Platform.IdGen.Redis.Test
         public void Init()
         {
             iocContainer = IoCContainerManagerFactory.GetIoCContainerManager();
+            iocContainer.RegisterLoggerFactory(new Log4NetLoggerFactory());
 
             string redisNetAddr = ConfigurationManager.AppSettings["RedisNetAddr"];
             if (string.IsNullOrEmpty(redisNetAddr)) throw new Exception("Network address for Redis server not configured (RedisNetAddr)");
