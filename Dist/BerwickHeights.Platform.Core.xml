@@ -433,6 +433,27 @@
         <member name="M:BerwickHeights.Platform.Core.Xml.XmlProcessorSvc.Validate(System.String)">
             <inheritDoc/>
         </member>
+        <member name="T:BerwickHeights.Platform.Core.Logging.ILoggerFactory">
+            <summary>
+            Interface to a factory service that produces loggers that implement the ILogger interface. ILogger is a facade 
+            to abstract away the logging implementation (e.g., Log4Net).
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Logging.ILoggerFactory.GetLogger(System.Type)">
+            <summary>
+            Returns an transient (multi-instance, non-singleton) instance of a logger that implements ILogger. The 
+            logger uses the given consumerType to differentiate the messages that the consumer produces in the log.
+            </summary>
+            <param name="consumerType">The type of the consumer.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Logging.ILoggerFactory.GetLogger(System.String)">
+            <summary>
+            Returns an transient (multi-instance, non-singleton) instance of a logger that implements ILogger. The 
+            logger uses the given name to differentiate the messages that the consumer produces in the log. Most 
+            consumers will use the other implementation of GetLogger() passing the consumer type.
+            </summary>
+            <param name="name">The name used to differentiate messages in the log.</param>
+        </member>
         <member name="T:BerwickHeights.Platform.Core.IoC.IIoCContainerManager">
             <summary>
             Interface to a type that manages an IoC container.
@@ -719,27 +740,6 @@
         </member>
         <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.ResetCurrentUserData">
             <inheritDoc/>
-        </member>
-        <member name="T:BerwickHeights.Platform.Core.Logging.ILoggerFactory">
-            <summary>
-            Interface to a factory service that produces loggers that implement the ILogger interface. ILogger is a facade 
-            to abstract away the logging implementation (e.g., Log4Net).
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.Core.Logging.ILoggerFactory.GetLogger(System.Type)">
-            <summary>
-            Returns an transient (multi-instance, non-singleton) instance of a logger that implements ILogger. The 
-            logger uses the given consumerType to differentiate the messages that the consumer produces in the log.
-            </summary>
-            <param name="consumerType">The type of the consumer.</param>
-        </member>
-        <member name="M:BerwickHeights.Platform.Core.Logging.ILoggerFactory.GetLogger(System.String)">
-            <summary>
-            Returns an transient (multi-instance, non-singleton) instance of a logger that implements ILogger. The 
-            logger uses the given name to differentiate the messages that the consumer produces in the log. Most 
-            consumers will use the other implementation of GetLogger() passing the consumer type.
-            </summary>
-            <param name="name">The name used to differentiate messages in the log.</param>
         </member>
     </members>
 </doc>
