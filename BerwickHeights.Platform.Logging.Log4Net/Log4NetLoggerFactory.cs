@@ -25,12 +25,17 @@ namespace BerwickHeights.Platform.Logging.Log4Net
     public class Log4NetLoggerFactory : ILoggerFactory
     {
         /// <summary>
-        /// Constructor. Configures Log4Net using the supplied configuration file.
+        /// Constructor. Configures Log4Net using the supplied configuration file. If config file name is not rooted,
+        /// then assumes the file is relative to base directory of current app domain.
         /// </summary>
-        /// <param name="log4NetConfigFile">Name of the Log4Net config file.</param>
-        public Log4NetLoggerFactory(string log4NetConfigFile)
+        /// <param name="configFile">Name of the Log4Net config file.</param>
+        public Log4NetLoggerFactory(string configFile)
         {
-            XmlConfigurator.Configure(new FileInfo(log4NetConfigFile));
+            FileInfo fileInfo = (Path.IsPathRooted(configFile)) 
+                ? new FileInfo(configFile) 
+                : new FileInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, configFile));
+            if (!fileInfo.Exists) throw new Exception("Cannot locate Log4Net config file: " + configFile);
+            XmlConfigurator.Configure(fileInfo);
         }
 
         /// <summary>
