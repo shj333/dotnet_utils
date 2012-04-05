@@ -7,7 +7,7 @@
         <member name="T:BerwickHeights.Platform.IdGen.Redis.IdGeneratorSvc">
             <inheritDoc/>
         </member>
-        <member name="M:BerwickHeights.Platform.IdGen.Redis.IdGeneratorSvc.#ctor(ServiceStack.Redis.IRedisClientsManager,BerwickHeights.Platform.Core.Config.IConfigurationSvc,BerwickHeights.Platform.Core.Logging.ILogger)">
+        <member name="M:BerwickHeights.Platform.IdGen.Redis.IdGeneratorSvc.#ctor(ServiceStack.Redis.IRedisClientsManager,BerwickHeights.Platform.Core.Config.IConfigurationSvc,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
             <summary>
             Constructor
             </summary>

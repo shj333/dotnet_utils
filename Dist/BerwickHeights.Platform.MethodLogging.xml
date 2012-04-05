@@ -20,12 +20,12 @@
             Interceptor config property name
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.MethodLogging.MethodLoggingInterceptorBase.#ctor(BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc,BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,BerwickHeights.Platform.Core.Config.IConfigurationSvc,BerwickHeights.Platform.Core.Logging.ILogger)">
+        <member name="M:BerwickHeights.Platform.MethodLogging.MethodLoggingInterceptorBase.#ctor(BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc,BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,BerwickHeights.Platform.Core.Config.IConfigurationSvc,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
             <summary>
             Constructor used when running performance tests
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.MethodLogging.MethodLoggingInterceptorBase.#ctor(BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,BerwickHeights.Platform.Core.Config.IConfigurationSvc,BerwickHeights.Platform.Core.Logging.ILogger)">
+        <member name="M:BerwickHeights.Platform.MethodLogging.MethodLoggingInterceptorBase.#ctor(BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,BerwickHeights.Platform.Core.Config.IConfigurationSvc,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
             <summary>
             Production constructor (no PerfTest component)
             </summary>

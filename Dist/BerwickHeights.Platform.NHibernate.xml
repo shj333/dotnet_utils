@@ -26,27 +26,27 @@
             Abstract base class for DAL components.
             </summary>
         </member>
-        <member name="F:BerwickHeights.Platform.NHibernate.PersistenceDALBase.SessionManager">
+        <member name="F:BerwickHeights.Platform.NHibernate.PersistenceDALBase.sessionManager">
             <summary>
             Used to manage NHibnerate sessions
             </summary>
         </member>
-        <member name="F:BerwickHeights.Platform.NHibernate.PersistenceDALBase.GenericDao">
+        <member name="F:BerwickHeights.Platform.NHibernate.PersistenceDALBase.genericDao">
             <summary>
             A set of methods that provide common functionality for NHibnerate
             </summary>
         </member>
-        <member name="F:BerwickHeights.Platform.NHibernate.PersistenceDALBase.Logger">
+        <member name="F:BerwickHeights.Platform.NHibernate.PersistenceDALBase.logger">
             <summary>
             Standard Castle logging component
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.NHibernate.PersistenceDALBase.#ctor(Castle.Facilities.NHibernateIntegration.ISessionManager,BerwickHeights.Platform.Core.Logging.ILogger)">
+        <member name="M:BerwickHeights.Platform.NHibernate.PersistenceDALBase.#ctor(Castle.Facilities.NHibernateIntegration.ISessionManager,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
             <summary>
             Constructor.
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.NHibernate.PersistenceDALBase.#ctor(BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,Castle.Facilities.NHibernateIntegration.ISessionManager,BerwickHeights.Platform.Core.Logging.ILogger)">
+        <member name="M:BerwickHeights.Platform.NHibernate.PersistenceDALBase.#ctor(BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,Castle.Facilities.NHibernateIntegration.ISessionManager,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
             <summary>
             Constructor.
             </summary>

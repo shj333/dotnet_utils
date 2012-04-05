@@ -52,7 +52,7 @@
         <member name="T:BerwickHeights.Platform.Email.EmailDeliverySvc">
             <inheritDoc/>
         </member>
-        <member name="M:BerwickHeights.Platform.Email.EmailDeliverySvc.#ctor(BerwickHeights.Platform.Core.Config.IConfigurationSvc,BerwickHeights.Platform.Core.Logging.ILogger)">
+        <member name="M:BerwickHeights.Platform.Email.EmailDeliverySvc.#ctor(BerwickHeights.Platform.Core.Config.IConfigurationSvc,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
             <summary>
             Constructor
             </summary>

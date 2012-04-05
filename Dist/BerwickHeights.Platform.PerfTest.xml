@@ -285,7 +285,7 @@
             <param name="testId">Application-defined, unique ID for the current suite of tests. 
             Used to aggregate test suite results into a single record in data store.</param>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Test.PerfTestController.#ctor(BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc,BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,BerwickHeights.Platform.Core.Logging.ILogger)">
+        <member name="M:BerwickHeights.Platform.PerfTest.Test.PerfTestController.#ctor(BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc,BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
             <summary>
             Constructor
             </summary>
@@ -500,7 +500,7 @@
         <member name="T:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL">
             <inheritDoc/>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL.#ctor(Castle.Facilities.NHibernateIntegration.ISessionManager,BerwickHeights.Platform.Core.Logging.ILogger)">
+        <member name="M:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL.#ctor(Castle.Facilities.NHibernateIntegration.ISessionManager,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
             <inheritDoc/>
         </member>
         <member name="M:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL.SaveTestResults(BerwickHeights.Platform.PerfTest.Model.TestSuiteResult)">
@@ -514,8 +514,7 @@
         </member>
     </members>
 </doc>
-e)">
-            <inheritDoc/>
+    <inheritDoc/>
         </member>
     </members>
 </doc>

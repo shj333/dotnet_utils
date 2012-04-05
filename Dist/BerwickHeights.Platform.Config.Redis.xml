@@ -11,7 +11,7 @@
             "BHSConfigKeyPrefix" key in application configuration.
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.Config.Redis.ConfigurationSvc.#ctor(ServiceStack.Redis.IRedisClientsManager,BerwickHeights.Platform.Core.Logging.ILogger)">
+        <member name="M:BerwickHeights.Platform.Config.Redis.ConfigurationSvc.#ctor(ServiceStack.Redis.IRedisClientsManager,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
             <summary>
             Constructor
             </summary>

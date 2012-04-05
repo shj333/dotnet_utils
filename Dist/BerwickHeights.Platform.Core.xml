@@ -161,12 +161,12 @@
             isMandatory is true and the given key does not match any configuration values.
             </summary>
         </member>
-        <member name="F:BerwickHeights.Platform.Core.Config.ConfigurationSvcBase.Logger">
+        <member name="F:BerwickHeights.Platform.Core.Config.ConfigurationSvcBase.logger">
             <summary>
             Logger
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.Core.Config.ConfigurationSvcBase.#ctor(BerwickHeights.Platform.Core.Logging.ILogger)">
+        <member name="M:BerwickHeights.Platform.Core.Config.ConfigurationSvcBase.#ctor(BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
             <summary>
             Constructor
             </summary>
@@ -197,6 +197,14 @@
             Implemented by inheriting class to retrieve configuration value from configuration data store.
             </summary>
             <param name="key">Key to configuration value.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Config.ConfigurationSvcBase.IsHideInLog(System.String,System.String)">
+            <summary>
+            Checks the config key against the list of keys that should hide the value in the log file (e.g., passwords).
+            </summary>
+            <param name="key">Configuration key.</param>
+            <param name="value">Configuration value.</param>
+            <returns>"****" if the value should be hidden in the log; otherwise returns the configuration value.</returns>
         </member>
         <member name="T:BerwickHeights.Platform.Core.Xml.IXmlProcessorSvc">
             <summary>
@@ -311,7 +319,8 @@
         </member>
         <member name="T:BerwickHeights.Platform.Core.Logging.ILogger">
             <summary>
-            Interface to a loggging service. This is a facade to abstract away the logging implementation.
+            Interface to a loggging service. This is a facade to abstract away the logging implementation (e.g., Log4Net). 
+            Consumers use the ILoggerFactory interface (which can be dependency injected) to gain an instance of a logger. 
             </summary>
         </member>
         <member name="M:BerwickHeights.Platform.Core.Logging.ILogger.Debug(System.String)">
@@ -407,7 +416,7 @@
         <member name="T:BerwickHeights.Platform.Core.Xml.XmlProcessorSvc">
             <inheritDoc/>
         </member>
-        <member name="M:BerwickHeights.Platform.Core.Xml.XmlProcessorSvc.#ctor(BerwickHeights.Platform.Core.Logging.ILogger)">
+        <member name="M:BerwickHeights.Platform.Core.Xml.XmlProcessorSvc.#ctor(BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
             <summary>
             Constructor.
             </summary>
@@ -434,6 +443,12 @@
             Registers the given interceptors with the IoC container.
             </summary>
             <param name="descriptors">A list of descriptors for each interceptor.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterLoggerFactory(BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
+            <summary>
+            Registers the given logger factory instance.
+            </summary>
+            <param name="loggerFactory">The instance of the logger factory to register.</param>
         </member>
         <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterAutomatedDBTransactions">
             <summary>
@@ -691,7 +706,7 @@
         <member name="T:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc">
             <inheritDoc/>
         </member>
-        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.#ctor">
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.#ctor(BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
             <summary>
             Constructor
             </summary>
@@ -705,17 +720,26 @@
         <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.ResetCurrentUserData">
             <inheritDoc/>
         </member>
-    </members>
-</doc>
-nheritDoc/>
+        <member name="T:BerwickHeights.Platform.Core.Logging.ILoggerFactory">
+            <summary>
+            Interface to a factory service that produces loggers that implement the ILogger interface. ILogger is a facade 
+            to abstract away the logging implementation (e.g., Log4Net).
+            </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.ResetCurrentUserData">
-            <inheritDoc/>
+        <member name="M:BerwickHeights.Platform.Core.Logging.ILoggerFactory.GetLogger(System.Type)">
+            <summary>
+            Returns an transient (multi-instance, non-singleton) instance of a logger that implements ILogger. The 
+            logger uses the given consumerType to differentiate the messages that the consumer produces in the log.
+            </summary>
+            <param name="consumerType">The type of the consumer.</param>
         </member>
-    </members>
-</doc>
-M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.ResetCurrentUserData">
-            <inheritDoc/>
+        <member name="M:BerwickHeights.Platform.Core.Logging.ILoggerFactory.GetLogger(System.String)">
+            <summary>
+            Returns an transient (multi-instance, non-singleton) instance of a logger that implements ILogger. The 
+            logger uses the given name to differentiate the messages that the consumer produces in the log. Most 
+            consumers will use the other implementation of GetLogger() passing the consumer type.
+            </summary>
+            <param name="name">The name used to differentiate messages in the log.</param>
         </member>
     </members>
 </doc>

@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BerwickHeights.Platform.Logging.Log4Net</name>
+    </assembly>
+    <members>
+        <member name="T:BerwickHeights.Platform.Logging.Log4Net.Log4NetLoggerFactory">
+            <summary>
+            Factory that produces instances of loggers using Log4Net. Should be a singleton that is dependency
+            injected into consumers.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Logging.Log4Net.Log4NetLoggerFactory.#ctor(System.String)">
+            <summary>
+            Constructor. Configures Log4Net using the supplied configuration file.
+            </summary>
+            <param name="log4NetConfigFile">Name of the Log4Net config file.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Logging.Log4Net.Log4NetLoggerFactory.#ctor">
+            <summary>
+            Constructor that uses a Log4Net config file named Log4Net.config
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Logging.Log4Net.Log4NetLoggerFactory.GetLogger(System.Type)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Logging.Log4Net.Log4NetLoggerFactory.GetLogger(System.String)">
+            <inheritDoc/>
+        </member>
+        <member name="T:BerwickHeights.Platform.Logging.Log4Net.Log4NetLogger">
+            <summary>
+             Implementation of ILogger using Log4Net logger.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Logging.Log4Net.Log4NetLogger.#ctor(System.Type)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Logging.Log4Net.Log4NetLogger.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Logging.Log4Net.Log4NetLogger.Debug(System.String)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Logging.Log4Net.Log4NetLogger.Debug(System.String,System.Exception)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Logging.Log4Net.Log4NetLogger.Error(System.String)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Logging.Log4Net.Log4NetLogger.Error(System.String,System.Exception)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Logging.Log4Net.Log4NetLogger.Fatal(System.String)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Logging.Log4Net.Log4NetLogger.Fatal(System.String,System.Exception)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Logging.Log4Net.Log4NetLogger.Info(System.String)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Logging.Log4Net.Log4NetLogger.Info(System.String,System.Exception)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Logging.Log4Net.Log4NetLogger.Warn(System.String)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Logging.Log4Net.Log4NetLogger.Warn(System.String,System.Exception)">
+            <inheritDoc/>
+        </member>
+        <member name="P:BerwickHeights.Platform.Logging.Log4Net.Log4NetLogger.IsDebugEnabled">
+            <inheritDoc/>
+        </member>
+        <member name="P:BerwickHeights.Platform.Logging.Log4Net.Log4NetLogger.IsErrorEnabled">
+            <inheritDoc/>
+        </member>
+        <member name="P:BerwickHeights.Platform.Logging.Log4Net.Log4NetLogger.IsFatalEnabled">
+            <inheritDoc/>
+        </member>
+        <member name="P:BerwickHeights.Platform.Logging.Log4Net.Log4NetLogger.IsInfoEnabled">
+            <inheritDoc/>
+        </member>
+        <member name="P:BerwickHeights.Platform.Logging.Log4Net.Log4NetLogger.IsWarnEnabled">
+            <inheritDoc/>
+        </member>
+    </members>
+</doc>
