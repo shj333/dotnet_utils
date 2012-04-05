@@ -37,6 +37,7 @@ namespace BerwickHeights.Platform.Config.Redis.Test
         private const string testDfltStr = "Test string default";
         private const string testStrArrayCfgKey = "TestStrArrayCfg";
         private readonly string[] testStrArray = new string[] { "aaa", "bbb", "ccc"};
+        private const string testPasswodCfgKey = "TestPassword";
 
         [TestFixtureSetUp]
         public void Init()
@@ -103,6 +104,9 @@ namespace BerwickHeights.Platform.Config.Redis.Test
             string[] val = configurationSvc.GetStringArrayConfig(testStrArrayCfgKey);
             Assert.AreEqual(testStrArray.Length, val.Length);
             for (int idx = 0; idx < testStrArray.Length; idx++) Assert.AreEqual(testStrArray[idx], val[idx]);
+
+            string password = configurationSvc.GetStringConfig(testPasswodCfgKey);
+            Assert.AreEqual(password, password);
         }
     }
 }

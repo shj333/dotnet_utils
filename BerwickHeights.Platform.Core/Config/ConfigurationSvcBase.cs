@@ -142,10 +142,10 @@ namespace BerwickHeights.Platform.Core.Config
                 // First time need to set the keys to search for hiding values
                 keysToHideInLog = new List<string>(new string[] { "pass" });
                 ((List<string>)keysToHideInLog).AddRange(GetStringArrayConfig("KeysToHideInLog", false)
-                    .Where(k => !string.IsNullOrEmpty(k)));
+                    .Where(k => !string.IsNullOrEmpty(k)).Select(k => k.ToLower()));
             }
 
-            return (keysToHideInLog.Any(key.Contains)) ? "****" : value;
+            return (keysToHideInLog.Any(key.ToLower().Contains)) ? "****" : value;
         }
 
         #endregion
