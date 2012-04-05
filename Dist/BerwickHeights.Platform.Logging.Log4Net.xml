@@ -12,9 +12,10 @@
         </member>
         <member name="M:BerwickHeights.Platform.Logging.Log4Net.Log4NetLoggerFactory.#ctor(System.String)">
             <summary>
-            Constructor. Configures Log4Net using the supplied configuration file.
+            Constructor. Configures Log4Net using the supplied configuration file. If config file name is not rooted,
+            then assumes the file is relative to base directory of current app domain.
             </summary>
-            <param name="log4NetConfigFile">Name of the Log4Net config file.</param>
+            <param name="configFile">Name of the Log4Net config file.</param>
         </member>
         <member name="M:BerwickHeights.Platform.Logging.Log4Net.Log4NetLoggerFactory.#ctor">
             <summary>
