@@ -73,7 +73,8 @@ namespace BerwickHeights.Platform.Core.Config
                 if ((isMandatory) && (defaultVal == null)) throw new ConfigurationErrorsException("Configuration value '" + key + "' cannot be null");
                 cfgVal = defaultVal ?? string.Empty;
             }
-            if (logger.IsDebugEnabled) logger.Debug("Config " + key + ": " + IsHideInLog(key, cfgVal));
+            // NB: Don't log configuration key for Trace Method logger -- generates too many log messages
+            if ((logger.IsDebugEnabled) && (!key.Equals(TraceMethodsConfigKey))) logger.Debug("Config " + key + ": " + IsHideInLog(key, cfgVal));
             return cfgVal;
         }
 
@@ -111,7 +112,6 @@ namespace BerwickHeights.Platform.Core.Config
                 // Configuration data not available, use given default value
                 cfgVal = defaultVal;
             }
-            if (logger.IsDebugEnabled) logger.Debug("Config " + key + ": " + IsHideInLog(key, cfgVal + ""));
             return cfgVal;
         }
 
@@ -149,5 +149,10 @@ namespace BerwickHeights.Platform.Core.Config
         }
 
         #endregion
+
+        /// <summary>
+        /// Configuration key that turns method tracing on or off. Used in Method Logging Interceptor.
+        /// </summary>
+        public const string TraceMethodsConfigKey = "TraceMethods";
     }
 }

@@ -51,6 +51,8 @@ namespace BerwickHeights.Platform.Core.Xml
         /// <inheritDoc/>
         public void LoadXsdSchema(XsdDescriptor xsd)
         {
+            logger.Info("Loading " + xsd);
+
             Assembly schemaAssembly;
             try
             {
@@ -60,12 +62,21 @@ namespace BerwickHeights.Platform.Core.Xml
             {
                 throw new Exception("Could not load assembly for " + xsd, e);
             }
-            Stream schemaStream = schemaAssembly.GetManifestResourceStream(xsd.XsdName);
+
+            Stream schemaStream;
+            try
+            {
+                schemaStream = schemaAssembly.GetManifestResourceStream(xsd.XsdName);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Could not load stream for " + xsd, e);
+            }
             if (schemaStream == null)
             {
-                logger.Warn("Schema not found for " + xsd);
-                return;
+                throw new Exception("Schema not found for " + xsd);
             }
+
             schemaSet.Add(xsd.TargetNamespace, XmlReader.Create(new StreamReader(schemaStream)));
         }
 

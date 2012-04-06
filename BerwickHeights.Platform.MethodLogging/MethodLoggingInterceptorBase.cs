@@ -72,10 +72,6 @@ namespace BerwickHeights.Platform.MethodLogging
         private readonly ILogger logger;
 
         /// <summary>
-        /// Configuration key that turns method tracing on or off
-        /// </summary>
-        public const string TraceMethodsConfigKey = "TraceMethods";
-        /// <summary>
         /// Interceptor config property name
         /// </summary>
         public const string ConfigPropertyName = "Config";
@@ -111,7 +107,7 @@ namespace BerwickHeights.Platform.MethodLogging
 
         /// <summary>
         /// Implementing type can use this to log the method call (if configured via 
-        /// MethodLoggingInterceptBase.TraceMethodsConfigKey configuration key) and log any exceptions that are caught.
+        /// ConfigurationSvcBase.TraceMethodsConfigKey configuration key) and log any exceptions that are caught.
         /// The method calls the abstract method ProceedWithMethodCall() when it is time to call the intercepted 
         /// method. The data object passed into this method is returned in the call to ProceedWithMethodCall().
         /// </summary>
@@ -126,7 +122,7 @@ namespace BerwickHeights.Platform.MethodLogging
             IList<ParameterInfo> methodParameters, IList<object> arguments, Type returnType)
         {
             StringBuilder sb = null;
-            bool isTraceMethods = configurationSvc.GetBooleanConfig(TraceMethodsConfigKey, false);
+            bool isTraceMethods = configurationSvc.GetBooleanConfig(ConfigurationSvcBase.TraceMethodsConfigKey, false);
 
             if (isTraceMethods)
             {
