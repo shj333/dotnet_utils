@@ -161,6 +161,11 @@
             isMandatory is true and the given key does not match any configuration values.
             </summary>
         </member>
+        <member name="F:BerwickHeights.Platform.Core.Config.ConfigurationSvcBase.TraceMethodsConfigKey">
+            <summary>
+            Configuration key that turns method tracing on or off. Used in Method Logging Interceptor.
+            </summary>
+        </member>
         <member name="F:BerwickHeights.Platform.Core.Config.ConfigurationSvcBase.logger">
             <summary>
             Logger
