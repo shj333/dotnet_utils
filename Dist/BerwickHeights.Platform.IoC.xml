@@ -31,7 +31,7 @@
             Abstract base class for IoC container managers.
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerBase.ConfigureNHibernate(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Action{NHibernate.Cfg.Configuration})">
+        <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerBase.ConfigureNHibernate(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Action{NHibernate.Cfg.Configuration},BerwickHeights.Platform.Core.Logging.ILogger)">
             <summary>
             Sets up configuration of NHibernate (database configuration via ConfigureDatabase(), mappings via 
             ConfigureMappings()) and exposes the configuration via supplied exposeConfigAction.
@@ -41,6 +41,7 @@
             <param name="autoPersistenceModel">Automappings used by FluentNHibernate.</param>
             <param name="exposeConfigAction">The action run when exposing the configuration (e.g., apply latest 
             schema to database instance, update schema, etc.).</param>
+            <param name="logger">Logger instance in case something goes wrong.</param>
         </member>
         <member name="T:BerwickHeights.Platform.IoC.IIoCContainerManager">
             <summary>
