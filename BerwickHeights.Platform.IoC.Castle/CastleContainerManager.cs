@@ -142,11 +142,13 @@ namespace BerwickHeights.Platform.IoC.Castle
 
         /// <inheritDoc/>
         public void SetupNHibernateIntegration(IPersistenceConfigurer persistenceConfigurer, 
-            AutoPersistenceModel autoPersistenceModel, bool isUseAutoTransactions)
+            AutoPersistenceModel autoPersistenceModel, Action<NHibernate.Cfg.Configuration> exposeConfigAction, 
+            bool isUseAutoTransactions)
         {
             container.Kernel.Register(
                 Component.For<ISessionFactory>()
-                    .UsingFactoryMethod(_ => base.ConfigureNHibernate(persistenceConfigurer, autoPersistenceModel).BuildSessionFactory()),
+                    .UsingFactoryMethod(_ => base.ConfigureNHibernate(
+                        persistenceConfigurer, autoPersistenceModel, exposeConfigAction).BuildSessionFactory()),
                 Component.For<ISession>()
                     .UsingFactoryMethod(k => k.Resolve<ISessionFactory>().OpenSession())
                     .LifestylePerWebRequest()

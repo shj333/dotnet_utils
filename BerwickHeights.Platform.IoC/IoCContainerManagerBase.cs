@@ -11,11 +11,11 @@
  *  
  */
 
+using System;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate.Cfg;
-using NHibernate.Tool.hbm2ddl;
 
 namespace BerwickHeights.Platform.IoC
 {
@@ -28,29 +28,21 @@ namespace BerwickHeights.Platform.IoC
 
         /// <summary>
         /// Sets up configuration of NHibernate (database configuration via ConfigureDatabase(), mappings via 
-        /// ConfigureMappings()). Also exposes the configuration to the database instance so that the latest 
-        /// schema is applied (via ConfigurationAction()).
+        /// ConfigureMappings()) and exposes the configuration via supplied exposeConfigAction.
         /// </summary>
         /// <param name="persistenceConfigurer">Sets up FluentNHibernate configuration of database type, 
         /// connection string, etc.</param>
         /// <param name="autoPersistenceModel">Automappings used by FluentNHibernate.</param>
+        /// <param name="exposeConfigAction">The action run when exposing the configuration (e.g., apply latest 
+        /// schema to database instance, update schema, etc.).</param>
         protected virtual Configuration ConfigureNHibernate(IPersistenceConfigurer persistenceConfigurer, 
-            AutoPersistenceModel autoPersistenceModel)
+            AutoPersistenceModel autoPersistenceModel, Action<Configuration> exposeConfigAction)
         {
             return Fluently.Configure()
               .Database(persistenceConfigurer)
               .Mappings(m => m.AutoMappings.Add(autoPersistenceModel))
-              .ExposeConfiguration(ConfigurationAction)
+              .ExposeConfiguration(exposeConfigAction)
               .BuildConfiguration();
-        }
-
-        /// <summary>
-        /// Exposes the configuration to the database instance so that the latest schema is applied.
-        /// </summary>
-        /// <param name="config"></param>
-        protected virtual void ConfigurationAction(Configuration config)
-        {
-            SchemaMetadataUpdater.QuoteTableAndColumns(config);
         }
 
         #endregion
