@@ -50,7 +50,6 @@
     <Compile Include="CurrentUser\ICurrentUserSvc.cs" />
     <Compile Include="IdGen\IIdGeneratorSvc.cs" />
     <Compile Include="IoC\IIoCComponent.cs" />
-    <Compile Include="IoC\IIoCContainerManager.cs" />
     <Compile Include="IoC\InterceptorDescriptor.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\ILoggerFactory.cs" />

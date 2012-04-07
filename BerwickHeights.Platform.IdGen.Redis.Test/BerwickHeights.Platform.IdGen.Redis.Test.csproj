@@ -94,6 +94,10 @@
       <Project>{F2F39917-F554-4BF1-80A9-984529295FBB}</Project>
       <Name>BerwickHeights.Platform.IdGen.Redis</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BerwickHeights.Platform.IoC.Castle\BerwickHeights.Platform.IoC.Castle.csproj">
+      <Project>{96ACA9EC-73E0-46AA-8734-3389AAE945DF}</Project>
+      <Name>BerwickHeights.Platform.IoC.Castle</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BerwickHeights.Platform.IoC\BerwickHeights.Platform.IoC.csproj">
       <Project>{B461ECFF-C71A-4824-8B30-A637F4783B68}</Project>
       <Name>BerwickHeights.Platform.IoC</Name>

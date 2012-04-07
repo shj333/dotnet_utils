@@ -33,6 +33,15 @@
     <DocumentationFile>bin\Release\BerwickHeights.Platform.IoC.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\packages\FluentNHibernate.1.3.0.717\lib\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.3.2.0.4000\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -43,6 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IIoCContainerManager.cs" />
+    <Compile Include="IoCContainerManagerBase.cs" />
     <Compile Include="IoCContainerManagerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -51,10 +62,9 @@
       <Project>{6EAAC4D2-A84B-4123-83A4-565BD11E5B73}</Project>
       <Name>BerwickHeights.Platform.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BerwickHeights.Platform.IoC.Castle\BerwickHeights.Platform.IoC.Castle.csproj">
-      <Project>{96ACA9EC-73E0-46AA-8734-3389AAE945DF}</Project>
-      <Name>BerwickHeights.Platform.IoC.Castle</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

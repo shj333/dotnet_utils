@@ -22,13 +22,17 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using FluentNHibernate.Automapping;
+using FluentNHibernate.Cfg.Db;
+using NHibernate;
+using ILoggerFactory = BerwickHeights.Platform.Core.Logging.ILoggerFactory;
 
 namespace BerwickHeights.Platform.IoC.Castle
 {
     /// <summary>
     /// Manages the IoC container for Windsor Castle.
     /// </summary>
-    public class CastleContainerManager : IIoCContainerManager, IDisposable
+    public class CastleContainerManager : IoCContainerManagerBase, IIoCContainerManager, IDisposable
     {
         #region Private Fields
 
@@ -38,7 +42,10 @@ namespace BerwickHeights.Platform.IoC.Castle
 
         #region Constructors
 
-        internal CastleContainerManager()
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public CastleContainerManager()
         {
             // Create Windsor container
             container = new WindsorContainer();
@@ -50,6 +57,8 @@ namespace BerwickHeights.Platform.IoC.Castle
         #endregion
 
         #region Implementation of IIoCContainerManager
+
+        #region Interceptors, LoggerFactory
 
         /// <inheritDoc/>
         public void RegisterInterceptors(params InterceptorDescriptor[] descriptors)
@@ -63,11 +72,9 @@ namespace BerwickHeights.Platform.IoC.Castle
             RegisterComponentInstance(typeof(ILoggerFactory), loggerFactory, "LoggerFactory");
         }
 
-        /// <inheritDoc/>
-        public void RegisterAutomatedDBTransactions()
-        {
-            container.AddFacility(new AutoTxFacility());
-        }
+        #endregion
+
+        #region Component registration
 
         /// <inheritDoc/>
         public void RegisterComponentsFromAppConfig()
@@ -129,6 +136,25 @@ namespace BerwickHeights.Platform.IoC.Castle
             container.Register(Component.For(serviceType).Named(componentId).Instance(instance));
         }
 
+        #endregion
+
+        #region NHibernate, ASP.Net MVC integration
+
+        /// <inheritDoc/>
+        public void SetupNHibernateIntegration(IPersistenceConfigurer persistenceConfigurer, 
+            AutoPersistenceModel autoPersistenceModel, bool isUseAutoTransactions)
+        {
+            container.Kernel.Register(
+                Component.For<ISessionFactory>()
+                    .UsingFactoryMethod(_ => base.ConfigureNHibernate(persistenceConfigurer, autoPersistenceModel).BuildSessionFactory()),
+                Component.For<ISession>()
+                    .UsingFactoryMethod(k => k.Resolve<ISessionFactory>().OpenSession())
+                    .LifestylePerWebRequest()
+                );
+
+            if (isUseAutoTransactions) container.AddFacility(new AutoTxFacility());
+        }
+
         /// <inheritDoc/>
         public void SetupASPNetMVCIntegration()
         {
@@ -138,6 +164,10 @@ namespace BerwickHeights.Platform.IoC.Castle
                 ControllerBuilder.Current.SetControllerFactory(new CastleMVCControllerFactory(container.Kernel));
             }
         }
+
+        #endregion
+
+        #region Resolve components at runtime
 
         /// <inheritDoc/>
         public T Resolve<T>()
@@ -167,6 +197,8 @@ namespace BerwickHeights.Platform.IoC.Castle
         {
             return container.ResolveAll<T>();
         }
+
+        #endregion
 
         #endregion
 
