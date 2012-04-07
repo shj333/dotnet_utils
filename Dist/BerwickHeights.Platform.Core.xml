@@ -459,114 +459,6 @@
             </summary>
             <param name="name">The name used to differentiate messages in the log.</param>
         </member>
-        <member name="T:BerwickHeights.Platform.Core.IoC.IIoCContainerManager">
-            <summary>
-            Interface to a type that manages an IoC container.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterInterceptors(BerwickHeights.Platform.Core.IoC.InterceptorDescriptor[])">
-            <summary>
-            Registers the given interceptors with the IoC container.
-            </summary>
-            <param name="descriptors">A list of descriptors for each interceptor.</param>
-        </member>
-        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterLoggerFactory(BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
-            <summary>
-            Registers the given logger factory instance.
-            </summary>
-            <param name="loggerFactory">The instance of the logger factory to register.</param>
-        </member>
-        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterAutomatedDBTransactions">
-            <summary>
-            Registers any components neede for automated database transactions.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterComponentsFromAppConfig">
-            <summary>
-            Registers any components listed in the application configuration file.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterComponentsFromExternalFile(System.String)">
-            <summary>
-            Registers any components listed in an external configuration file.
-            </summary>
-            <param name="configFile">The name of the external config file.</param>
-        </member>
-        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterInProcComponents(System.String[])">
-            <summary>
-            Registers components that are called in-process by looking for any types in the given assemblies that 
-            implement an interface that inherits from IIocComponent.
-            </summary>
-            <param name="assemblyNames">The list of assemblies to check for types that implement an interface that
-            inherits from IIocComponent.</param>
-        </member>
-        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterWCFClientComponents(System.String,System.String[])">
-            <summary>
-            Registers components that are proxied to a remote component by looking for any types in the given 
-            assemblies that implement an interface that inherits from IIocComponent.
-            </summary>
-            <param name="wcfServiceUrl">The URL to the remote service that is hosting the remote component.</param>
-            <param name="assemblyNames">The list of assemblies to check for types that implement an interface that
-            inherits from IIocComponent.</param>
-        </member>
-        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterWCFServiceComponents(System.String,System.String[])">
-            <summary>
-            Registers components that service remote requests by looking for any types in the given assemblies that 
-            implement an interface that inherits from IIocComponent.
-            </summary>
-            <param name="wcfServiceUrl">The URL of the service that is hosting the component.</param>
-            <param name="assemblyNames">The list of assemblies to check for types that implement an interface that
-            inherits from IIocComponent.</param>
-        </member>
-        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterComponent(System.Type,System.Type)">
-            <summary>
-            Registers the given implementation type as a singleton component in the IoC container with the given
-            service (interface) type.
-            </summary>
-            <param name="serviceType">The type (interface) of the component service.</param>
-            <param name="implType">The implementation type for the component.</param>
-        </member>
-        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.RegisterComponentInstance(System.Type,System.Object,System.String)">
-            <summary>
-            Registers the given instance as a component in the IoC container. The service type and component id are 
-            set as given.
-            </summary>
-            <param name="serviceType">The type (interface) of the component service.</param>
-            <param name="instance">The instance to register as a component.</param>
-            <param name="componentId">The id of the component.</param>
-        </member>
-        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.SetupASPNetMVCIntegration">
-            <summary>
-            Sets up integration between the IoC container and ASP.Net MVC so that controllers are generated by
-            the IoC container instead of ASP.NEt MVC framework.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.Resolve``1">
-            <summary>
-            Returns a component that implements the given interface.
-            </summary>
-            <typeparam name="T">The requested component interface.</typeparam>
-        </member>
-        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.TryResolve``1">
-            <summary>
-            Attempts to return a component that implements the given interface; if not found in IoC container, then
-            returns default(T).
-            </summary>
-            <typeparam name="T">The requested component interface.</typeparam>
-        </member>
-        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.Resolve``1(System.String)">
-            <summary>
-            Returns a component that implements the given interface and has the given component id.
-            </summary>
-            <typeparam name="T">The requested component interface.</typeparam>
-            <param name="componentId">The id of the requested component.</param>
-        </member>
-        <member name="M:BerwickHeights.Platform.Core.IoC.IIoCContainerManager.ResolveAll``1">
-            <summary>
-            Returns all components that implement the given interface.
-            </summary>
-            <typeparam name="T">The requested component interface.</typeparam>
-        </member>
         <member name="T:BerwickHeights.Platform.Core.Utils.ParamChecker">
             <summary>
             Static class that checks the validity of method parameters.
@@ -626,6 +518,129 @@
         <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.#ctor(System.String,System.String,System.String)">
             <summary>
             Constructor for cases where current user has no additional attributes.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.#ctor(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Constructor for user that has additional attributes.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.GetAttribute(System.String)">
+            <summary>
+            Returns the attribute for this user that matches the given key or an empty string if no match is found.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.HasAttribute(System.String)">
+            <summary>
+            Returns whether or not the attributes list for this user contains the given key.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.ToString">
+            <inheritDoc />
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.UserId">
+            <summary>
+            The unique ID of the user generated by the authentication system.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.UserName">
+            <summary>
+            The name of the current user (used for display purposes).
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.SessionId">
+            <summary>
+            This user's session.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.OperationId">
+            <summary>
+            The operation ID is used to group all operations that occur in a single transaction.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.IsInitialized">
+            <summary>
+            Whether or not the user information has been initialized for this thread. If the 
+            value of this property is false, then the data in this object must not be 
+            used.
+            </summary>
+        </member>
+        <member name="T:BerwickHeights.Platform.Core.IoC.InterceptorDescriptor">
+            <summary>
+            Describes an instance of an interceptor registered in the IoC container. Interceptors are typically used for 
+            Aspect Oriented Programming (AOP).
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.IoC.InterceptorDescriptor.#ctor(System.Type,System.Collections.IDictionary,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="interceptorType">The type of this interceptor.</param>
+            <param name="config">Interceptor-specific configuration for this instance as key-value pairs.</param>
+            <param name="namespacePrefixes">If the full type name of a component starts with one of these 
+            namespace prefixes, then this interceptor will intercept the component.</param>
+            <param name="ignoredTypes">The list of full type names for components that will not be 
+            intercepted by this interceptor. Used to prevent endless recursion in the IoC container of internal types 
+            that should not be intercepted.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.IoC.InterceptorDescriptor.ToString">
+            <inheritDoc />
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.IoC.InterceptorDescriptor.InterceptorType">
+            <summary>
+            The type of this interceptor.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.IoC.InterceptorDescriptor.Config">
+            <summary>
+            Interceptor-specific configuration for this instance as key-value pairs.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.IoC.InterceptorDescriptor.NamespacePrefixes">
+            <summary>
+            If the full type name of a component starts with one of these namespace prefixes, then this
+            interceptor will intercept the component.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Core.IoC.InterceptorDescriptor.IgnoredTypes">
+            <summary>
+            The list of full type names for components that will not be intercepted by this interceptor.  
+            Used to prevent endless recursion in the IoC container of internal types that should not be intercepted.
+            </summary>
+        </member>
+        <member name="T:BerwickHeights.Platform.Core.IdGen.IIdGeneratorSvc">
+            <summary>
+            ID Generator service.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.IdGen.IIdGeneratorSvc.GetNextId(System.String,System.Int32)">
+            <summary>
+            Returns a unique ID for the given application and application-defined object type. Uses a data store 
+            to guarantee uniqueness of the returned id's within the application/object type space.
+            </summary>
+            <param name="applicationId">The unique ID of the application.</param>
+            <param name="objectTypeId">The application-defined ID of the object type.</param>
+        </member>
+        <member name="T:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.#ctor(BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.GetCurrentUserData">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.SetCurrentUserData(BerwickHeights.Platform.Core.CurrentUser.CurrentUserData)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.ResetCurrentUserData">
+            <inheritDoc/>
+        </member>
+    </members>
+</doc>
+here current user has no additional attributes.
             </summary>
         </member>
         <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.#ctor(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String})">

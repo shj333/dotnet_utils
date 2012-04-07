@@ -13,9 +13,152 @@
             <summary>
             Returns the singleton instance of the IoC container manager configured in application configuration 
             according to the key "IoCContainerType". The configured value should be the fully qualified type name 
-            of the IoC container manager (full type name and assembly). Defaults to Castle Windsor if 
-            application configuration data is not available for key "IoCContainerType".
+            of the IoC container manager (full type name and assembly).
             </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerFactory.GetIoCContainerManager(System.String)">
+            <summary>
+            Returns the singleton instance of the IoC container manager specified by containerType. If containerType
+            is empty, then uses the container manager configured in application configuration according to the key 
+            "IoCContainerType". The configured value should be the fully qualified type name of the IoC container 
+            manager (full type name and assembly).
+            </summary>
+            <param name="containerType">The fully qualified type name of the IoC container manager (full type name 
+            and assembly).</param>
+        </member>
+        <member name="T:BerwickHeights.Platform.IoC.IIoCContainerManager">
+            <summary>
+            Interface to a type that manages an IoC container.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.RegisterInterceptors(BerwickHeights.Platform.Core.IoC.InterceptorDescriptor[])">
+            <summary>
+            Registers the given interceptors with the IoC container.
+            </summary>
+            <param name="descriptors">A list of descriptors for each interceptor.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.RegisterLoggerFactory(BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
+            <summary>
+            Registers the given logger factory instance.
+            </summary>
+            <param name="loggerFactory">The instance of the logger factory to register.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.RegisterComponentsFromAppConfig">
+            <summary>
+            Registers any components listed in the application configuration file.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.RegisterComponentsFromExternalFile(System.String)">
+            <summary>
+            Registers any components listed in an external configuration file.
+            </summary>
+            <param name="configFile">The name of the external config file.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.RegisterInProcComponents(System.String[])">
+            <summary>
+            Registers components that are called in-process by looking for any types in the given assemblies that 
+            implement an interface that inherits from IIocComponent.
+            </summary>
+            <param name="assemblyNames">The list of assemblies to check for types that implement an interface that
+            inherits from IIocComponent.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.RegisterWCFClientComponents(System.String,System.String[])">
+            <summary>
+            Registers components that are proxied to a remote component by looking for any types in the given 
+            assemblies that implement an interface that inherits from IIocComponent.
+            </summary>
+            <param name="wcfServiceUrl">The URL to the remote service that is hosting the remote component.</param>
+            <param name="assemblyNames">The list of assemblies to check for types that implement an interface that
+            inherits from IIocComponent.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.RegisterWCFServiceComponents(System.String,System.String[])">
+            <summary>
+            Registers components that service remote requests by looking for any types in the given assemblies that 
+            implement an interface that inherits from IIocComponent.
+            </summary>
+            <param name="wcfServiceUrl">The URL of the service that is hosting the component.</param>
+            <param name="assemblyNames">The list of assemblies to check for types that implement an interface that
+            inherits from IIocComponent.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.RegisterComponent(System.Type,System.Type)">
+            <summary>
+            Registers the given implementation type as a singleton component in the IoC container with the given
+            service (interface) type.
+            </summary>
+            <param name="serviceType">The type (interface) of the component service.</param>
+            <param name="implType">The implementation type for the component.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.RegisterComponentInstance(System.Type,System.Object,System.String)">
+            <summary>
+            Registers the given instance as a component in the IoC container. The service type and component id are 
+            set as given.
+            </summary>
+            <param name="serviceType">The type (interface) of the component service.</param>
+            <param name="instance">The instance to register as a component.</param>
+            <param name="componentId">The id of the component.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.SetupNHibernateIntegration(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Boolean)">
+            <summary>
+            NHibernate integration.
+            </summary>
+            <param name="persistenceConfigurer">Sets up FluentNHibernate configuration of database type, 
+            connection string, etc.</param>
+            <param name="autoPersistenceModel">Automappings used by FluentNHibernate.</param>
+            <param name="isUseAutoTransactions">If true, then automated database transactions via AOP are 
+            configured.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.SetupASPNetMVCIntegration">
+            <summary>
+            Sets up integration between the IoC container and ASP.Net MVC so that controllers are generated by
+            the IoC container instead of ASP.NEt MVC framework.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.Resolve``1">
+            <summary>
+            Returns a component that implements the given interface.
+            </summary>
+            <typeparam name="T">The requested component interface.</typeparam>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.TryResolve``1">
+            <summary>
+            Attempts to return a component that implements the given interface; if not found in IoC container, then
+            returns default(T).
+            </summary>
+            <typeparam name="T">The requested component interface.</typeparam>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.Resolve``1(System.String)">
+            <summary>
+            Returns a component that implements the given interface and has the given component id.
+            </summary>
+            <typeparam name="T">The requested component interface.</typeparam>
+            <param name="componentId">The id of the requested component.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.ResolveAll``1">
+            <summary>
+            Returns all components that implement the given interface.
+            </summary>
+            <typeparam name="T">The requested component interface.</typeparam>
+        </member>
+        <member name="T:BerwickHeights.Platform.IoC.IoCContainerManagerBase">
+            <summary>
+            Abstract base class for IoC container managers.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerBase.ConfigureNHibernate(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel)">
+            <summary>
+            Sets up configuration of NHibernate (database configuration via ConfigureDatabase(), mappings via 
+            ConfigureMappings()). Also exposes the configuration to the database instance so that the latest 
+            schema is applied (via ConfigurationAction()).
+            </summary>
+            <param name="persistenceConfigurer">Sets up FluentNHibernate configuration of database type, 
+            connection string, etc.</param>
+            <param name="autoPersistenceModel">Automappings used by FluentNHibernate.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerBase.ConfigurationAction(NHibernate.Cfg.Configuration)">
+            <summary>
+            Exposes the configuration to the database instance so that the latest schema is applied.
+            </summary>
+            <param name="config"></param>
         </member>
     </members>
 </doc>

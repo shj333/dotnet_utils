@@ -9,13 +9,15 @@
             Manages the IoC container for Windsor Castle.
             </summary>
         </member>
+        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
         <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.RegisterInterceptors(BerwickHeights.Platform.Core.IoC.InterceptorDescriptor[])">
             <inheritDoc/>
         </member>
         <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.RegisterLoggerFactory(BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
-            <inheritDoc/>
-        </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.RegisterAutomatedDBTransactions">
             <inheritDoc/>
         </member>
         <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.RegisterComponentsFromAppConfig">
@@ -37,6 +39,9 @@
             <inheritDoc/>
         </member>
         <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.RegisterComponentInstance(System.Type,System.Object,System.String)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.SetupNHibernateIntegration(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Boolean)">
             <inheritDoc/>
         </member>
         <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.SetupASPNetMVCIntegration">
@@ -131,12 +136,7 @@
         </member>
     </members>
 </doc>
-ights.Platform.Core.Logging.ILogger)">
-            <summary>
-            Constructor used when running performance tests
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.MethodLoggingInterceptor.#ctor(BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,BerwickHeights.Platform.Core.Config.IConfigurationSvc,BerwickHeights.Platform.Core.Logging.ILogger)">
+entUser.ICurrentUserSvc,BerwickHeights.Platform.Core.Config.IConfigurationSvc,BerwickHeights.Platform.Core.Logging.ILogger)">
             <summary>
             Production constructor (no PerfTest component)
             </summary>
