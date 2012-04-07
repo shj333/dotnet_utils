@@ -26,12 +26,12 @@
             Abstract base class for DAL components.
             </summary>
         </member>
-        <member name="F:BerwickHeights.Platform.NHibernate.PersistenceDALBase.sessionManager">
+        <member name="F:BerwickHeights.Platform.NHibernate.PersistenceDALBase.sessionFactory">
             <summary>
             Used to manage NHibnerate sessions
             </summary>
         </member>
-        <member name="F:BerwickHeights.Platform.NHibernate.PersistenceDALBase.genericDao">
+        <member name="F:BerwickHeights.Platform.NHibernate.PersistenceDALBase.genericDAL">
             <summary>
             A set of methods that provide common functionality for NHibnerate
             </summary>
@@ -41,12 +41,12 @@
             Standard Castle logging component
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.NHibernate.PersistenceDALBase.#ctor(Castle.Facilities.NHibernateIntegration.ISessionManager,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
+        <member name="M:BerwickHeights.Platform.NHibernate.PersistenceDALBase.#ctor(NHibernate.ISessionFactory,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
             <summary>
             Constructor.
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.NHibernate.PersistenceDALBase.#ctor(BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,Castle.Facilities.NHibernateIntegration.ISessionManager,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
+        <member name="M:BerwickHeights.Platform.NHibernate.PersistenceDALBase.#ctor(BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,NHibernate.ISessionFactory,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
             <summary>
             Constructor.
             </summary>
@@ -75,6 +75,281 @@
             <param name="query">The NHibernate query.</param>
             <param name="pageSize">The number of database records in each page. If set to 0, then this call does nothing.</param>
             <param name="pageNumber">The 1-based page number.</param>
+        </member>
+        <member name="T:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL">
+            <summary>
+            Generic functionality for NHibernate
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.#ctor(NHibernate.ISessionFactory)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="sessionFactory">The session factory.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindAll(System.Type)">
+            <summary>
+            Returns all instances found for the specified type.
+            </summary>
+            <param name="type">The target type.</param>
+            <returns>The <see cref="T:System.Array"/> of results</returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindAll(System.Type,System.Int32,System.Int32)">
+            <summary>
+            Returns a portion of the query results (sliced)
+            </summary>
+            <param name="type">The target type.</param>
+            <param name="firstRow">The number of the first row to retrieve.</param>
+            <param name="maxRows">The maximum number of results retrieved.</param>
+            <returns>The <see cref="T:System.Array"/> of results</returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindById(System.Type,System.Object)">
+            <summary>
+            Finds an object instance by an unique ID
+            </summary>
+            <param name="type">The AR subclass type</param>
+            <param name="id">ID value</param>
+            <returns>The object instance.</returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.Create(System.Object)">
+            <summary>
+            Creates (Saves) a new instance to the database.
+            </summary>
+            <param name="instance">The instance to be created on the database</param>
+            <returns>The instance</returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.Update(System.Object)">
+            <summary>
+            Persists the modification on the instance
+            state to the database.
+            </summary>
+            <param name="instance">The instance to be updated on the database</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.Delete(System.Object)">
+            <summary>
+            Deletes the instance from the database.
+            </summary>
+            <param name="instance">The instance to be deleted from the database</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.DeleteAll(System.Type)">
+            <summary>
+            Deletes all rows for the specified type
+            </summary>
+            <param name="type">type on which the rows on the database should be deleted</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.Save(System.Object)">
+            <summary>
+            Saves the instance to the database. If the primary key is unitialized
+            it creates the instance on the database. Otherwise it updates it.
+            <para>
+            If the primary key is assigned, then you must invoke <see cref="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.Create(System.Object)"/>
+            or <see cref="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.Update(System.Object)"/> instead.
+            </para>
+            </summary>
+            <param name="instance">The instance to be saved</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindAllStateless(System.Type)">
+            <summary>
+            Returns all instances found for the specified type using IStatelessSession.
+            </summary>
+            <param name="type">The target type.</param>
+            <returns>The <see cref="T:System.Array"/> of results</returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindAllStateless(System.Type,System.Int32,System.Int32)">
+            <summary>
+            Returns a portion of the query results (sliced) using IStatelessSession.
+            </summary>
+            <param name="type">The target type.</param>
+            <param name="firstRow">The number of the first row to retrieve.</param>
+            <param name="maxRows">The maximum number of results retrieved.</param>
+            <returns>The <see cref="T:System.Array"/> of results</returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindByIdStateless(System.Type,System.Object)">
+            <summary>
+            Finds an object instance by an unique ID using IStatelessSession.
+            </summary>
+            <param name="type">The AR subclass type</param>
+            <param name="id">ID value</param>
+            <returns>The object instance.</returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.CreateStateless(System.Object)">
+            <summary>
+            Creates (saves or inserts) a new instance to the database using IStatelessSession.
+            </summary>
+            <param name="instance">The instance to be created on the database</param>
+            <returns>The instance</returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.UpdateStateless(System.Object)">
+            <summary>
+            Persists the modification on the instance state to the database using IStatelessSession.
+            </summary>
+            <param name="instance">The instance to be updated on the database</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.DeleteStateless(System.Object)">
+            <summary>
+            Deletes the instance from the database using IStatelessSession.
+            </summary>
+            <param name="instance">The instance to be deleted from the database</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.DeleteAllStateless(System.Type)">
+            <summary>
+            Deletes all rows for the specified type using IStatelessSession.
+            </summary>
+            <param name="type">type on which the rows on the database should be deleted</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindAll(System.Type,NHibernate.Criterion.ICriterion[])">
+            <summary>
+            Returns all instances found for the specified type
+            using criteria.
+            </summary>
+            <param name="type">The target type.</param>
+            <param name="criterias">The criteria expression</param>
+            <returns>The <see cref="T:System.Array"/> of results.</returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindAll(System.Type,NHibernate.Criterion.ICriterion[],System.Int32,System.Int32)">
+            <summary>
+            Returns all instances found for the specified type
+            using criteria.
+            </summary>
+            <param name="type">The target type.</param>
+            <param name="criterias">The criteria expression</param>
+            <param name="firstRow">The number of the first row to retrieve.</param>
+            <param name="maxRows">The maximum number of results retrieved.</param>
+            <returns>The <see cref="T:System.Array"/> of results.</returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindAll(System.Type,NHibernate.Criterion.ICriterion[],NHibernate.Criterion.Order[])">
+            <summary>
+            Returns all instances found for the specified type
+            using criteria.
+            </summary>
+            <param name="type">The target type.</param>
+            <param name="criterias">The criteria expression</param>
+            <param name="sortItems">An <see cref="T:System.Array"/> of <see cref="T:NHibernate.Criterion.Order"/> objects.</param>
+            <returns>The <see cref="T:System.Array"/> of results.</returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindAll(System.Type,NHibernate.Criterion.ICriterion[],NHibernate.Criterion.Order[],System.Int32,System.Int32)">
+            <summary>
+            Returns all instances found for the specified type
+            using criteria.
+            </summary>
+            <param name="type">The target type.</param>
+            <param name="criterias">The criteria expression</param>
+            <param name="sortItems">An <see cref="T:System.Array"/> of <see cref="T:NHibernate.Criterion.Order"/> objects.</param>
+            <param name="firstRow">The number of the first row to retrieve.</param>
+            <param name="maxRows">The maximum number of results retrieved.</param>
+            <returns>The <see cref="T:System.Array"/> of results.</returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindAllWithCustomQuery(System.String)">
+            <summary>
+            Finds all with custom query.
+            </summary>
+            <param name="queryString">The query string.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindAllWithCustomQuery(System.String,System.Int32,System.Int32)">
+            <summary>
+            Finds all with custom HQL query.
+            </summary>
+            <param name="queryString">The query string.</param>
+            <param name="firstRow">The number of the first row to retrieve.</param>
+            <param name="maxRows">The maximum number of results retrieved.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindAllWithNamedQuery(System.String)">
+            <summary>
+            Finds all with named HQL query.
+            </summary>
+            <param name="namedQuery">The named query.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindAllWithNamedQuery(System.String,System.Int32,System.Int32)">
+            <summary>
+            Finds all with named HQL query.
+            </summary>
+            <param name="namedQuery">The named query.</param>
+            <param name="firstRow">The number of the first row to retrieve.</param>
+            <param name="maxRows">The maximum number of results retrieved.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindAllStateless(System.Type,NHibernate.Criterion.ICriterion[])">
+            <summary>
+            Returns all instances found for the specified type
+            using criteria and IStatelessSession.
+            </summary>
+            <param name="type">The target type.</param>
+            <param name="criterias">The criteria expression</param>
+            <returns>The <see cref="T:System.Array"/> of results.</returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindAllStateless(System.Type,NHibernate.Criterion.ICriterion[],System.Int32,System.Int32)">
+            <summary>
+            Returns all instances found for the specified type
+            using criteria and IStatelessSession.
+            </summary>
+            <param name="type">The target type.</param>
+            <param name="criterias">The criteria expression</param>
+            <param name="firstRow">The number of the first row to retrieve.</param>
+            <param name="maxRows">The maximum number of results retrieved.</param>
+            <returns>The <see cref="T:System.Array"/> of results.</returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindAllStateless(System.Type,NHibernate.Criterion.ICriterion[],NHibernate.Criterion.Order[])">
+            <summary>
+            Returns all instances found for the specified type
+            using criteria and IStatelessSession.
+            </summary>
+            <param name="type">The target type.</param>
+            <param name="criterias">The criteria expression</param>
+            <param name="sortItems">An <see cref="T:System.Array"/> of <see cref="T:NHibernate.Criterion.Order"/> objects.</param>
+            <returns>The <see cref="T:System.Array"/> of results.</returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindAllStateless(System.Type,NHibernate.Criterion.ICriterion[],NHibernate.Criterion.Order[],System.Int32,System.Int32)">
+            <summary>
+            Returns all instances found for the specified type
+            using criteria and IStatelessSession.
+            </summary>
+            <param name="type">The target type.</param>
+            <param name="criterias">The criteria expression</param>
+            <param name="sortItems">An <see cref="T:System.Array"/> of <see cref="T:NHibernate.Criterion.Order"/> objects.</param>
+            <param name="firstRow">The number of the first row to retrieve.</param>
+            <param name="maxRows">The maximum number of results retrieved.</param>
+            <returns>The <see cref="T:System.Array"/> of results.</returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindAllWithCustomQueryStateless(System.String)">
+            <summary>
+            Finds all with custom query using IStatelessSession.
+            </summary>
+            <param name="queryString">The query string.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindAllWithCustomQueryStateless(System.String,System.Int32,System.Int32)">
+            <summary>
+            Finds all with custom HQL query using IStatelessSession.
+            </summary>
+            <param name="queryString">The query string.</param>
+            <param name="firstRow">The number of the first row to retrieve.</param>
+            <param name="maxRows">The maximum number of results retrieved.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindAllWithNamedQueryStateless(System.String)">
+            <summary>
+            Finds all with named HQL query using IStatelessSession.
+            </summary>
+            <param name="namedQuery">The named query.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.FindAllWithNamedQueryStateless(System.String,System.Int32,System.Int32)">
+            <summary>
+            Finds all with named HQL query using IStatelessSession.
+            </summary>
+            <param name="namedQuery">The named query.</param>
+            <param name="firstRow">The number of the first row to retrieve.</param>
+            <param name="maxRows">The maximum number of results retrieved.</param>
+            <returns></returns>
+        </member>
+        <member name="P:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL.SessionFactory">
+            <summary>
+            Gets the session factory.
+            </summary>
+            <value>The session factory.</value>
         </member>
     </members>
 </doc>

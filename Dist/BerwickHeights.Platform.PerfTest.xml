@@ -500,7 +500,7 @@
         <member name="T:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL">
             <inheritDoc/>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL.#ctor(Castle.Facilities.NHibernateIntegration.ISessionManager,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
+        <member name="M:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL.#ctor(NHibernate.ISessionFactory,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
             <inheritDoc/>
         </member>
         <member name="M:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL.SaveTestResults(BerwickHeights.Platform.PerfTest.Model.TestSuiteResult)">
@@ -512,6 +512,9 @@
         <member name="M:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL.GetTestResults(System.DateTime,System.DateTime)">
             <inheritDoc/>
         </member>
+    </members>
+</doc>
+er>
     </members>
 </doc>
     <inheritDoc/>
