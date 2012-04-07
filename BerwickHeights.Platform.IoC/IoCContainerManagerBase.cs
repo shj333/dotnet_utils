@@ -12,6 +12,7 @@
  */
 
 using System;
+using BerwickHeights.Platform.Core.Logging;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
@@ -35,14 +36,24 @@ namespace BerwickHeights.Platform.IoC
         /// <param name="autoPersistenceModel">Automappings used by FluentNHibernate.</param>
         /// <param name="exposeConfigAction">The action run when exposing the configuration (e.g., apply latest 
         /// schema to database instance, update schema, etc.).</param>
+        /// <param name="logger">Logger instance in case something goes wrong.</param>
         protected virtual Configuration ConfigureNHibernate(IPersistenceConfigurer persistenceConfigurer, 
-            AutoPersistenceModel autoPersistenceModel, Action<Configuration> exposeConfigAction)
+            AutoPersistenceModel autoPersistenceModel, Action<Configuration> exposeConfigAction,
+            ILogger logger)
         {
-            return Fluently.Configure()
-              .Database(persistenceConfigurer)
-              .Mappings(m => m.AutoMappings.Add(autoPersistenceModel))
-              .ExposeConfiguration(exposeConfigAction)
-              .BuildConfiguration();
+            try
+            {
+                return Fluently.Configure()
+                  .Database(persistenceConfigurer)
+                  .Mappings(m => m.AutoMappings.Add(autoPersistenceModel))
+                  .ExposeConfiguration(exposeConfigAction)
+                  .BuildConfiguration();
+            }
+            catch (Exception e)
+            {
+                logger.Error("Caught exception in configuring NHibernate", e);   
+                throw;
+            }
         }
 
         #endregion

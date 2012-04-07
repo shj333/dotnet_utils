@@ -87,6 +87,27 @@ namespace BerwickHeights.Platform.NHibernate
 			}
 		}
 
+        /// <summary>
+        /// Finds an object instance by an unique ID of the given type. Returns null if entity not found.
+        /// </summary>
+        /// <param name="id">ID value</param>
+        /// <returns>The object instance or null if entity not found.</returns>
+        public virtual T GetEntity<T>(object id) where T : class
+        {
+            try
+            {
+                T entity = FindById(typeof(T), id) as T;
+                NHibernateUtil.Initialize(entity);
+                return entity;
+            }
+            catch (ObjectNotFoundException)
+            {
+                return null;
+            }
+        }
+
+
+
 		/// <summary>
 		/// Finds an object instance by an unique ID
 		/// </summary>
