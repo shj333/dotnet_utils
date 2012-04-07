@@ -16,7 +16,6 @@ using System.Collections.Generic;
 using System.Linq;
 using BerwickHeights.Platform.NHibernate;
 using BerwickHeights.Platform.PerfTest.Model;
-using Castle.Facilities.NHibernateIntegration;
 using NHibernate;
 
 namespace BerwickHeights.Platform.PerfTest.DAL.NHibernate
@@ -25,8 +24,8 @@ namespace BerwickHeights.Platform.PerfTest.DAL.NHibernate
     public class PerfTestDAL : PersistenceDALBase, IPerfTestDAL
     {
         /// <inheritDoc/>
-        public PerfTestDAL(ISessionManager sessionManager, Core.Logging.ILoggerFactory loggerFactory)
-            : base(sessionManager, loggerFactory)
+        public PerfTestDAL(ISessionFactory sessionFactory, Core.Logging.ILoggerFactory loggerFactory)
+            : base(sessionFactory, loggerFactory)
         {
         }
 
@@ -50,18 +49,18 @@ namespace BerwickHeights.Platform.PerfTest.DAL.NHibernate
             }
 
             // Cascades save to persist/update children performance test data as well
-            genericDao.Save(testSuiteResult);
+            genericDAL.Save(testSuiteResult);
         }
 
         /// <inheritDoc/>
         public virtual TestSuiteResult GetTestResults(string testSuiteResultId)
         {
             TestSuiteResult testSuiteResult;
-            using (sessionManager.OpenSession())
+            using (sessionFactory.OpenSession())
             {
                 try
                 {
-                    testSuiteResult = genericDao.FindById(typeof(TestSuiteResult),
+                    testSuiteResult = genericDAL.FindById(typeof(TestSuiteResult),
                         testSuiteResultId) as TestSuiteResult;
                     NHibernateUtil.Initialize(testSuiteResult);
                 }
@@ -77,7 +76,7 @@ namespace BerwickHeights.Platform.PerfTest.DAL.NHibernate
         /// <inheritDoc/>
         public virtual IEnumerable<TestSuiteResult> GetTestResults(DateTime startTime, DateTime endTime)
         {
-            using (ISession session = sessionManager.OpenSession())
+            using (ISession session = sessionFactory.OpenSession())
             {
                 const string hql = "from TestSuiteResult tr "
                     + "where tr.StartTime >= :startTime "

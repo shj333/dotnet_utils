@@ -36,8 +36,9 @@
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.3.0.0.4001\lib\net40-client\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Facilities.AutoTx">
-      <HintPath>..\packages\Castle.Facilities.AutoTx.3.0.202.2202\lib\net40\Castle.Facilities.AutoTx.dll</HintPath>
+    <Reference Include="Castle.Facilities.AutoTx, Version=3.0.202.2202, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Facilities.AutoTx.Branch\Castle.Facilities.AutoTx.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Facilities.Logging">
       <HintPath>..\packages\Castle.LoggingFacility.3.0.0.4001\lib\net40\Castle.Facilities.Logging.dll</HintPath>

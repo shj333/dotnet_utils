@@ -14,8 +14,6 @@
 using System;
 using BerwickHeights.Platform.Core.CurrentUser;
 using BerwickHeights.Platform.Core.Logging;
-using Castle.Facilities.NHibernateIntegration;
-using Castle.Facilities.NHibernateIntegration.Components.Dao;
 using NHibernate;
 using ILoggerFactory = BerwickHeights.Platform.Core.Logging.ILoggerFactory;
 
@@ -29,11 +27,11 @@ namespace BerwickHeights.Platform.NHibernate
         /// <summary>
         /// Used to manage NHibnerate sessions
         /// </summary>
-        protected readonly ISessionManager sessionManager;
+        protected readonly ISessionFactory sessionFactory;
         /// <summary>
         /// A set of methods that provide common functionality for NHibnerate
         /// </summary>
-        protected readonly NHibernateGenericDao genericDao;
+        protected readonly NHibernateGenericDAL genericDAL;
         /// <summary>
         /// Standard Castle logging component
         /// </summary>
@@ -45,9 +43,9 @@ namespace BerwickHeights.Platform.NHibernate
         /// <summary>
         /// Constructor.
         /// </summary>
-        protected PersistenceDALBase(ISessionManager sessionManager, 
+        protected PersistenceDALBase(ISessionFactory sessionFactory, 
             ILoggerFactory loggerFactory)
-            : this(null, sessionManager, loggerFactory)
+            : this(null, sessionFactory, loggerFactory)
         {
         }
 
@@ -55,13 +53,13 @@ namespace BerwickHeights.Platform.NHibernate
         /// Constructor.
         /// </summary>
         protected PersistenceDALBase(ICurrentUserSvc currentUserSvc, 
-            ISessionManager sessionManager, 
+            ISessionFactory sessionFactory, 
             ILoggerFactory loggerFactory)
         {
             this.currentUserSvc = currentUserSvc;
-            this.sessionManager = sessionManager;
+            this.sessionFactory = sessionFactory;
             logger = loggerFactory.GetLogger(GetType());
-            genericDao = new NHibernateGenericDao(sessionManager);
+            genericDAL = new NHibernateGenericDAL(sessionFactory);
         }
 
 
