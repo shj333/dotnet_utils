@@ -26,6 +26,22 @@
             <param name="containerType">The fully qualified type name of the IoC container manager (full type name 
             and assembly).</param>
         </member>
+        <member name="T:BerwickHeights.Platform.IoC.IoCContainerManagerBase">
+            <summary>
+            Abstract base class for IoC container managers.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerBase.ConfigureNHibernate(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Action{NHibernate.Cfg.Configuration})">
+            <summary>
+            Sets up configuration of NHibernate (database configuration via ConfigureDatabase(), mappings via 
+            ConfigureMappings()) and exposes the configuration via supplied exposeConfigAction.
+            </summary>
+            <param name="persistenceConfigurer">Sets up FluentNHibernate configuration of database type, 
+            connection string, etc.</param>
+            <param name="autoPersistenceModel">Automappings used by FluentNHibernate.</param>
+            <param name="exposeConfigAction">The action run when exposing the configuration (e.g., apply latest 
+            schema to database instance, update schema, etc.).</param>
+        </member>
         <member name="T:BerwickHeights.Platform.IoC.IIoCContainerManager">
             <summary>
             Interface to a type that manages an IoC container.
@@ -97,13 +113,15 @@
             <param name="instance">The instance to register as a component.</param>
             <param name="componentId">The id of the component.</param>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.SetupNHibernateIntegration(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Boolean)">
+        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.SetupNHibernateIntegration(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Action{NHibernate.Cfg.Configuration},System.Boolean)">
             <summary>
             NHibernate integration.
             </summary>
             <param name="persistenceConfigurer">Sets up FluentNHibernate configuration of database type, 
             connection string, etc.</param>
             <param name="autoPersistenceModel">Automappings used by FluentNHibernate.</param>
+            <param name="exposeConfigAction">The action run when exposing the configuration (e.g., apply latest 
+            schema to database instance, update schema, etc.).</param>
             <param name="isUseAutoTransactions">If true, then automated database transactions via AOP are 
             configured.</param>
         </member>
@@ -138,27 +156,6 @@
             Returns all components that implement the given interface.
             </summary>
             <typeparam name="T">The requested component interface.</typeparam>
-        </member>
-        <member name="T:BerwickHeights.Platform.IoC.IoCContainerManagerBase">
-            <summary>
-            Abstract base class for IoC container managers.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerBase.ConfigureNHibernate(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel)">
-            <summary>
-            Sets up configuration of NHibernate (database configuration via ConfigureDatabase(), mappings via 
-            ConfigureMappings()). Also exposes the configuration to the database instance so that the latest 
-            schema is applied (via ConfigurationAction()).
-            </summary>
-            <param name="persistenceConfigurer">Sets up FluentNHibernate configuration of database type, 
-            connection string, etc.</param>
-            <param name="autoPersistenceModel">Automappings used by FluentNHibernate.</param>
-        </member>
-        <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerBase.ConfigurationAction(NHibernate.Cfg.Configuration)">
-            <summary>
-            Exposes the configuration to the database instance so that the latest schema is applied.
-            </summary>
-            <param name="config"></param>
         </member>
     </members>
 </doc>
