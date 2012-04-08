@@ -114,7 +114,7 @@
             <param name="instance">The instance to register as a component.</param>
             <param name="componentId">The id of the component.</param>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.SetupNHibernateIntegration(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Action{NHibernate.Cfg.Configuration},System.Boolean)">
+        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.SetupNHibernateIntegration(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Action{NHibernate.Cfg.Configuration},System.Boolean,System.Boolean)">
             <summary>
             NHibernate integration.
             </summary>
@@ -123,6 +123,9 @@
             <param name="autoPersistenceModel">Automappings used by FluentNHibernate.</param>
             <param name="exposeConfigAction">The action run when exposing the configuration (e.g., apply latest 
             schema to database instance, update schema, etc.).</param>
+            <param name="isPerWebRequest">Determines lifestyle of NHibernate ISession component; if true, then 
+            the lifestyle is bound to the web request; otherwise, the lifestyle is transient and the instances
+            are destroyed when disposed.</param>
             <param name="isUseAutoTransactions">If true, then automated database transactions via AOP are 
             configured.</param>
         </member>

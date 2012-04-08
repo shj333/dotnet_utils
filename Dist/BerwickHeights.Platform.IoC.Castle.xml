@@ -41,7 +41,7 @@
         <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.RegisterComponentInstance(System.Type,System.Object,System.String)">
             <inheritDoc/>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.SetupNHibernateIntegration(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Action{NHibernate.Cfg.Configuration},System.Boolean)">
+        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.SetupNHibernateIntegration(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Action{NHibernate.Cfg.Configuration},System.Boolean,System.Boolean)">
             <inheritDoc/>
         </member>
         <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.SetupASPNetMVCIntegration">
@@ -136,7 +136,7 @@
         </member>
     </members>
 </doc>
-orm.Core.Config.IConfigurationSvc,BerwickHeights.Platform.Core.Logging.ILogger)">
+.IConfigurationSvc,BerwickHeights.Platform.Core.Logging.ILogger)">
             <summary>
             Production constructor (no PerfTest component)
             </summary>
