@@ -143,17 +143,20 @@ namespace BerwickHeights.Platform.IoC.Castle
         /// <inheritDoc/>
         public void SetupNHibernateIntegration(IPersistenceConfigurer persistenceConfigurer, 
             AutoPersistenceModel autoPersistenceModel, Action<NHibernate.Cfg.Configuration> exposeConfigAction, 
-            bool isUseAutoTransactions)
+            bool isPerWebRequest, bool isUseAutoTransactions)
         {
             ILogger logger = container.Resolve<ILoggerFactory>().GetLogger(GetType());
+            ComponentRegistration<ISession> sessionCompReg = Component.For<ISession>()
+                .UsingFactoryMethod(k => k.Resolve<ISessionFactory>().OpenSession());
+            if (isPerWebRequest) sessionCompReg.LifestylePerWebRequest();
+            else sessionCompReg.LifestyleTransient();
+
             container.Kernel.Register(
                 Component.For<ISessionFactory>()
                     .UsingFactoryMethod(_ => base.ConfigureNHibernate(
                         persistenceConfigurer, autoPersistenceModel, exposeConfigAction, logger).BuildSessionFactory()),
-                Component.For<ISession>()
-                    .UsingFactoryMethod(k => k.Resolve<ISessionFactory>().OpenSession())
-                    .LifestylePerWebRequest()
-                );
+                sessionCompReg
+            );
 
             if (isUseAutoTransactions) container.AddFacility(new AutoTxFacility());
         }
