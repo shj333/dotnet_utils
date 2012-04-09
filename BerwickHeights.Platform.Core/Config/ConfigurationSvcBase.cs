@@ -54,7 +54,7 @@ namespace BerwickHeights.Platform.Core.Config
         {
             string cfgVal = GetValue(key);
             bool returnVal = (string.IsNullOrEmpty(cfgVal)) ? defaultVal : bool.Parse(cfgVal);
-            if (logger.IsDebugEnabled) logger.Debug("Config " + key + ": " + IsHideInLog(key, cfgVal));
+            if ((logger.IsDebugEnabled) && (!key.Equals(TraceMethodsConfigKey))) logger.Debug("Config " + key + ": " + IsHideInLog(key, cfgVal));
             return returnVal;
         }
 
