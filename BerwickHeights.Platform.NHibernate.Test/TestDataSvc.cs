@@ -18,10 +18,8 @@ namespace BerwickHeights.Platform.NHibernate.Test
 {
     public interface ITestDataSvc
     {
-        [Transaction]
         void SaveEntity(TestEntity testEntity);
 
-        [Transaction]
         TestEntity GetEntity(string testEntityId);
     }
 

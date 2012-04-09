@@ -12,6 +12,8 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 using BerwickHeights.Platform.Core.Logging;
 using Castle.DynamicProxy;
 using Castle.Services.Transaction;
@@ -33,6 +35,9 @@ namespace BerwickHeights.Platform.NHibernate
         private readonly ISessionFactory sessionFactory;
         private readonly ILogger logger;
 
+        private readonly ISet<MethodInfo> normalMethods;
+        private readonly ISet<MethodInfo> transactionalMethods;
+
         #endregion
 
         #region Constructors
@@ -45,6 +50,9 @@ namespace BerwickHeights.Platform.NHibernate
         {
             this.sessionFactory = sessionFactory;
             logger = loggerFactory.GetLogger(GetType());
+
+            normalMethods = new HashSet<MethodInfo>();
+            transactionalMethods = new HashSet<MethodInfo>();
         }
 
         #endregion
@@ -56,7 +64,7 @@ namespace BerwickHeights.Platform.NHibernate
         /// </summary>
         public void Intercept(IInvocation invocation)
         {
-            if (IsInTransaction(invocation))
+            if (IsTransactional(invocation))
             {
                 RunMethodInTransaction(invocation);
             }
@@ -70,11 +78,38 @@ namespace BerwickHeights.Platform.NHibernate
 
         #region Private Methods
 
-        private bool IsInTransaction(IInvocation invocation)
+        private bool IsTransactional(IInvocation invocation)
         {
-            bool result = invocation.Method.IsDefined(typeof (TransactionAttribute), false);
-            if (logger.IsDebugEnabled) logger.Debug("Method " + invocation.Method.Name + " of class " + invocation.TargetType.Name + " is transactional?: " + result);
-            return result;
+            // Method info comes from target if invocation is an interface
+            MethodInfo methodInfo = (invocation.Method.DeclaringType.IsInterface)
+                ? invocation.MethodInvocationTarget
+                : invocation.Method;
+
+            // See if we have cached transactional property yet
+            bool isTransactional;
+            if (normalMethods.Contains(methodInfo))
+            {
+                isTransactional = false;
+                if (logger.IsDebugEnabled) logger.Debug("Using cached value for method " + invocation.Method.Name + " of class " + invocation.TargetType.Name);
+            }
+            else if (transactionalMethods.Contains(methodInfo))
+            {
+                isTransactional = true;
+                if (logger.IsDebugEnabled) logger.Debug("Using cached value for method " + invocation.Method.Name + " of class " + invocation.TargetType.Name);
+            }
+            else
+            {
+                // See if method has "Transaction" attribute defined on it
+                isTransactional = methodInfo.IsDefined(typeof(TransactionAttribute), false);
+
+                // Cache result for next time
+                if (isTransactional) transactionalMethods.Add(methodInfo);
+                else normalMethods.Add(methodInfo);
+            }
+
+            if (logger.IsDebugEnabled) logger.Debug("Method " + invocation.Method.Name + " of class " + invocation.TargetType.Name + " is transactional?: " + isTransactional);
+
+            return isTransactional;
         }
 
         private void RunMethodInTransaction(IInvocation invocation)

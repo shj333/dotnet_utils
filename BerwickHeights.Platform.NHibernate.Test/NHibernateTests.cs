@@ -54,6 +54,9 @@ namespace BerwickHeights.Platform.NHibernate.Test
 
             Assert.AreEqual(entity.TestEntityId, entityInDb.TestEntityId);
             Assert.AreEqual(entity, entityInDb);
+
+            // See if cache is used in detecting transactional attribute
+            testDataSvc.GetEntity(entity.TestEntityId);
         }
 
         private static IPersistenceConfigurer ConfigureDatabase()
