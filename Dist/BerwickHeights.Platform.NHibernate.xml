@@ -21,6 +21,21 @@
         <member name="M:BerwickHeights.Platform.NHibernate.AuditInterceptor.OnSave(System.Object,System.Object,System.Object[],System.String[],NHibernate.Type.IType[])">
             <inheritDoc/>
         </member>
+        <member name="T:BerwickHeights.Platform.NHibernate.TransactionInterceptor">
+            <summary>
+            Castle Windsor interceptor that provides transactional support to configured methods.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.TransactionInterceptor.#ctor(NHibernate.ISessionFactory,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.TransactionInterceptor.Intercept(Castle.DynamicProxy.IInvocation)">
+            <summary>
+            Determines if given invocation is bound to a transaction and suplies one if so.
+            </summary>
+        </member>
         <member name="T:BerwickHeights.Platform.NHibernate.NHibernateGenericDAL">
             <summary>
             Generic functionality for NHibernate
