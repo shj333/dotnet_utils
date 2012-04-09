@@ -72,8 +72,8 @@ namespace BerwickHeights.Platform.NHibernate
 
         private bool IsInTransaction(IInvocation invocation)
         {
-            bool result = invocation.Method.IsDefined(typeof (Transaction), false);
-            if (logger.IsDebugEnabled) logger.Debug("Method is transactional?: " + result);
+            bool result = invocation.Method.IsDefined(typeof (TransactionAttribute), false);
+            if (logger.IsDebugEnabled) logger.Debug("Method " + invocation.Method.Name + " of class " + invocation.TargetType.Name + " is transactional?: " + result);
             return result;
         }
 

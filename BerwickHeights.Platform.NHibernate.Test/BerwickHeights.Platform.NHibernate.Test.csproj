@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="NHibernateTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestDataSvc.cs" />
     <Compile Include="TestEntity.cs" />
   </ItemGroup>
   <ItemGroup>
