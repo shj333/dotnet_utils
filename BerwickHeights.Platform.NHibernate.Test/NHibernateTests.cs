@@ -5,7 +5,9 @@ using Castle.Services.Transaction;
 using FluentNHibernate;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg.Db;
+using FluentNHibernate.Conventions;
 using FluentNHibernate.Conventions.Helpers;
+using FluentNHibernate.Conventions.Instances;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
 using NHCfg = NHibernate.Cfg;
@@ -31,19 +33,33 @@ namespace BerwickHeights.Platform.NHibernate.Test
         }
 
         [Test]
-        [Transaction(TransactionScopeOption.Required)]
         public void TestPersistEntity()
         {
-            TestEntity entity = new TestEntity(13, "data2");
+            TestEntity entity = new TestEntity(13, "data2", "http://test.com/test/foo");
             Console.WriteLine("TestEntityId: " + entity.TestEntityId);
             using (ISession session = iocContainer.Resolve<ISession>())
             {
-//                using (ITransaction trans = session.BeginTransaction())
- ///               {
-                    session.SaveOrUpdate(entity);
-      //              trans.Commit();
-    //            }
+                using (ITransaction trans = session.BeginTransaction())
+                {
+                    session.Save(entity);
+                    trans.Commit();
+                }
             }
+
+            TestEntity entityInDb;
+            using (ISession session = iocContainer.Resolve<ISession>())
+            {
+                using (ITransaction trans = session.BeginTransaction())
+                {
+                    entityInDb = session.Get<TestEntity>(entity.TestEntityId);
+                    trans.Commit();
+                }
+            }
+
+            Console.WriteLine("Entity in db: " + entityInDb);
+
+            Assert.AreEqual(entity.TestEntityId, entityInDb.TestEntityId);
+            Assert.AreEqual(entity, entityInDb);
         }
 
         private static IPersistenceConfigurer ConfigureDatabase()
@@ -56,13 +72,26 @@ namespace BerwickHeights.Platform.NHibernate.Test
         {
             return AutoMap
                 .AssemblyOf<TestEntity>(new AutomapConfig())
-                .Conventions.Add(Table.Is(x => x.EntityType.Name));
+                .Conventions.Add(
+                    Table.Is(x => x.EntityType.Name), 
+                    ConventionBuilder.Id.Always(x => x.CustomSqlType("uniqueidentifier")))
+                .Conventions.Add<StringPropertyConvention>();
         }
+
+        private class StringPropertyConvention : IPropertyConvention
+        {
+            public void Apply(IPropertyInstance instance)
+            {
+                if (instance.Name.Contains("Url")) instance.CustomSqlType("nvarchar(max)");
+                instance.Not.Nullable();
+            }
+        }
+
 
         private static void ExposeConfigAction(NHCfg.Configuration config)
         {
             SchemaMetadataUpdater.QuoteTableAndColumns(config);
-            //new SchemaExport(config).Create(false, true);
+            new SchemaExport(config).Create(false, true);
         }
 
         /// <summary>
@@ -70,17 +99,11 @@ namespace BerwickHeights.Platform.NHibernate.Test
         /// </summary>
         public class AutomapConfig : DefaultAutomappingConfiguration
         {
-            /// <summary>
-            /// Specifies the namespace where DTOs live
-            /// </summary>
             public override bool ShouldMap(Type type)
             {
                 return (type == typeof(TestEntity));
             }
 
-            /// <summary>
-            /// Determines whether or not the given DTO member is the identity.
-            /// </summary>
             public override bool IsId(Member member)
             {
                 return (member.Name.Equals(member.DeclaringType.Name + "Id"));
