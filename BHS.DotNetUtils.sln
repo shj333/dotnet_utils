@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerwickHeights.Platform.Ser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerwickHeights.Platform.Logging.Log4Net", "BerwickHeights.Platform.Logging.Log4Net\BerwickHeights.Platform.Logging.Log4Net.csproj", "{2B736EB1-14D9-40F3-ADA5-CFC6B611BD47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerwickHeights.Platform.NHibernate.Test", "BerwickHeights.Platform.NHibernate.Test\BerwickHeights.Platform.NHibernate.Test.csproj", "{D089F82F-87FC-454E-9853-DB80D6EF638C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -96,6 +98,10 @@ Global
 		{2B736EB1-14D9-40F3-ADA5-CFC6B611BD47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B736EB1-14D9-40F3-ADA5-CFC6B611BD47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B736EB1-14D9-40F3-ADA5-CFC6B611BD47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D089F82F-87FC-454E-9853-DB80D6EF638C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D089F82F-87FC-454E-9853-DB80D6EF638C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D089F82F-87FC-454E-9853-DB80D6EF638C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D089F82F-87FC-454E-9853-DB80D6EF638C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
