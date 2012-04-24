@@ -35,6 +35,7 @@ namespace BerwickHeights.Platform.Email
         private readonly string host;
         private readonly string userName;
         private readonly string password;
+        private readonly bool useDefaultCredentials;
         private readonly int timeoutMSecs;
 
         #endregion
@@ -55,6 +56,7 @@ namespace BerwickHeights.Platform.Email
             userName = configurationSvc.GetStringConfig("SMTPUser", false);
             if (!string.IsNullOrEmpty(userName)) password = configurationSvc.GetStringConfig("SMTPPassword");
             timeoutMSecs = configurationSvc.GetIntConfig("STMPTimeoutSecs", false, 1) * 1000;
+            useDefaultCredentials = configurationSvc.GetBooleanConfig("SMTPUseDefaultCredentials", false);
 
             logger.Info("EmailDeliverySvc started with "
                 + "Port: " + port
@@ -94,8 +96,8 @@ namespace BerwickHeights.Platform.Email
             client.Port = port;
             client.EnableSsl = enableSsl;
             client.Host = host;
-            client.UseDefaultCredentials = (string.IsNullOrEmpty(userName));
-            if (!client.UseDefaultCredentials)
+            client.UseDefaultCredentials = useDefaultCredentials;
+            if ((!client.UseDefaultCredentials) && (!string.IsNullOrEmpty(userName)))
             {
                 client.Credentials = new NetworkCredential(userName, password);
             }
@@ -198,6 +200,7 @@ namespace BerwickHeights.Platform.Email
                 + ", EnableSSL: " + client.EnableSsl
                 + ", Host: " + client.Host
                 + ", UseDefaultCredentials: " + client.UseDefaultCredentials
+                + ", Network Credentials: " + ((client.Credentials == null) ? "none" : "provided")
                 + ", TimeoutMSecs: " + client.Timeout;
         }
 
