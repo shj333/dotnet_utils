@@ -263,6 +263,21 @@
             <param name="str">The string to check.</param>
             <param name="endsWith">The string that should end the given string.</param>
         </member>
+        <member name="T:BerwickHeights.Platform.Core.Utils.ListUtils">
+            <summary>
+            Static utility methods for managing lists.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Utils.ListUtils.ListToString(System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            Returns a string version of the given list as "[item1,item2,item3,...]".
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Core.Utils.ListUtils.DictionaryToString(System.Collections.Generic.IDictionary{System.Object,System.Object})">
+            <summary>
+            Returns a string version of the given dictionary as "[key1={value1},key2={value2},key3={value3},...]".
+            </summary>
+        </member>
         <member name="T:BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc">
             <summary>
             Provides information about the user who is currently using this thread. The information is 
@@ -638,24 +653,9 @@
         <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc.ResetCurrentUserData">
             <inheritDoc/>
         </member>
-        <member name="T:BerwickHeights.Platform.Core.Utils.ListUtils">
-            <summary>
-            Static utility methods for managing lists.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.Core.Utils.ListUtils.ListToString(System.Collections.Generic.IEnumerable{System.Object})">
-            <summary>
-            Returns a string version of the given list as "[item1,item2,item3,...]".
-            </summary>
-        </member>
     </members>
 </doc>
-ser.CurrentUserData.GetAttribute(System.String)">
-            <summary>
-            Returns the attribute for this user that matches the given key or an empty string if no match is found.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.Core.CurrentUser.CurrentUserData.HasAttribute(System.String)">
+">
             <summary>
             Returns whether or not the attributes list for this user contains the given key.
             </summary>
