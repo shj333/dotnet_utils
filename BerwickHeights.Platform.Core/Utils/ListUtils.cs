@@ -31,5 +31,16 @@ namespace BerwickHeights.Platform.Core.Utils
             sb.Append("]");
             return sb.ToString();
         }
+
+        /// <summary>
+        /// Returns a string version of the given dictionary as "[key1={value1},key2={value2},key3={value3},...]".
+        /// </summary>
+        public static string DictionaryToString(IDictionary<object, object> dictionary)
+        {
+            StringBuilder sb = new StringBuilder("[");
+            foreach (object key in dictionary.Keys) sb.Append(key + "={" + dictionary[key] + "},");
+            sb.Append("]");
+            return sb.ToString();
+        }
     }
 }
