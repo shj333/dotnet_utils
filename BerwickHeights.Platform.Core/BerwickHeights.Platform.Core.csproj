@@ -54,6 +54,10 @@
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\ILoggerFactory.cs" />
     <Compile Include="Model\AuditInfoBase.cs" />
+    <Compile Include="Model\Results\ISvcResult.cs" />
+    <Compile Include="Model\Results\SvcResult.cs" />
+    <Compile Include="Model\Results\SvcResultMessage.cs" />
+    <Compile Include="Model\Results\SvcResultMessageTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\DateTimeComparison.cs" />
     <Compile Include="Utils\ListUtils.cs" />
