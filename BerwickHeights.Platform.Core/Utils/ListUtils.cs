@@ -11,7 +11,7 @@
  *  
  */
 
-using System.Collections.Generic;
+using System.Collections;
 using System.Text;
 
 namespace BerwickHeights.Platform.Core.Utils
@@ -24,10 +24,10 @@ namespace BerwickHeights.Platform.Core.Utils
         /// <summary>
         /// Returns a string version of the given list as "[item1,item2,item3,...]".
         /// </summary>
-        public static string ListToString(IEnumerable<object> list)
+        public static string ListToString(IEnumerable list)
         {
             StringBuilder sb = new StringBuilder("[");
-            foreach (object item in list) sb.Append(item + ",");
+            foreach (object item in list) sb.Append("{" + item + "},");
             sb.Append("]");
             return sb.ToString();
         }
@@ -35,7 +35,7 @@ namespace BerwickHeights.Platform.Core.Utils
         /// <summary>
         /// Returns a string version of the given dictionary as "[key1={value1},key2={value2},key3={value3},...]".
         /// </summary>
-        public static string DictionaryToString(IDictionary<object, object> dictionary)
+        public static string DictionaryToString(IDictionary dictionary)
         {
             StringBuilder sb = new StringBuilder("[");
             foreach (object key in dictionary.Keys) sb.Append(key + "={" + dictionary[key] + "},");

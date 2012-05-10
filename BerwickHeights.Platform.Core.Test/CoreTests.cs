@@ -12,10 +12,12 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using BerwickHeights.Platform.Core.CurrentUser;
 using BerwickHeights.Platform.Core.IoC;
+using BerwickHeights.Platform.Core.Utils;
 using BerwickHeights.Platform.Core.Xml;
 using BerwickHeights.Platform.IoC;
 using BerwickHeights.Platform.Logging.Log4Net;
@@ -106,6 +108,19 @@ namespace BerwickHeights.Platform.Core.Test
             // Test validating bad xml input
             result = xmlProcessorSvc.Validate("<?xml version=\"1.0\"?><TestData xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" Data4=\"data3\" xmlns=\"http://xsd.berwickheights.com/Test\"><Data5>data1</Data5><Data6>data2</Data6></TestData>");
             Assert.IsFalse(result.IsValid);
+        }
+
+        [Test]
+        public void TestListUtils()
+        {
+            IDictionary<int, string> data = new Dictionary<int, string>()
+            {
+                { 1, "Data1" },
+                { 2, "Data2" }, 
+                { 3, "Data3" } 
+            };
+            Console.WriteLine(ListUtils.ListToString(data.Values));
+            Console.WriteLine(ListUtils.DictionaryToString((IDictionary)data));
         }
     }
 }
