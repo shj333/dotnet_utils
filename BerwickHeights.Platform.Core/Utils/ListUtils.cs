@@ -27,7 +27,7 @@ namespace BerwickHeights.Platform.Core.Utils
         public static string ListToString(IEnumerable list)
         {
             StringBuilder sb = new StringBuilder("[");
-            foreach (object item in list) sb.Append("{" + item + "},");
+            if (list != null) foreach (object item in list) sb.Append("{" + item + "},");
             sb.Append("]");
             return sb.ToString();
         }
@@ -38,7 +38,7 @@ namespace BerwickHeights.Platform.Core.Utils
         public static string DictionaryToString(IDictionary dictionary)
         {
             StringBuilder sb = new StringBuilder("[");
-            foreach (object key in dictionary.Keys) sb.Append(key + "={" + dictionary[key] + "},");
+            if (dictionary != null) foreach (object key in dictionary.Keys) sb.Append(key + "={" + dictionary[key] + "},");
             sb.Append("]");
             return sb.ToString();
         }
