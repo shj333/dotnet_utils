@@ -33,8 +33,16 @@ namespace BerwickHeights.Platform.Core.Model
         /// Constructor 
         /// </summary>
         protected IdBase(string domainId, string externalId)
+            : this(null, domainId, externalId)
         {
-            SystemId = Guid.NewGuid().ToString();
+        }
+
+        /// <summary>
+        /// Constructor 
+        /// </summary>
+        protected IdBase(string systemId, string domainId, string externalId)
+        {
+            SystemId = systemId;
             DomainId = domainId;
             ExternalId = externalId;
         }
