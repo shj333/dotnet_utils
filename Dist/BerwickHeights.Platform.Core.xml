@@ -863,6 +863,11 @@
             Constructor 
             </summary>
         </member>
+        <member name="M:BerwickHeights.Platform.Core.Model.IdBase.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor 
+            </summary>
+        </member>
         <member name="M:BerwickHeights.Platform.Core.Model.IdBase.ToString">
             <inheritDoc/>
         </member>
