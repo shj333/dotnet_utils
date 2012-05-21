@@ -15,7 +15,6 @@ using System;
 using System.Configuration;
 using System.Linq;
 using BerwickHeights.Platform.Core.Config;
-using BerwickHeights.Platform.Core.IoC;
 using BerwickHeights.Platform.IoC;
 using BerwickHeights.Platform.Logging.Log4Net;
 using NUnit.Framework;
@@ -37,7 +36,7 @@ namespace BerwickHeights.Platform.Config.Redis.Test
         private const string testDfltStr = "Test string default";
         private const string testStrArrayCfgKey = "TestStrArrayCfg";
         private readonly string[] testStrArray = new string[] { "aaa", "bbb", "ccc"};
-        private const string testPasswodCfgKey = "TestPassword";
+        private const string testPasswordCfgKey = "TestPassword";
 
         [TestFixtureSetUp]
         public void Init()
@@ -105,7 +104,7 @@ namespace BerwickHeights.Platform.Config.Redis.Test
             Assert.AreEqual(testStrArray.Length, val.Length);
             for (int idx = 0; idx < testStrArray.Length; idx++) Assert.AreEqual(testStrArray[idx], val[idx]);
 
-            string password = configurationSvc.GetStringConfig(testPasswodCfgKey);
+            string password = configurationSvc.GetStringConfig(testPasswordCfgKey);
             Assert.AreEqual(password, password);
         }
     }

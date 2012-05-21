@@ -54,6 +54,7 @@
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\ILoggerFactory.cs" />
     <Compile Include="Model\AuditInfoBase.cs" />
+    <Compile Include="Model\IdBase.cs" />
     <Compile Include="Model\Results\ISvcResult.cs" />
     <Compile Include="Model\Results\SvcResult.cs" />
     <Compile Include="Model\Results\SvcResultMessage.cs" />
