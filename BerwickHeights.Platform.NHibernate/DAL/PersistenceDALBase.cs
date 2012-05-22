@@ -17,7 +17,7 @@ using BerwickHeights.Platform.Core.Logging;
 using NHibernate;
 using ILoggerFactory = BerwickHeights.Platform.Core.Logging.ILoggerFactory;
 
-namespace BerwickHeights.Platform.NHibernate
+namespace BerwickHeights.Platform.NHibernate.DAL
 {
     /// <summary>
     /// Abstract base class for DAL components.

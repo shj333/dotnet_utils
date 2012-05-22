@@ -23,7 +23,7 @@ using IInterceptor = Castle.DynamicProxy.IInterceptor;
 using ILoggerFactory = BerwickHeights.Platform.Core.Logging.ILoggerFactory;
 using ITransaction = NHibernate.ITransaction;
 
-namespace BerwickHeights.Platform.NHibernate
+namespace BerwickHeights.Platform.NHibernate.Interceptors
 {
     /// <summary>
     /// Castle Windsor interceptor that provides transactional support to configured methods.

@@ -1,6 +1,7 @@
 ﻿using System;
 using BerwickHeights.Platform.Core.IoC;
 using BerwickHeights.Platform.IoC;
+using BerwickHeights.Platform.NHibernate.Interceptors;
 using FluentNHibernate;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg.Db;

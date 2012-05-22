@@ -17,7 +17,7 @@ using NHibernate;
 using NHibernate.Criterion;
 using NHibernate.Exceptions;
 
-namespace BerwickHeights.Platform.NHibernate
+namespace BerwickHeights.Platform.NHibernate.DAL
 {
     /// <summary>
     /// Generic functionality for NHibernate

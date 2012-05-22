@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright 2012 Berwick Heights Software, Inc
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in 
@@ -17,7 +17,7 @@ using BerwickHeights.Platform.Core.Model;
 using NHibernate;
 using NHibernate.Type;
 
-namespace BerwickHeights.Platform.NHibernate
+namespace BerwickHeights.Platform.NHibernate.Interceptors
 {
     /// <summary>
     /// NHibernate interceptor that fills in the Created, CreatedBy, Modified and
