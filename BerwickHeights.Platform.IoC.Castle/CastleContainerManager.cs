@@ -100,7 +100,7 @@ namespace BerwickHeights.Platform.IoC.Castle
                     // Get types in assembly to see if they need to be registered
                     FromAssemblyDescriptor types = AllTypes.FromAssemblyNamed(assemblyName);
                     
-                    // Register components whose interface inherits from Virtify-custom IIocComponent interface
+                    // Register components whose interface inherits from IIocComponent interface
                     container.Register(types.BasedOn<IIoCComponent>()
                         .WithService
                         .FromInterface());

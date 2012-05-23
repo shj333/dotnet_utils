@@ -31,7 +31,7 @@ namespace BerwickHeights.Platform.IoC.Castle
         /// <summary>
         /// Prefix for the names of the interceptors.
         /// </summary>
-        internal const string InterceptorNamePrefix = "VIRTIFY_INTERCEPTOR_";
+        internal const string InterceptorNamePrefix = "BHS_INTERCEPTOR_";
         
         #endregion
         
