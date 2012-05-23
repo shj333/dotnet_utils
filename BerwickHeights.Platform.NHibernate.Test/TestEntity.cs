@@ -48,7 +48,7 @@ namespace BerwickHeights.Platform.NHibernate.Test
                 + ", Data1: " + Data1
                 + ", Data2: " + Data2
                 + ", SomeUrl: " + SomeUrl
-                + base.ToString();
+                + ", " + base.ToString();
         }
 
         public virtual bool Equals(TestEntity other)

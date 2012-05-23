@@ -23,15 +23,13 @@ namespace BerwickHeights.Platform.NHibernate.Fluent.Conventions
     /// <summary>
     /// Conventions for handling string properties in FluentNHibernate. If the property name contains any of the 
     /// configured strings in BigStringPropertyNames, then the SQL type of the property is set to NVARCHAR(MAX); the
-    /// SQL type can be overridden by the BigStringSqlType configuration key. if the property name is CreatedBy
-    /// or ModifiedBy, then the type is set to UNIQUEIDENTIFIER unless overridden by the CreatedModifiedBySqlType
-    /// configuration key.
+    /// SQL type can be overridden by the BigStringSqlType configuration key. Also adds a unique constraint for
+    /// domain ids and external ids.
     /// </summary>
     public class StringConvention : IPropertyConvention
     {
         private readonly string[] bigStringPropertyNames;
         private readonly string bigStringSqlType;
-        private readonly string createdModifiedBySqlType;
 
         /// <summary>
         /// Constructor
@@ -40,28 +38,22 @@ namespace BerwickHeights.Platform.NHibernate.Fluent.Conventions
         {
             IConfigurationSvc configurationSvc = IoCContainerManagerFactory.GetIoCContainerManager().Resolve<IConfigurationSvc>();
             bigStringPropertyNames = configurationSvc.GetStringArrayConfig("BigStringPropertyNames", false);
-            bigStringSqlType = configurationSvc.GetStringConfig("IdSqlType", false, "NVARCHAR(MAX)");
-            createdModifiedBySqlType = configurationSvc.GetStringConfig("IdSqlTypeCreatedModifiedBySqlType", false, "UNIQUEIDENTIFIER");
+            bigStringSqlType = configurationSvc.GetStringConfig("BigStringSqlType", false, "NVARCHAR(MAX)");
         }
 
         /// <summary>
         /// Conventions for handling string properties in FluentNHibernate. If the property name contains any of the 
         /// configured strings in BigStringPropertyNames, then the SQL type of the property is set to NVARCHAR(MAX); the
-        /// SQL type can be overridden by the BigStringSqlType configuration key. if the property name is CreatedBy
-        /// or ModifiedBy, then the type is set to UNIQUEIDENTIFIER unless overridden by the CreatedModifiedBySqlType
-        /// configuration key.
+        /// SQL type can be overridden by the BigStringSqlType configuration key. Also adds a unique constraint for
+        /// domain ids and external ids.
         /// </summary>
         public void Apply(IPropertyInstance instance)
         {
+            // If property name contains one of the configured values, then use use special SQL type for column
             string name = instance.Name;
-
             if (bigStringPropertyNames.FirstOrDefault(name.Contains) != null) instance.CustomSqlType(bigStringSqlType);
-            if ((name.Equals("CreatedBy")) || (name.Equals("ModifiedBy")))
-            {
-                instance.CustomSqlType(createdModifiedBySqlType);
-                instance.CustomType(typeof (Guid));
-                instance.Access.CamelCaseField();
-            }
+
+            // Add unique constraint for domain ids and external ids
             if (name.Equals("DomainId")) instance.Unique();
             if (name.Equals("ExternalId")) instance.Unique();
         }

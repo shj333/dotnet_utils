@@ -44,28 +44,56 @@ namespace BerwickHeights.Platform.Core.Model.Results
                 foreach (string arg in arguments) ((IList<string>)Arguments).Add(arg);
             }
             MessageTime = DateTime.UtcNow;
-        }
-        #endregion
-        #region Public Properties
+        }
+
+        #endregion
+
+        #region Public Properties
+
         /// <summary>
         /// The type of this message (error, informational, statistic, etc).
-        /// </summary>        public virtual SvcResultMessageTypes MessageType { get; private set; }
-        /// <summary>        /// The resource ID that is a key into localized messages displayed to user.        /// </summary>
-        public virtual string ResourceId { get; private set; }
-        /// <summary>        /// The list of substitution arguments for this message.        /// </summary>
+        /// </summary>
+        public virtual SvcResultMessageTypes MessageType { get; private set; }
+
+        /// <summary>
+        /// The resource ID that is a key into localized messages displayed to user.
+        /// </summary>
+        public virtual string ResourceId { get; private set; }
+
+        /// <summary>
+        /// The list of substitution arguments for this message.
+        /// </summary>
         public virtual IEnumerable<string> Arguments
         {
             get { return arguments ?? (arguments = new List<string>()); }
         }
         private List<string> arguments;
 
-        /// <summary>        /// The time this message was created.        /// </summary>
-        public virtual DateTime MessageTime { get; private set; }
-        #endregion
-        #region Override Methods
-        /// <inheritDoc/>        public override string ToString()        {            return "SvcResultMessage: "                + "MessageType: " + MessageType                + ", ResourceId: " + ResourceId                + ", Arguments: " + ListUtils.ListToString(Arguments)                + ", MessageTime: " + MessageTime;        }
-        /// <summary>        /// This takes a string.Format() string and applies it using the Arguments property. This can be 
-        /// used, for example, when the format string is derived from a resource file.        /// </summary>        /// <param name="formatString">string.Format() format string</param>        /// <returns>formatted string</returns>
+        /// <summary>
+        /// The time this message was created.
+        /// </summary>
+        public virtual DateTime MessageTime { get; private set; }
+
+        #endregion
+
+        #region Override Methods
+
+        /// <inheritDoc/>
+        public override string ToString()
+        {
+            return "SvcResultMessage: "
+                + "MessageType: " + MessageType
+                + ", ResourceId: " + ResourceId
+                + ", Arguments: " + ListUtils.ListToString(Arguments)
+                + ", MessageTime: " + MessageTime;
+        }
+
+        /// <summary>
+        /// This takes a string.Format() string and applies it using the Arguments property. This can be 
+        /// used, for example, when the format string is derived from a resource file.
+        /// </summary>
+        /// <param name="formatString">string.Format() format string</param>
+        /// <returns>formatted string</returns>
         public virtual string ToString(string formatString)
         {
             return Arguments.Any() 

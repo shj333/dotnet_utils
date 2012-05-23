@@ -55,7 +55,7 @@ namespace BerwickHeights.Platform.PerfTest.Model
         {
             return "TimingData: "
                 + "TimingDataId: " + TimingDataId
-                + base.ToString();
+                + ", " + base.ToString();
         }
 
         /// <inheritDoc/>

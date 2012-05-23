@@ -78,9 +78,9 @@ namespace BerwickHeights.Platform.PerfTest.Model
         /// <inheritDoc/>
         public override string ToString()
         {
-            return ", ClassName: " + ClassName
+            return "ClassName: " + ClassName
                 + ", MethodName: " + MethodName
-                + base.ToString();
+                + ", " + base.ToString();
         }
 
         /// <inheritDoc/>

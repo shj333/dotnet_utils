@@ -81,7 +81,7 @@ namespace BerwickHeights.Platform.PerfTest.Model
             return "TestResult: "
                 + "TestResultId: " + TestResultId
                 + ", IsSuccess: " + IsSuccess
-                + base.ToString()
+                + ", " + base.ToString()
                 + sb;
         }
 

@@ -21,10 +21,6 @@ namespace BerwickHeights.Platform.Core.Model
     /// </summary>
     public abstract class AuditInfoBase
     {
-        private Guid createdBy;
-        private Guid modifiedBy;
-
-
         /// <summary>
         /// Empty constructor.
         /// </summary>
@@ -36,21 +32,17 @@ namespace BerwickHeights.Platform.Core.Model
         protected AuditInfoBase(DateTime created, string createdBy, DateTime modified, string modifiedBy)
         {
             Created = created;
-            this.createdBy = Guid.Parse(createdBy);
+            CreatedBy = createdBy;
             Modified = modified;
-            this.modifiedBy = Guid.Parse(modifiedBy);
+            ModifiedBy = modifiedBy;
         }
 
         /// <summary>
         /// Constructor for cloning.
         /// </summary>
         protected AuditInfoBase(AuditInfoBase auditInfo)
+            : this(auditInfo.Created, auditInfo.CreatedBy, auditInfo.Modified, auditInfo.ModifiedBy)
         {
-            // Set auditing info based on original since we're cloning
-            Created = auditInfo.Created;
-            createdBy = auditInfo.createdBy;
-            Modified = auditInfo.Modified;
-            modifiedBy = auditInfo.modifiedBy;
         }
 
         /// <summary>
@@ -61,11 +53,7 @@ namespace BerwickHeights.Platform.Core.Model
         /// <summary>
         /// Who created the record.
         /// </summary>
-        public virtual string CreatedBy
-        {
-            get { return StringUtils.SafeToString(createdBy); }
-            set { createdBy = Guid.Parse(value); }
-        }
+        public virtual string CreatedBy { get; set; }
 
         /// <summary>
         /// When the record was last modified.
@@ -75,11 +63,7 @@ namespace BerwickHeights.Platform.Core.Model
         /// <summary>
         /// Who last modified the record.
         /// </summary>
-        public virtual string ModifiedBy
-        {
-            get { return StringUtils.SafeToString(modifiedBy); }
-            set { modifiedBy = Guid.Parse(value); }
-        }
+        public virtual string ModifiedBy { get; set; }
 
         /// <summary>
         /// Used by NHibernate interceptor. If set to true, then the interceptor will
@@ -95,7 +79,7 @@ namespace BerwickHeights.Platform.Core.Model
         /// <inheritDoc/>
         public override string ToString()
         {
-            return ", Created: " + Created
+            return "Created: " + Created
                 + ", CreatedBy: " + CreatedBy
                 + ", Modified: " + Modified
                 + ", ModifiedBy: " + ModifiedBy

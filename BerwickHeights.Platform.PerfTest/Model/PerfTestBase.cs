@@ -96,7 +96,7 @@ namespace BerwickHeights.Platform.PerfTest.Model
         /// <inheritDoc/>
         public override string ToString()
         {
-            return ", StartTime: " + StartTime
+            return "StartTime: " + StartTime
                 + ", EndTime: " + EndTime
                 + ", ElapsedTimeMSecs: " + ElapsedTimeMSecs
                 + ", Annotation: " + Annotation;
