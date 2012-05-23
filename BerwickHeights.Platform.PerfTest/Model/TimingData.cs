@@ -12,6 +12,7 @@
  */
 
 using System;
+using BerwickHeights.Platform.NHibernate.Fluent;
 
 namespace BerwickHeights.Platform.PerfTest.Model
 {
@@ -19,7 +20,7 @@ namespace BerwickHeights.Platform.PerfTest.Model
     /// Timing data for a performance test showing individual performance for sub-sections
     /// of the test.
     /// </summary>
-    public class TimingData : TestResultBase
+    public class TimingData : TestResultBase, INHibernateEntity
     {
         /// <summary>
         /// Parameterless constructor needed for NHibernate.
@@ -41,7 +42,7 @@ namespace BerwickHeights.Platform.PerfTest.Model
         /// <summary>
         /// Unique ID for this timing data.
         /// </summary>
-        public virtual string TimingDataId { get; protected internal set; }
+        public virtual Guid TimingDataId { get; protected internal set; }
 
         /// <summary>
         /// The parent test result to which this timing data belongs.

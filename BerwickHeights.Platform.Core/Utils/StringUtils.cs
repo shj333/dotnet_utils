@@ -20,7 +20,7 @@ namespace BerwickHeights.Platform.Core.Utils
     {
         /// <summary>
         /// If the given object is null, then returns string.empty. Otherwise, returns obj.ToString(). 
-        /// This can be safely used to stringify an object, even if it is null.
+        /// This can be safely used to convert an object to a string, even if it is null.
         /// </summary>
         public static string SafeToString(object obj)
         {

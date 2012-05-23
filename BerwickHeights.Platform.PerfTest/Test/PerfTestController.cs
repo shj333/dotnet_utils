@@ -92,7 +92,7 @@ namespace BerwickHeights.Platform.PerfTest.Test
         public void BeginPerfTest(string testId, string annotation, string typeName, string methodName)
         {
             // Add current user ID to test ID to differentiate results among parallel users
-            testId = AddCurrentUserTotestId(testId);
+            testId = AddCurrentUserToTestId(testId);
 
             // See if we already have a test result for given ID
             TestSuiteResult testSuiteResult;
@@ -125,7 +125,7 @@ namespace BerwickHeights.Platform.PerfTest.Test
             ClearCurrentTest(currentTestResult);
 
             // Add current user ID to test ID to differentiate results among parallel users
-            testId = AddCurrentUserTotestId(testId);
+            testId = AddCurrentUserToTestId(testId);
 
             lock (resultsMap)
             {
@@ -142,7 +142,7 @@ namespace BerwickHeights.Platform.PerfTest.Test
         public void SavePerfTestResults(string testId)
         {
             // Add current user ID to test ID to differentiate results among parallel users
-            testId = AddCurrentUserTotestId(testId);
+            testId = AddCurrentUserToTestId(testId);
 
             TestSuiteResult testSuiteResult;
             lock (resultsMap)
@@ -162,7 +162,7 @@ namespace BerwickHeights.Platform.PerfTest.Test
         public void ClearPerfTestResults(string testId)
         {
             // Add current user ID to test ID to differentiate results among parallel users
-            testId = AddCurrentUserTotestId(testId);
+            testId = AddCurrentUserToTestId(testId);
 
             lock (resultsMap)
             {
@@ -175,7 +175,7 @@ namespace BerwickHeights.Platform.PerfTest.Test
 
         #region Private Methods
 
-        private string AddCurrentUserTotestId(string testId)
+        private string AddCurrentUserToTestId(string testId)
         {
             // Get current user ID for this thread
             string userId = currentUserSvc.GetCurrentUserData().UserId;

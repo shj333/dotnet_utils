@@ -212,7 +212,7 @@ namespace BerwickHeights.Platform.NHibernate.DAL
 		}
 
 		/// <summary>
-		/// Saves the instance to the database. If the primary key is unitialized
+		/// Saves the instance to the database. If the primary key is uninitialized
 		/// it creates the instance on the database. Otherwise it updates it.
 		/// <para>
 		/// If the primary key is assigned, then you must invoke <see cref="Create"/>

@@ -30,7 +30,7 @@ namespace BerwickHeights.Platform.ServiceStack.Logging
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="typeName">Type name for object that is loging message.</param>
+        /// <param name="typeName">Type name for object that is logging message.</param>
         public BHSLogger(string typeName)
         {
             logger = IoCContainerManagerFactory.GetIoCContainerManager().Resolve<ILoggerFactory>().GetLogger(GetType());

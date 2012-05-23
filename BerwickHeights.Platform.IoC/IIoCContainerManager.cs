@@ -106,7 +106,7 @@ namespace BerwickHeights.Platform.IoC
         /// </summary>
         /// <param name="persistenceConfigurer">Sets up FluentNHibernate configuration of database type, 
         /// connection string, etc.</param>
-        /// <param name="autoPersistenceModel">Automappings used by FluentNHibernate.</param>
+        /// <param name="autoPersistenceModel">Auto-mappings used by FluentNHibernate.</param>
         /// <param name="isPerWebRequest">Determines lifestyle of NHibernate ISession component; if true, then 
         /// the lifestyle is bound to the web request; otherwise, the lifestyle is transient and the instances
         /// are destroyed when disposed.</param>

@@ -16,7 +16,6 @@ using System.Configuration;
 using BerwickHeights.Platform.Config.Redis;
 using BerwickHeights.Platform.Core.Config;
 using BerwickHeights.Platform.Core.IdGen;
-using BerwickHeights.Platform.Core.IoC;
 using BerwickHeights.Platform.IoC;
 using BerwickHeights.Platform.Logging.Log4Net;
 using NUnit.Framework;

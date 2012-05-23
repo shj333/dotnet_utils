@@ -11,8 +11,10 @@
  *  
  */
 
+using System;
 using System.Collections.Generic;
 using System.Text;
+using BerwickHeights.Platform.NHibernate.Fluent;
 
 namespace BerwickHeights.Platform.PerfTest.Model
 {
@@ -20,7 +22,7 @@ namespace BerwickHeights.Platform.PerfTest.Model
     /// Performance data associated with a performance test (e.g., class and method that generated 
     /// this data, when it took place, how long it took, whether or not it was successful etc).
     /// </summary>
-    public class TestResult : TestResultBase
+    public class TestResult : TestResultBase, INHibernateEntity
     {
         /// <summary>
         /// Parameterless constructor needed for NHibernate.
@@ -49,7 +51,7 @@ namespace BerwickHeights.Platform.PerfTest.Model
         /// <summary>
         /// Unique ID for this test data.
         /// </summary>
-        public virtual string TestResultId { get; protected internal set; }
+        public virtual Guid TestResultId { get; protected internal set; }
 
         /// <summary>
         /// Whether or not this test was successful.

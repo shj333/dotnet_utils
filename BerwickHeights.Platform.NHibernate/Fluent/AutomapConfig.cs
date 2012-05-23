@@ -23,7 +23,7 @@ namespace BerwickHeights.Platform.NHibernate.Fluent
     public class AutomapConfig : DefaultAutomappingConfiguration
     {
         /// <summary>
-        /// Determines if the type is a domain type entitye that is mapped by looking for domain model types that
+        /// Determines if the type is a domain type entity that is mapped by looking for domain model types that
         /// implement INHibernateEntity.
         /// </summary>
         public override bool ShouldMap(Type type)

@@ -12,13 +12,18 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Configuration;
 using BerwickHeights.Platform.Core.IoC;
+using BerwickHeights.Platform.Core.Test;
 using BerwickHeights.Platform.IoC;
 using BerwickHeights.Platform.NHibernate.Fluent;
 using BerwickHeights.Platform.NHibernate.Fluent.Conventions;
 using BerwickHeights.Platform.NHibernate.Interceptors;
 using BerwickHeights.Platform.PerfTest.DAL.NHibernate;
 using FluentNHibernate.Automapping;
+using NHibernate;
+using ServiceStack.Redis;
 using NHCfg = NHibernate.Cfg;
 using NUnit.Framework;
 using ILoggerFactory = BerwickHeights.Platform.Logging;
@@ -37,42 +42,59 @@ namespace BerwickHeights.Platform.NHibernate.Test
             container = IoCContainerManagerFactory.GetIoCContainerManager();
             container.RegisterLoggerFactory(new Log4NetLoggerFactory());
 
-            InterceptorDescriptor descriptor = new InterceptorDescriptor(
-                typeof(TransactionInterceptor), 
-                null, 
-                new string[] {"BerwickHeights"}, 
-                new string[0]);
-            container.RegisterInterceptors(descriptor);
+            IEnumerable<string> ignoredTypes = new string[]
+            {
+                "BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc", 
+                "BerwickHeights.Platform.IoC.Castle.Logger",
+                "BerwickHeights.Platform.Config.Redis.ConfigurationSvc",
+                "BerwickHeights.Platform.NHibernate.Interceptors.AuditInterceptor"
+            };
+            container.RegisterInterceptors(
+                new InterceptorDescriptor(typeof(TransactionInterceptor), null, new string[] { "BerwickHeights" }, ignoredTypes));
+
+            string redisNetAddr = ConfigurationManager.AppSettings["RedisNetAddr"];
+            if (string.IsNullOrEmpty(redisNetAddr)) throw new Exception("Network address for Redis server not configured (RedisNetAddr)");
+            string redisDbNumStr = ConfigurationManager.AppSettings["RedisDbNumber"];
+            int redisDbNum = (string.IsNullOrEmpty(redisDbNumStr)) ? 0 : int.Parse(redisDbNumStr);
+            container.RegisterComponentInstance(typeof(IRedisClientsManager),
+                new PooledRedisClientManager(redisDbNum, redisNetAddr), "RedisClientsManager");
+
+            // Register components in assemblies
+            container.RegisterInProcComponents(
+                "BerwickHeights.Platform.Core",
+                "BerwickHeights.Platform.Config.Redis");
+            container.RegisterComponent(typeof(ITestDataSvc), typeof(TestDataSvc));
+            container.RegisterComponent(typeof(IInterceptor), typeof(AuditInterceptor));
 
             AutoPersistenceModel model = AutoMap
                 .AssemblyOf<TestEntity>(new AutomapConfig())
-                .Conventions.AddAssembly(typeof(StringConvention).Assembly);
+                .Conventions.AddAssembly(typeof (StringConvention).Assembly);
             PerfTestFluentConfig.AutoMap(model);
 
             container.SetupNHibernateIntegration(FluentConfigUtils.ConfigureSqlServer2008("TestDatabase"), model, false, false);
-
-            container.RegisterComponent(typeof(ITestDataSvc), typeof(TestDataSvc));
         }
 
         [Test]
         public void TestPersistEntity()
         {
+            CurrentUserSvcTest.SetTestCurrentUserData();
+
             ITestDataSvc testDataSvc = container.Resolve<ITestDataSvc>();
 
-            TestEntity entity = new TestEntity(13, "data2", "http://test.com/test/foo");
-            Console.WriteLine("TestEntityId: " + entity.TestEntityId);
+            TestEntity entity = new TestEntity("domainId", "externalId", 13, "data2", "http://test.com/test/foo");
+            Console.WriteLine("SystemId: " + entity.SystemId);
 
             testDataSvc.SaveEntity(entity);
 
-            TestEntity entityInDb = testDataSvc.GetEntity(entity.TestEntityId);
+            TestEntity entityInDb = testDataSvc.GetEntity(entity.SystemId);
 
             Console.WriteLine("Entity in db: " + entityInDb);
 
-            Assert.AreEqual(entity.TestEntityId, entityInDb.TestEntityId);
+            Assert.AreEqual(entity.SystemId, entityInDb.SystemId);
             Assert.AreEqual(entity, entityInDb);
 
             // See if cache is used in detecting transactional attribute
-            testDataSvc.GetEntity(entity.TestEntityId);
+            testDataSvc.GetEntity(entity.SystemId);
         }
     }
 }

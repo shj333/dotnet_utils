@@ -16,7 +16,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using BerwickHeights.Platform.Core.CurrentUser;
-using BerwickHeights.Platform.Core.IoC;
 using BerwickHeights.Platform.Core.Utils;
 using BerwickHeights.Platform.Core.Xml;
 using BerwickHeights.Platform.IoC;

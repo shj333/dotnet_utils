@@ -50,6 +50,10 @@
       <Project>{6EAAC4D2-A84B-4123-83A4-565BD11E5B73}</Project>
       <Name>BerwickHeights.Platform.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BerwickHeights.Platform.NHibernate\BerwickHeights.Platform.NHibernate.csproj">
+      <Project>{2FE4A6E2-33F6-448D-BCF5-2E9C7A645ECA}</Project>
+      <Name>BerwickHeights.Platform.NHibernate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BerwickHeights.Platform.PerfTest\BerwickHeights.Platform.PerfTest.csproj">
       <Project>{40DF5163-D6AF-4160-BF38-EB0014146BCA}</Project>
       <Name>BerwickHeights.Platform.PerfTest</Name>

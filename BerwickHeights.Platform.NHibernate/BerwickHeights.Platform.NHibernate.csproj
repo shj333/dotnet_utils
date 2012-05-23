@@ -66,6 +66,7 @@
     <Compile Include="DAL\PersistenceDALBase.cs" />
     <Compile Include="Fluent\AutomapConfig.cs" />
     <Compile Include="Fluent\Conventions\EnumConvention.cs" />
+    <Compile Include="Fluent\Conventions\ForeignKeyConvention.cs" />
     <Compile Include="Fluent\Conventions\IdConvention.cs" />
     <Compile Include="Fluent\Conventions\NotNullableConvention.cs" />
     <Compile Include="Fluent\Conventions\StringConvention.cs" />

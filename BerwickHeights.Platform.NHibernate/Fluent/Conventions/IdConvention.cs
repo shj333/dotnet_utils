@@ -11,8 +11,7 @@
  *  
  */
 
-using BerwickHeights.Platform.Core.Config;
-using BerwickHeights.Platform.IoC;
+using System;
 using FluentNHibernate.Conventions;
 using FluentNHibernate.Conventions.Instances;
 
@@ -26,27 +25,15 @@ namespace BerwickHeights.Platform.NHibernate.Fluent.Conventions
     /// </summary>
     public class IdConvention : IIdConvention
     {
-        private readonly string idSqlType;
-
         /// <summary>
-        /// Constructor
-        /// </summary>
-        public IdConvention()
-        {
-            idSqlType = IoCContainerManagerFactory.GetIoCContainerManager().Resolve<IConfigurationSvc>()
-                .GetStringConfig("IdSqlType", false, "UNIQUEIDENTIFIER");
-        }
-
-        /// <summary>
-        /// Sets identities (primary keys) in FluentNHibernate mappings to use UNIQUEIDENTIFIER as the SQL type
-        /// but this can be overridden by the IdSqlType configuration key. Sets the GuidComb algorithm to be used
-        /// to generate new identifiers (see Jimmy Nilsson's article at 
+        /// If identity is a Guid, then sets the GuidComb algorithm to be used to generate new identifiers (see 
+        /// Jimmy Nilsson's article at 
         /// http://www.informit.com/articles/article.aspx?p=25862&amp;seqNum=7).
         /// </summary>
         public void Apply(IIdentityInstance instance)
         {
-            instance.CustomSqlType(idSqlType);
-            instance.GeneratedBy.GuidComb();
+            Type propertyType = instance.Property.PropertyType;
+            if ((propertyType == typeof(Guid)) || (propertyType == typeof(Guid?))) instance.GeneratedBy.GuidComb();
         }
     }
 }

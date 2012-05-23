@@ -109,6 +109,10 @@
       <Project>{DDF6C3AD-40EC-4C4B-9885-1C598E450EE6}</Project>
       <Name>BerwickHeights.Platform.Config.Redis</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BerwickHeights.Platform.Core.Test\BerwickHeights.Platform.Core.Test.csproj">
+      <Project>{DD513B7D-7AE0-4AA9-ABF8-886E7C340BE0}</Project>
+      <Name>BerwickHeights.Platform.Core.Test</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BerwickHeights.Platform.Core\BerwickHeights.Platform.Core.csproj">
       <Project>{6EAAC4D2-A84B-4123-83A4-565BD11E5B73}</Project>
       <Name>BerwickHeights.Platform.Core</Name>

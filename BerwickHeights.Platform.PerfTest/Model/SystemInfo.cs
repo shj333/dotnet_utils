@@ -11,13 +11,16 @@
  *  
  */
 
+using System;
+using BerwickHeights.Platform.NHibernate.Fluent;
+
 namespace BerwickHeights.Platform.PerfTest.Model
 {
     /// <summary>
     /// One piece of system information associated with a performance test run. Examples
     /// include CPU type, amount of memory, OS type, etc.
     /// </summary>
-    public class SystemInfo
+    public class SystemInfo : INHibernateEntity
     {
         /// <summary>
         /// Parameterless constructor needed for NHibernate.
@@ -40,7 +43,7 @@ namespace BerwickHeights.Platform.PerfTest.Model
         /// <summary>
         /// Unique identifier for this piece of system information.
         /// </summary>
-        public virtual string SystemInfoId { get; protected internal set; }
+        public virtual Guid SystemInfoId { get; protected internal set; }
 
         /// <summary>
         /// The type of component that this piece of system information applies to
@@ -54,7 +57,7 @@ namespace BerwickHeights.Platform.PerfTest.Model
         public virtual string Name { get; protected internal set; }
 
         /// <summary>
-        /// The value of this piece of system infomation.
+        /// The value of this piece of system information.
         /// </summary>
         public virtual string Value { get; protected internal set; }
 

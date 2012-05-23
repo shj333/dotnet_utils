@@ -78,7 +78,7 @@ namespace BerwickHeights.Platform.IoC.Castle
                 if (model.Implementation.Namespace == null) continue;
                 if (descriptor.NamespacePrefixes.Any(prefix => model.Implementation.Namespace.StartsWith(prefix)))
                 {
-                    // Locate interceptor by index using name set in InceptorsInstaller
+                    // Locate interceptor by index using name set in InterceptorsInstaller
                     interceptors.Add(InterceptorReference.ForKey(InterceptorNamePrefix + idx));
                 }
                 idx++;

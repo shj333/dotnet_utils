@@ -36,7 +36,7 @@ namespace BerwickHeights.Platform.Core.CurrentUser
         void SetCurrentUserData(CurrentUserData currentUserData);
 
         /// <summary>
-        /// Un-sets the user data in the thread's local storage so that it is no longer intialized. This is
+        /// Resets the user data in the thread's local storage so that it is no longer intialized. This is
         /// important in multi-threaded situation so that the thread's local storage is cleared out before
         /// another user begins using the thread.
         /// </summary>

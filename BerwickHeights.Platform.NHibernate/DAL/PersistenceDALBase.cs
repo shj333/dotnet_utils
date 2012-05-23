@@ -25,11 +25,11 @@ namespace BerwickHeights.Platform.NHibernate.DAL
     public abstract class PersistenceDALBase
     {
         /// <summary>
-        /// Used to manage NHibnerate sessions
+        /// Used to manage NHibernate sessions
         /// </summary>
         protected readonly ISessionFactory sessionFactory;
         /// <summary>
-        /// A set of methods that provide common functionality for NHibnerate
+        /// A set of methods that provide common functionality for NHibernate
         /// </summary>
         protected readonly NHibernateGenericDAL genericDAL;
         /// <summary>

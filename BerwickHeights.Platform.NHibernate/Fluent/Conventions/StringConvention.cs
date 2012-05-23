@@ -11,6 +11,7 @@
  *  
  */
 
+using System;
 using System.Linq;
 using BerwickHeights.Platform.Core.Config;
 using BerwickHeights.Platform.IoC;
@@ -52,8 +53,17 @@ namespace BerwickHeights.Platform.NHibernate.Fluent.Conventions
         /// </summary>
         public void Apply(IPropertyInstance instance)
         {
-            if (bigStringPropertyNames.FirstOrDefault(n => instance.Name.Contains(n)) != null) instance.CustomSqlType(bigStringSqlType);
-            if ((instance.Name.Equals("CreatedBy")) || (instance.Name.Equals("ModifiedBy"))) instance.CustomSqlType(createdModifiedBySqlType);
+            string name = instance.Name;
+
+            if (bigStringPropertyNames.FirstOrDefault(name.Contains) != null) instance.CustomSqlType(bigStringSqlType);
+            if ((name.Equals("CreatedBy")) || (name.Equals("ModifiedBy")))
+            {
+                instance.CustomSqlType(createdModifiedBySqlType);
+                instance.CustomType(typeof (Guid));
+                instance.Access.CamelCaseField();
+            }
+            if (name.Equals("DomainId")) instance.Unique();
+            if (name.Equals("ExternalId")) instance.Unique();
         }
     }
 }

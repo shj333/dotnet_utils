@@ -39,7 +39,7 @@ namespace BerwickHeights.Platform.IoC
         /// </summary>
         /// <param name="persistenceConfigurer">Sets up FluentNHibernate configuration of database type, 
         /// connection string, etc.</param>
-        /// <param name="autoPersistenceModel">Automappings used by FluentNHibernate.</param>
+        /// <param name="autoPersistenceModel">Auto-mappings used by FluentNHibernate.</param>
         /// <param name="logger">Logger instance in case something goes wrong.</param>
         protected virtual Configuration ConfigureNHibernate(IPersistenceConfigurer persistenceConfigurer, 
             AutoPersistenceModel autoPersistenceModel, ILogger logger)

@@ -11,15 +11,17 @@
  *  
  */
 
+using System;
 using System.Collections.Generic;
 using System.Text;
+using BerwickHeights.Platform.NHibernate.Fluent;
 
 namespace BerwickHeights.Platform.PerfTest.Model
 {
     /// <summary>
     /// Master class for all information stored for a particular performance test run.
     /// </summary>
-    public class TestSuiteResult : PerfTestBase
+    public class TestSuiteResult : PerfTestBase, INHibernateEntity
     {
         /// <summary>
         /// Constructor.
@@ -42,7 +44,7 @@ namespace BerwickHeights.Platform.PerfTest.Model
         /// <summary>
         /// Unique ID for this test run.
         /// </summary>
-        public virtual string TestSuiteResultId { get; protected internal set; }
+        public virtual Guid TestSuiteResultId { get; protected internal set; }
 
         /// <summary>
         /// ID of user who ran the performance test.

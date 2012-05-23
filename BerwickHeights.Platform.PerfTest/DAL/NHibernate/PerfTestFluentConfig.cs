@@ -30,26 +30,21 @@ namespace BerwickHeights.Platform.PerfTest.DAL.NHibernate
                 .AddEntityAssembly(typeof(TestSuiteResult).Assembly)
                 .Override<TestSuiteResult>(map =>
                 {
-                    map.Id(x => x.TestSuiteResultId);
                     map.HasMany(x => x.SystemInfoList).AsSet().Inverse().Cascade.All().Not.LazyLoad();
                     map.HasMany(x => x.TestResultList).AsSet().Inverse().Cascade.All().Not.LazyLoad();
-                    map.Map(x => x.UserId).CustomSqlType("UNIQUEIDENTIFIER");
                 })
                 .Override<SystemInfo>(map =>
                 {
-                    map.Id(x => x.SystemInfoId);
-                    map.References(x => x.TestSuiteResult, "TestSuiteResultID").Cascade.None();
+                    map.References(x => x.TestSuiteResult, "TestSuiteResultId").Cascade.None().Not.Nullable();
                 })
                 .Override<TestResult>(map =>
                 {
-                    map.Id(x => x.TestResultId);
                     map.HasMany(x => x.TimingDataList).AsSet().Inverse().Cascade.All().Not.LazyLoad();
-                    map.References(x => x.TestSuiteResult, "TestSuiteResultID").Cascade.None();
+                    map.References(x => x.TestSuiteResult, "TestSuiteResultID").Cascade.None().Not.Nullable();
                 })
                 .Override<TimingData>(map =>
                 {
-                    map.Id(x => x.TimingDataId);
-                    map.References(x => x.TestResult, "TestResultID").Cascade.None();
+                    map.References(x => x.TestResult, "TestResultID").Cascade.None().Not.Nullable();
                 });
             return model;
         }

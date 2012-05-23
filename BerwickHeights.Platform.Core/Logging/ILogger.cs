@@ -16,7 +16,7 @@ using System;
 namespace BerwickHeights.Platform.Core.Logging
 {
     /// <summary>
-    /// Interface to a loggging service. This is a facade to abstract away the logging implementation (e.g., Log4Net). 
+    /// Interface to a logging service. This is a facade to abstract away the logging implementation (e.g., Log4Net). 
     /// Consumers use the ILoggerFactory interface (which can be dependency injected) to gain an instance of a logger. 
     /// </summary>
     public interface ILogger

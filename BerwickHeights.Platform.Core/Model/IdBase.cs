@@ -33,18 +33,18 @@ namespace BerwickHeights.Platform.Core.Model
         /// Constructor 
         /// </summary>
         protected IdBase(string domainId, string externalId)
-            : this(null, domainId, externalId)
+            : this(Guid.Empty, domainId, externalId)
         {
         }
 
         /// <summary>
         /// Constructor 
         /// </summary>
-        protected IdBase(string systemId, string domainId, string externalId)
+        protected IdBase(Guid systemId, string domainId, string externalId)
         {
             SystemId = systemId;
-            DomainId = domainId;
-            ExternalId = externalId;
+            DomainId = domainId ?? string.Empty;
+            ExternalId = externalId ?? string.Empty;
         }
 
         #endregion
@@ -54,7 +54,7 @@ namespace BerwickHeights.Platform.Core.Model
         /// <summary>
         /// Internal system id for this domain object.
         /// </summary>
-        public virtual string SystemId { get; protected internal set; }
+        public virtual Guid SystemId { get; protected internal set; }
 
         /// <summary>
         /// Domain id (human readable) for this domain object.

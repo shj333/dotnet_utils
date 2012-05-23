@@ -73,7 +73,7 @@ namespace BerwickHeights.Platform.Core.Model
         public virtual DateTime Modified { get; set; }
 
         /// <summary>
-        /// Who last modifed the record.
+        /// Who last modified the record.
         /// </summary>
         public virtual string ModifiedBy
         {
@@ -83,7 +83,7 @@ namespace BerwickHeights.Platform.Core.Model
 
         /// <summary>
         /// Used by NHibernate interceptor. If set to true, then the interceptor will
-        /// not set the Modified and ModifedBy columns to the current time and current
+        /// not set the Modified and ModifiedBy columns to the current time and current
         /// user before saving. Instead, the Modified and ModifiedBy columns will be 
         /// saved as these values exist in the object. This is useful for cloning GBO
         /// elements since these values should remain consistent between the original

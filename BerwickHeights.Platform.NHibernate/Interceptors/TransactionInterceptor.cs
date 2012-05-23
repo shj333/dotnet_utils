@@ -60,7 +60,7 @@ namespace BerwickHeights.Platform.NHibernate.Interceptors
         #region Implementation of IInterceptor
 
         /// <summary>
-        /// Determines if given invocation is bound to a transaction and suplies one if so.
+        /// Determines if given invocation is bound to a transaction and supplies one if so.
         /// </summary>
         public void Intercept(IInvocation invocation)
         {
