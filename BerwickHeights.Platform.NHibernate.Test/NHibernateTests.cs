@@ -1,14 +1,24 @@
-﻿using System;
+﻿/*
+ * Copyright 2012 Berwick Heights Software, Inc
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in 
+ * compliance with the License. You may obtain a copy of the License at 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is 
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+ * See the License for the specific language governing permissions and limitations under the License.
+ *  
+ */
+
+using System;
 using BerwickHeights.Platform.Core.IoC;
 using BerwickHeights.Platform.IoC;
+using BerwickHeights.Platform.NHibernate.Fluent;
+using BerwickHeights.Platform.NHibernate.Fluent.Conventions;
 using BerwickHeights.Platform.NHibernate.Interceptors;
-using FluentNHibernate;
+using BerwickHeights.Platform.PerfTest.DAL.NHibernate;
 using FluentNHibernate.Automapping;
-using FluentNHibernate.Cfg.Db;
-using FluentNHibernate.Conventions;
-using FluentNHibernate.Conventions.Helpers;
-using FluentNHibernate.Conventions.Instances;
-using NHibernate.Tool.hbm2ddl;
 using NHCfg = NHibernate.Cfg;
 using NUnit.Framework;
 using ILoggerFactory = BerwickHeights.Platform.Logging;
@@ -34,7 +44,12 @@ namespace BerwickHeights.Platform.NHibernate.Test
                 new string[0]);
             container.RegisterInterceptors(descriptor);
 
-            container.SetupNHibernateIntegration(ConfigureDatabase(), ConfigureMappings(), ExposeConfigAction, false, false);
+            AutoPersistenceModel model = AutoMap
+                .AssemblyOf<TestEntity>(new AutomapConfig())
+                .Conventions.AddAssembly(typeof(StringConvention).Assembly);
+            PerfTestFluentConfig.AutoMap(model);
+
+            container.SetupNHibernateIntegration(FluentConfigUtils.ConfigureSqlServer2008("TestDatabase"), model, false, false);
 
             container.RegisterComponent(typeof(ITestDataSvc), typeof(TestDataSvc));
         }
@@ -58,55 +73,6 @@ namespace BerwickHeights.Platform.NHibernate.Test
 
             // See if cache is used in detecting transactional attribute
             testDataSvc.GetEntity(entity.TestEntityId);
-        }
-
-        private static IPersistenceConfigurer ConfigureDatabase()
-        {
-            return
-                MsSqlConfiguration.MsSql2008.ConnectionString(x => x.FromConnectionStringWithKey("TestDatabase")).ShowSql();
-        }
-
-        private static AutoPersistenceModel ConfigureMappings()
-        {
-            return AutoMap
-                .AssemblyOf<TestEntity>(new AutomapConfig())
-                .Conventions.Add(
-                    Table.Is(x => x.EntityType.Name), 
-                    ConventionBuilder.Id.Always(x => x.CustomSqlType("uniqueidentifier")))
-                .Conventions.Add<StringPropertyConvention>();
-        }
-
-        private class StringPropertyConvention : IPropertyConvention
-        {
-            public void Apply(IPropertyInstance instance)
-            {
-                if (instance.Name.Contains("Url")) instance.CustomSqlType("nvarchar(max)");
-                instance.Not.Nullable();
-            }
-        }
-
-
-        private static void ExposeConfigAction(NHCfg.Configuration config)
-        {
-            config.SetProperty("current_session_context_class", "thread_static");
-            SchemaMetadataUpdater.QuoteTableAndColumns(config);
-            new SchemaExport(config).Create(false, true);
-        }
-
-        /// <summary>
-        /// Configuration for FluentNHibernate AutoMapper
-        /// </summary>
-        public class AutomapConfig : DefaultAutomappingConfiguration
-        {
-            public override bool ShouldMap(Type type)
-            {
-                return (type == typeof(TestEntity));
-            }
-
-            public override bool IsId(Member member)
-            {
-                return (member.Name.Equals(member.DeclaringType.Name + "Id"));
-            }
         }
     }
 }

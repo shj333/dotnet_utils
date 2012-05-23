@@ -49,7 +49,7 @@ namespace BerwickHeights.Platform.PerfTest.Model
         /// <summary>
         /// Unique ID for this test data.
         /// </summary>
-        public virtual string TestResultId { get; private set; }
+        public virtual string TestResultId { get; protected internal set; }
 
         /// <summary>
         /// Whether or not this test was successful.
@@ -60,7 +60,7 @@ namespace BerwickHeights.Platform.PerfTest.Model
         /// A list of timing data for this test showing individual performance for sub-sections
         /// of this test.
         /// </summary>
-        public virtual ICollection<TimingData> TimingDataList { get; private set; }
+        public virtual ICollection<TimingData> TimingDataList { get; protected internal set; }
 
         /// <summary>
         /// The parent test run to which this data belongs.

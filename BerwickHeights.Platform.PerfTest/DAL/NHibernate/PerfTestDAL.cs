@@ -14,7 +14,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BerwickHeights.Platform.NHibernate;
+using BerwickHeights.Platform.NHibernate.DAL;
 using BerwickHeights.Platform.PerfTest.Model;
 using NHibernate;
 

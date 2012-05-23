@@ -85,7 +85,7 @@ namespace BerwickHeights.Platform.PerfTest.Model
         /// How long the event took, in milliseconds. Calculated from StartTime and EndTime
         /// properties.
         /// </summary>
-        public virtual int ElapsedTimeMSecs { get; private set; }
+        public virtual int ElapsedTimeMSecs { get; protected internal set; }
 
         /// <summary>
         /// Text annotation associated with event.

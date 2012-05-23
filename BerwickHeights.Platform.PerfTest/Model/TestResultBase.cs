@@ -68,12 +68,12 @@ namespace BerwickHeights.Platform.PerfTest.Model
         /// <summary>
         /// The class that generated this test data.
         /// </summary>
-        public virtual string ClassName { get; private set; }
+        public virtual string ClassName { get; protected internal set; }
 
         /// <summary>
         /// The method that generated this test data.
         /// </summary>
-        public virtual string MethodName { get; private set; }
+        public virtual string MethodName { get; protected internal set; }
 
         /// <inheritDoc/>
         public override string ToString()

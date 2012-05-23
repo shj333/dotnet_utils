@@ -14,8 +14,6 @@
 using BerwickHeights.Platform.Core.Config;
 using BerwickHeights.Platform.IoC;
 using FluentNHibernate.Cfg.Db;
-using NHibernate.Cfg;
-using NHibernate.Tool.hbm2ddl;
 
 namespace BerwickHeights.Platform.NHibernate.Fluent
 {
@@ -39,32 +37,6 @@ namespace BerwickHeights.Platform.NHibernate.Fluent
             if (showSql) config.ShowSql();
 
             return config;
-        }
-
-        /// <summary>
-        /// Exposes NHibernate configuration to be able to modifiy it. 
-        /// </summary>
-        /// <param name="config"></param>
-        public static void ExposeConfigAction(Configuration config)
-        {
-            //
-            // Allows AOP-based transaction management. Keeps current NH session context in thread static. Calls to 
-            // sessionFactory.GetCurrentSession() will look in thread static to find current session context. Look at
-            // TransactionInterceptor to see how this is used. 
-            //
-            config.SetProperty("current_session_context_class", "thread_static");
-
-            // TODO Get AuditIntercptor working
-            // config.SetInterceptor(new AuditInterceptor(
-            //    IoCContainerManagerFactory.GetIoCContainerManager().Resolve<ICurrentUserSvc>()));
-
-            // Correct how NH handles quoting of table and column names
-            SchemaMetadataUpdater.QuoteTableAndColumns(config);
-
-            // Update schema in database if set in app config (should only be used in dev environments)
-            bool updateSchemaInDb = IoCContainerManagerFactory.GetIoCContainerManager().Resolve<IConfigurationSvc>()
-                .GetBooleanConfig("UpdateSchemaInDb", false);
-            if (updateSchemaInDb) new SchemaExport(config).Create(false, true);
         }
     }
 }

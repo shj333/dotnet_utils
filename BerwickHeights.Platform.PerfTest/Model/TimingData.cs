@@ -41,7 +41,7 @@ namespace BerwickHeights.Platform.PerfTest.Model
         /// <summary>
         /// Unique ID for this timing data.
         /// </summary>
-        public virtual string TimingDataId { get; private set; }
+        public virtual string TimingDataId { get; protected internal set; }
 
         /// <summary>
         /// The parent test result to which this timing data belongs.

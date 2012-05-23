@@ -42,6 +42,9 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\packages\Castle.Windsor.3.0.0.4001\lib\net40\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="FluentNHibernate, Version=1.3.0.727, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentNHibernate.1.3.0.727\lib\FluentNHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
@@ -63,6 +66,7 @@
     <Compile Include="Attrib\PerfTestAttribute.cs" />
     <Compile Include="DAL\IPerfTestDAL.cs" />
     <Compile Include="DAL\NHibernate\PerfTestDAL.cs" />
+    <Compile Include="DAL\NHibernate\PerfTestFluentConfig.cs" />
     <Compile Include="Model\PerfTestBase.cs" />
     <Compile Include="Model\SystemInfo.cs" />
     <Compile Include="Model\TestResult.cs" />
@@ -88,12 +92,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Model\NHibernate\SystemInfo.hbm.xml" />
-    <EmbeddedResource Include="Model\NHibernate\TestResult.hbm.xml" />
-    <EmbeddedResource Include="Model\NHibernate\TestSuiteResult.hbm.xml" />
-    <EmbeddedResource Include="Model\NHibernate\TimingData.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

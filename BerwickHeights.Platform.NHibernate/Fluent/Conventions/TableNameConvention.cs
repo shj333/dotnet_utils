@@ -42,7 +42,15 @@ namespace BerwickHeights.Platform.NHibernate.Fluent.Conventions
         /// </summary>
         public void Apply(IClassInstance instance)
         {
-            instance.Table(tableNamePrefix + instance.EntityType.Name);
+            string nameSpace = instance.EntityType.Namespace;
+            if ((!string.IsNullOrEmpty(nameSpace)) && (nameSpace.StartsWith("BerwickHeights.Platform.PerfTest")))
+            {
+                instance.Table("PERF_" + instance.EntityType.Name);
+            }
+            else
+            {
+                instance.Table(tableNamePrefix + instance.EntityType.Name);
+            }
         }
     }
 }

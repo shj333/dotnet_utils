@@ -11,10 +11,8 @@
  *  
  */
 
-using System;
 using System.Collections.Generic;
 using System.Text;
-using BerwickHeights.Platform.Core.Utils;
 
 namespace BerwickHeights.Platform.PerfTest.Model
 {
@@ -23,15 +21,12 @@ namespace BerwickHeights.Platform.PerfTest.Model
     /// </summary>
     public class TestSuiteResult : PerfTestBase
     {
-        private readonly Guid userId;
-
-
         /// <summary>
         /// Constructor.
         /// </summary>
         public TestSuiteResult(string userId) : this()
         {
-            this.userId = Guid.Parse(userId);
+            UserId = userId;
         }
 
 
@@ -47,23 +42,23 @@ namespace BerwickHeights.Platform.PerfTest.Model
         /// <summary>
         /// Unique ID for this test run.
         /// </summary>
-        public virtual string TestSuiteResultId { get; private set; }
+        public virtual string TestSuiteResultId { get; protected internal set; }
 
         /// <summary>
         /// ID of user who ran the performance test.
         /// </summary>
-        public virtual string UserId { get { return StringUtils.SafeToString(userId); } }
+        public virtual string UserId { get; protected internal set; }
 
         /// <summary>
         /// List of system information pertaining to this test run (e.g., CPU type, 
         /// amount of memory, OS type, etc.).
         /// </summary>
-        public virtual ICollection<SystemInfo> SystemInfoList { get; private set; }
+        public virtual ICollection<SystemInfo> SystemInfoList { get; protected internal set; }
 
         /// <summary>
         /// List of test results for each performance test in this test run.
         /// </summary>
-        public virtual ICollection<TestResult> TestResultList { get; private set; }
+        public virtual ICollection<TestResult> TestResultList { get; protected internal set; }
 
 
         /// <inheritDoc/>

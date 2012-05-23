@@ -32,7 +32,7 @@ namespace BerwickHeights.Platform.IoC.Castle
     /// <summary>
     /// Manages the IoC container for Windsor Castle.
     /// </summary>
-    public class CastleContainerManager : IoCContainerManagerBase, IIoCContainerManager, IDisposable
+    public class CastleContainerManager : IoCContainerManagerBase, IDisposable
     {
         #region Private Fields
 
@@ -61,13 +61,13 @@ namespace BerwickHeights.Platform.IoC.Castle
         #region Interceptors, LoggerFactory
 
         /// <inheritDoc/>
-        public void RegisterInterceptors(params InterceptorDescriptor[] descriptors)
+        public override void RegisterInterceptors(params InterceptorDescriptor[] descriptors)
         {
             container.Install(new InterceptorsInstaller(descriptors));
         }
 
         /// <inheritDoc/>
-        public void RegisterLoggerFactory(ILoggerFactory loggerFactory)
+        public override void RegisterLoggerFactory(ILoggerFactory loggerFactory)
         {
             RegisterComponentInstance(typeof(ILoggerFactory), loggerFactory, "LoggerFactory");
         }
@@ -77,19 +77,19 @@ namespace BerwickHeights.Platform.IoC.Castle
         #region Component registration
 
         /// <inheritDoc/>
-        public void RegisterComponentsFromAppConfig()
+        public override void RegisterComponentsFromAppConfig()
         {
             container.Install(Configuration.FromAppConfig());
         }
 
         /// <inheritDoc/>
-        public void RegisterComponentsFromExternalFile(string configFile)
+        public override void RegisterComponentsFromExternalFile(string configFile)
         {
             container.Install(Configuration.FromXmlFile(configFile));
         }
 
         /// <inheritDoc/>
-        public void RegisterInProcComponents(params string[] assemblyNames)
+        public override void RegisterInProcComponents(params string[] assemblyNames)
         {
             // Loop through given assembly names -- trim off leading/trailing space
             ILogger logger = container.Resolve<ILoggerFactory>().GetLogger(GetType());
@@ -113,25 +113,25 @@ namespace BerwickHeights.Platform.IoC.Castle
         }
 
         /// <inheritDoc/>
-        public void RegisterWCFClientComponents(string wcfServiceUrl, params string[] assemblyNames)
+        public override void RegisterWCFClientComponents(string wcfServiceUrl, params string[] assemblyNames)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritDoc/>
-        public void RegisterWCFServiceComponents(string wcfServiceUrl, params string[] assemblyNames)
+        public override void RegisterWCFServiceComponents(string wcfServiceUrl, params string[] assemblyNames)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritDoc/>
-        public void RegisterComponent(Type serviceType, Type implType)
+        public override void RegisterComponent(Type serviceType, Type implType)
         {
             container.Register(Component.For(serviceType).ImplementedBy(implType));
         }
 
         /// <inheritDoc/>
-        public void RegisterComponentInstance(Type serviceType, object instance, string componentId)
+        public override void RegisterComponentInstance(Type serviceType, object instance, string componentId)
         {
             container.Register(Component.For(serviceType).Named(componentId).Instance(instance));
         }
@@ -141,9 +141,8 @@ namespace BerwickHeights.Platform.IoC.Castle
         #region NHibernate, ASP.Net MVC integration
 
         /// <inheritDoc/>
-        public void SetupNHibernateIntegration(IPersistenceConfigurer persistenceConfigurer, 
-            AutoPersistenceModel autoPersistenceModel, Action<NHibernate.Cfg.Configuration> exposeConfigAction, 
-            bool isPerWebRequest, bool isUseAutoTransactions)
+        public override void SetupNHibernateIntegration(IPersistenceConfigurer persistenceConfigurer, 
+            AutoPersistenceModel autoPersistenceModel, bool isPerWebRequest, bool isUseAutoTransactions)
         {
             ILogger logger = container.Resolve<ILoggerFactory>().GetLogger(GetType());
             ComponentRegistration<ISession> sessionCompReg = Component.For<ISession>()
@@ -152,9 +151,8 @@ namespace BerwickHeights.Platform.IoC.Castle
             else sessionCompReg.LifestyleTransient();
 
             container.Kernel.Register(
-                Component.For<ISessionFactory>()
-                    .UsingFactoryMethod(_ => base.ConfigureNHibernate(
-                        persistenceConfigurer, autoPersistenceModel, exposeConfigAction, logger).BuildSessionFactory()),
+                Component.For<ISessionFactory>().UsingFactoryMethod(_ => base.ConfigureNHibernate(
+                    persistenceConfigurer, autoPersistenceModel, logger).BuildSessionFactory()),
                 sessionCompReg
             );
 
@@ -162,7 +160,7 @@ namespace BerwickHeights.Platform.IoC.Castle
         }
 
         /// <inheritDoc/>
-        public void SetupASPNetMVCIntegration()
+        public override void SetupASPNetMVCIntegration()
         {
             // If we're using ASP.Net MVC, then set up a controller factory that integrates with Castle Windsor container
             if (ControllerBuilder.Current != null)
@@ -176,13 +174,13 @@ namespace BerwickHeights.Platform.IoC.Castle
         #region Resolve components at runtime
 
         /// <inheritDoc/>
-        public T Resolve<T>()
+        public override T Resolve<T>()
         {
             return container.Resolve<T>();
         }
 
         /// <inheritDoc/>
-        public T TryResolve<T>()
+        public override T TryResolve<T>()
         {
             if (container.Kernel.HasComponent(typeof(T)))
             {
@@ -193,13 +191,13 @@ namespace BerwickHeights.Platform.IoC.Castle
         }
 
         /// <inheritDoc/>
-        public T Resolve<T>(string componentId)
+        public override T Resolve<T>(string componentId)
         {
             return container.Resolve<T>(componentId);
         }
 
         /// <inheritDoc/>
-        public IEnumerable<T> ResolveAll<T>()
+        public override IEnumerable<T> ResolveAll<T>()
         {
             return container.ResolveAll<T>();
         }

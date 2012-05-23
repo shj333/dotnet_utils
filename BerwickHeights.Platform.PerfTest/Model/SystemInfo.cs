@@ -40,23 +40,23 @@ namespace BerwickHeights.Platform.PerfTest.Model
         /// <summary>
         /// Unique identifier for this piece of system information.
         /// </summary>
-        public virtual string SystemInfoId { get; private set; }
+        public virtual string SystemInfoId { get; protected internal set; }
 
         /// <summary>
         /// The type of component that this piece of system information applies to
         /// (e.g., cpu, memory).
         /// </summary>
-        public virtual string Component { get; private set; }
+        public virtual string Component { get; protected internal set; }
 
         /// <summary>
         /// The name of this piece of system information.
         /// </summary>
-        public virtual string Name { get; private set; }
+        public virtual string Name { get; protected internal set; }
 
         /// <summary>
         /// The value of this piece of system infomation.
         /// </summary>
-        public virtual string Value { get; private set; }
+        public virtual string Value { get; protected internal set; }
 
         /// <summary>
         /// The parent test run to which this system information belongs.

@@ -50,11 +50,13 @@ namespace BerwickHeights.Platform.NHibernate.Fluent
         }
 
         /// <summary>
-        /// Declares the given domain type member as the identity (primary key) if it is named SystemId.
+        /// Declares the given domain type member as the identity (primary key) if it is named SystemId or 
+        /// {TypeName}Id.
         /// </summary>
         public override bool IsId(Member member)
         {
-            return (member.Name.Equals("SystemId"));
+            string name = member.Name;
+            return ((name.Equals("SystemId")) || (name.Equals(member.DeclaringType.Name + "Id")));
         }
     }
 }
