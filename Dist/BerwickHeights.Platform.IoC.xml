@@ -75,7 +75,7 @@
             <param name="instance">The instance to register as a component.</param>
             <param name="componentId">The id of the component.</param>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.SetupNHibernateIntegration(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Boolean,System.Boolean)">
+        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.SetupNHibernateIntegration(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Boolean)">
             <summary>
             NHibernate integration.
             </summary>
@@ -85,8 +85,6 @@
             <param name="isPerWebRequest">Determines lifestyle of NHibernate ISession component; if true, then 
             the lifestyle is bound to the web request; otherwise, the lifestyle is transient and the instances
             are destroyed when disposed.</param>
-            <param name="isUseAutoTransactions">If true, then automated database transactions via AOP are 
-            configured.</param>
         </member>
         <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.SetupASPNetMVCIntegration">
             <summary>
@@ -193,7 +191,7 @@
         <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerBase.RegisterComponentInstance(System.Type,System.Object,System.String)">
             <inheritDoc/>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerBase.SetupNHibernateIntegration(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Boolean,System.Boolean)">
+        <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerBase.SetupNHibernateIntegration(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Boolean)">
             <inheritDoc/>
         </member>
         <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerBase.SetupASPNetMVCIntegration">

@@ -71,7 +71,7 @@
         <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.RegisterComponentInstance(System.Type,System.Object,System.String)">
             <inheritDoc/>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.SetupNHibernateIntegration(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Boolean,System.Boolean)">
+        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.SetupNHibernateIntegration(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Boolean)">
             <inheritDoc/>
         </member>
         <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.SetupASPNetMVCIntegration">
