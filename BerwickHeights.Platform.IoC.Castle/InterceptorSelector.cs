@@ -67,10 +67,11 @@ namespace BerwickHeights.Platform.IoC.Castle
             interceptors.AddRange(model.Interceptors);
 
             // Add the interceptors that are configured for this selector
-            int idx = 0;
+            int idx = -1;
             foreach (InterceptorDescriptor descriptor in descriptors)
             {
                 // Don't add interceptors to classes on the ignore list
+                idx++;
                 string modelFullClassName = model.Implementation.Namespace + "." + model.Implementation.Name;
                 if (descriptor.IgnoredTypes.Any(fullClassName => (modelFullClassName).Equals(fullClassName))) continue;
 
@@ -81,7 +82,6 @@ namespace BerwickHeights.Platform.IoC.Castle
                     // Locate interceptor by index using name set in InterceptorsInstaller
                     interceptors.Add(InterceptorReference.ForKey(InterceptorNamePrefix + idx));
                 }
-                idx++;
             }
 
             return interceptors.ToArray();

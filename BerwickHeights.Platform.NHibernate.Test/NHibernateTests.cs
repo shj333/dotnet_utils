@@ -12,15 +12,18 @@
  */
 
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Configuration;
 using BerwickHeights.Platform.Core.IoC;
 using BerwickHeights.Platform.Core.Test;
 using BerwickHeights.Platform.IoC;
+using BerwickHeights.Platform.IoC.Castle;
+using BerwickHeights.Platform.MethodLogging;
 using BerwickHeights.Platform.NHibernate.Fluent;
 using BerwickHeights.Platform.NHibernate.Fluent.Conventions;
 using BerwickHeights.Platform.NHibernate.Interceptors;
 using BerwickHeights.Platform.PerfTest.DAL.NHibernate;
+using BerwickHeights.Platform.PerfTest.Test;
 using FluentNHibernate.Automapping;
 using NHibernate;
 using ServiceStack.Redis;
@@ -42,15 +45,32 @@ namespace BerwickHeights.Platform.NHibernate.Test
             container = IoCContainerManagerFactory.GetIoCContainerManager();
             container.RegisterLoggerFactory(new Log4NetLoggerFactory());
 
-            IEnumerable<string> ignoredTypes = new string[]
-            {
-                "BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc", 
-                "BerwickHeights.Platform.IoC.Castle.Logger",
-                "BerwickHeights.Platform.Config.Redis.ConfigurationSvc",
-                "BerwickHeights.Platform.NHibernate.Interceptors.AuditInterceptor"
-            };
+            MethodLoggingInterceptorBase.ConfigData loggerCfg = new MethodLoggingInterceptorBase.ConfigData(true, true, new string[] { "pass" });
             container.RegisterInterceptors(
-                new InterceptorDescriptor(typeof(TransactionInterceptor), null, new string[] { "BerwickHeights" }, ignoredTypes));
+                new InterceptorDescriptor(
+                    typeof (MethodLoggingInterceptor), 
+                    new Hashtable { { MethodLoggingInterceptorBase.ConfigPropertyName, loggerCfg } }, 
+                    new string[] { "BerwickHeights.Platform" }, 
+                    new string[]
+                    {
+                        "BerwickHeights.Platform.Config.Redis.ConfigurationSvc",
+                        "BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc", 
+                        "BerwickHeights.Platform.IoC.Castle.Logger",
+                        "BerwickHeights.Platform.NHibernate.Interceptors.AuditInterceptor",
+                        "BerwickHeights.Platform.PerfTest.Svc.PerfTestSvc",
+                        "BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL"
+                    }),
+                new InterceptorDescriptor(
+                    typeof(TransactionInterceptor), 
+                    null, 
+                    new string[] { "BerwickHeights" }, 
+                    new string[]
+                    {
+                        "BerwickHeights.Platform.Config.Redis.ConfigurationSvc",
+                        "BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc", 
+                        "BerwickHeights.Platform.IoC.Castle.Logger",
+                        "BerwickHeights.Platform.NHibernate.Interceptors.AuditInterceptor"
+                    }));
 
             string redisNetAddr = ConfigurationManager.AppSettings["RedisNetAddr"];
             if (string.IsNullOrEmpty(redisNetAddr)) throw new Exception("Network address for Redis server not configured (RedisNetAddr)");
@@ -62,7 +82,8 @@ namespace BerwickHeights.Platform.NHibernate.Test
             // Register components in assemblies
             container.RegisterInProcComponents(
                 "BerwickHeights.Platform.Core",
-                "BerwickHeights.Platform.Config.Redis");
+                "BerwickHeights.Platform.Config.Redis",
+                "BerwickHeights.Platform.PerfTest");
             container.RegisterComponent(typeof(ITestDataSvc), typeof(TestDataSvc));
             container.RegisterComponent(typeof(IInterceptor), typeof(AuditInterceptor));
 
@@ -78,6 +99,10 @@ namespace BerwickHeights.Platform.NHibernate.Test
         public void TestPersistEntity()
         {
             CurrentUserSvcTest.SetTestCurrentUserData();
+
+            const string perfTestId = "perftest1";
+            IPerfTestController perfTestController = container.Resolve<IPerfTestController>();
+            perfTestController.BeginPerfTest(perfTestId, "unit test", GetType().Name, "TestPersistEntity");
 
             ITestDataSvc testDataSvc = container.Resolve<ITestDataSvc>();
 
@@ -95,6 +120,10 @@ namespace BerwickHeights.Platform.NHibernate.Test
 
             // See if cache is used in detecting transactional attribute
             testDataSvc.GetEntity(entity.SystemId);
+
+            perfTestController.EndPerfTest(perfTestId);
+            perfTestController.SavePerfTestResults(perfTestId);
+            perfTestController.ClearPerfTestResults(perfTestId);
         }
     }
 }

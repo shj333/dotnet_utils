@@ -29,10 +29,6 @@ namespace BerwickHeights.Platform.NHibernate.DAL
         /// </summary>
         protected readonly ISessionFactory sessionFactory;
         /// <summary>
-        /// A set of methods that provide common functionality for NHibernate
-        /// </summary>
-        protected readonly NHibernateGenericDAL genericDAL;
-        /// <summary>
         /// Standard Castle logging component
         /// </summary>
         protected readonly ILogger logger;
@@ -59,7 +55,6 @@ namespace BerwickHeights.Platform.NHibernate.DAL
             this.currentUserSvc = currentUserSvc;
             this.sessionFactory = sessionFactory;
             logger = loggerFactory.GetLogger(GetType());
-            genericDAL = new NHibernateGenericDAL(sessionFactory);
         }
 
 

@@ -49,43 +49,30 @@ namespace BerwickHeights.Platform.PerfTest.DAL.NHibernate
             }
 
             // Cascades save to persist/update children performance test data as well
-            genericDAL.Save(testSuiteResult);
+            ISession session = sessionFactory.GetCurrentSession();
+            session.Save(testSuiteResult);
         }
 
         /// <inheritDoc/>
         public virtual TestSuiteResult GetTestResults(string testSuiteResultId)
         {
-            TestSuiteResult testSuiteResult;
-            using (sessionFactory.OpenSession())
-            {
-                try
-                {
-                    testSuiteResult = genericDAL.FindById(typeof(TestSuiteResult),
-                        testSuiteResultId) as TestSuiteResult;
-                    NHibernateUtil.Initialize(testSuiteResult);
-                }
-                catch (ObjectNotFoundException)
-                {
-                    testSuiteResult = null;
-                }
-            }
-
+            ISession session = sessionFactory.GetCurrentSession();
+            TestSuiteResult testSuiteResult = session.Get<TestSuiteResult>(testSuiteResultId);
+            if (testSuiteResult != null) NHibernateUtil.Initialize(testSuiteResult);
             return testSuiteResult;
         }
 
         /// <inheritDoc/>
         public virtual IEnumerable<TestSuiteResult> GetTestResults(DateTime startTime, DateTime endTime)
         {
-            using (ISession session = sessionFactory.OpenSession())
-            {
-                const string hql = "from TestSuiteResult tr "
-                    + "where tr.StartTime >= :startTime "
-                    + "and tr.StartTime <= :endTime ";
-                return session.CreateQuery(hql)
-                    .SetDateTime("startTime", startTime)
-                    .SetDateTime("endTime", endTime)
-                    .List<TestSuiteResult>();
-            }
+            ISession session = sessionFactory.GetCurrentSession();
+            const string hql = "from TestSuiteResult tr "
+                + "where tr.StartTime >= :startTime "
+                + "and tr.StartTime <= :endTime ";
+            return session.CreateQuery(hql)
+                .SetDateTime("startTime", startTime)
+                .SetDateTime("endTime", endTime)
+                .List<TestSuiteResult>();
         }
     }
 }

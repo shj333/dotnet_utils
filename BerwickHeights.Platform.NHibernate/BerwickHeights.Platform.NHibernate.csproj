@@ -62,7 +62,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL\NHibernateGenericDAL.cs" />
     <Compile Include="DAL\PersistenceDALBase.cs" />
     <Compile Include="Fluent\AutomapConfig.cs" />
     <Compile Include="Fluent\Conventions\EnumConvention.cs" />
