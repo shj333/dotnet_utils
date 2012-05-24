@@ -92,7 +92,7 @@ namespace BerwickHeights.Platform.NHibernate.Test
                 .Conventions.AddAssembly(typeof (StringConvention).Assembly);
             PerfTestFluentConfig.AutoMap(model);
 
-            container.SetupNHibernateIntegration(FluentConfigUtils.ConfigureSqlServer2008("TestDatabase"), model, false, false);
+            container.SetupNHibernateIntegration(FluentConfigUtils.ConfigureSqlServer2008("TestDatabase"), model, false);
         }
 
         [Test]

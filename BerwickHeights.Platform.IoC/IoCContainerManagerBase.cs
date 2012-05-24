@@ -110,7 +110,7 @@ namespace BerwickHeights.Platform.IoC
         /// <inheritDoc/>
         public abstract void RegisterComponentInstance(Type serviceType, object instance, string componentId);
         /// <inheritDoc/>
-        public abstract void SetupNHibernateIntegration(IPersistenceConfigurer persistenceConfigurer, AutoPersistenceModel autoPersistenceModel, bool isPerWebRequest, bool isUseAutoTransactions);
+        public abstract void SetupNHibernateIntegration(IPersistenceConfigurer persistenceConfigurer, AutoPersistenceModel autoPersistenceModel, bool isPerWebRequest);
         /// <inheritDoc/>
         public abstract void SetupASPNetMVCIntegration();
         /// <inheritDoc/>

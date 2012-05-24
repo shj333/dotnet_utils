@@ -17,7 +17,6 @@ using System.Linq;
 using System.Web.Mvc;
 using BerwickHeights.Platform.Core.IoC;
 using BerwickHeights.Platform.Core.Logging;
-using Castle.Facilities.AutoTx;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.Windsor;
@@ -142,7 +141,7 @@ namespace BerwickHeights.Platform.IoC.Castle
 
         /// <inheritDoc/>
         public override void SetupNHibernateIntegration(IPersistenceConfigurer persistenceConfigurer, 
-            AutoPersistenceModel autoPersistenceModel, bool isPerWebRequest, bool isUseAutoTransactions)
+            AutoPersistenceModel autoPersistenceModel, bool isPerWebRequest)
         {
             ILogger logger = container.Resolve<ILoggerFactory>().GetLogger(GetType());
             ComponentRegistration<ISession> sessionCompReg = Component.For<ISession>()
@@ -155,8 +154,6 @@ namespace BerwickHeights.Platform.IoC.Castle
                     persistenceConfigurer, autoPersistenceModel, logger).BuildSessionFactory()),
                 sessionCompReg
             );
-
-            if (isUseAutoTransactions) container.AddFacility(new AutoTxFacility());
         }
 
         /// <inheritDoc/>
