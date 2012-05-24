@@ -4,6 +4,36 @@
         <name>BerwickHeights.Platform.IoC.Castle</name>
     </assembly>
     <members>
+        <member name="T:BerwickHeights.Platform.IoC.Castle.InterceptorsInstaller">
+            <summary>
+            Castle Windsor Installer that handles the insertion of interceptors into Castle components.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.Castle.InterceptorsInstaller.#ctor(BerwickHeights.Platform.Core.IoC.InterceptorDescriptor[])">
+            <summary>
+            Sets up a Castle InterceptorSelector (implements IModelInterceptorsSelector interface) which adds the 
+            given interceptors to classes that are in the given namespaces but not in the given ignore list.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.Castle.InterceptorsInstaller.Install(Castle.Windsor.IWindsorContainer,Castle.MicroKernel.SubSystems.Configuration.IConfigurationStore)">
+            <summary>
+            Installs a Castle InterceptorSelector (implements IModelInterceptorsSelector interface) which adds the 
+            given interceptors to classes that are in the given namespaces but not in the given ignore list.
+            </summary>
+            <param name="container">The Castle Windsor dependency injection container.</param>
+            <param name="store">Configuration for this container.</param>
+        </member>
+        <member name="T:BerwickHeights.Platform.IoC.Castle.CastleMVCControllerFactory">
+            <summary>
+            Factory that manages ASP.Net MVC controller instances using a Castle Windsor container.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleMVCControllerFactory.GetControllerInstance(System.Web.Routing.RequestContext,System.Type)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleMVCControllerFactory.ReleaseController(System.Web.Mvc.IController)">
+            <inheritDoc/>
+        </member>
         <member name="T:BerwickHeights.Platform.IoC.Castle.CastleContainerManager">
             <summary>
             Manages the IoC container for Windsor Castle.
@@ -41,7 +71,7 @@
         <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.RegisterComponentInstance(System.Type,System.Object,System.String)">
             <inheritDoc/>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.SetupNHibernateIntegration(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Action{NHibernate.Cfg.Configuration},System.Boolean,System.Boolean)">
+        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.SetupNHibernateIntegration(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Boolean,System.Boolean)">
             <inheritDoc/>
         </member>
         <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.SetupASPNetMVCIntegration">
@@ -60,38 +90,6 @@
             <inheritDoc/>
         </member>
         <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.Dispose">
-            <inheritDoc/>
-        </member>
-        <member name="T:BerwickHeights.Platform.IoC.Castle.CastleMVCControllerFactory">
-            <summary>
-            Factory that manages ASP.Net MVC controller instances using a Castle Windsor container.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleMVCControllerFactory.GetControllerInstance(System.Web.Routing.RequestContext,System.Type)">
-            <inheritDoc/>
-        </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleMVCControllerFactory.ReleaseController(System.Web.Mvc.IController)">
-            <inheritDoc/>
-        </member>
-        <member name="T:BerwickHeights.Platform.IoC.Castle.InterceptorSelector">
-            <summary>
-            Adds configured Castle Windsor interceptors to components matching configured parameters.
-            </summary>
-        </member>
-        <member name="F:BerwickHeights.Platform.IoC.Castle.InterceptorSelector.InterceptorNamePrefix">
-            <summary>
-            Prefix for the names of the interceptors.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.InterceptorSelector.#ctor(System.Collections.Generic.IEnumerable{BerwickHeights.Platform.Core.IoC.InterceptorDescriptor})">
-            <summary>
-            Constructor.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.InterceptorSelector.HasInterceptors(Castle.Core.ComponentModel)">
-            <inheritDoc/>
-        </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.InterceptorSelector.SelectInterceptors(Castle.Core.ComponentModel,Castle.Core.InterceptorReference[])">
             <inheritDoc/>
         </member>
         <member name="T:BerwickHeights.Platform.IoC.Castle.MethodLoggingInterceptor">
@@ -115,61 +113,26 @@
         <member name="M:BerwickHeights.Platform.IoC.Castle.MethodLoggingInterceptor.ProceedWithMethodCall(System.Object)">
             <inheritDoc/>
         </member>
-        <member name="T:BerwickHeights.Platform.IoC.Castle.InterceptorsInstaller">
+        <member name="T:BerwickHeights.Platform.IoC.Castle.InterceptorSelector">
             <summary>
-            Castle Windsor Installer that handles the insertion of interceptors into Castle components.
+            Adds configured Castle Windsor interceptors to components matching configured parameters.
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.InterceptorsInstaller.#ctor(BerwickHeights.Platform.Core.IoC.InterceptorDescriptor[])">
+        <member name="F:BerwickHeights.Platform.IoC.Castle.InterceptorSelector.InterceptorNamePrefix">
             <summary>
-            Sets up a Castle InterceptorSelector (implements IModelInterceptorsSelector interface) which adds the 
-            given interceptors to classes that are in the given namespaces but not in the given ignore list.
+            Prefix for the names of the interceptors.
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.InterceptorsInstaller.Install(Castle.Windsor.IWindsorContainer,Castle.MicroKernel.SubSystems.Configuration.IConfigurationStore)">
+        <member name="M:BerwickHeights.Platform.IoC.Castle.InterceptorSelector.#ctor(System.Collections.Generic.IEnumerable{BerwickHeights.Platform.Core.IoC.InterceptorDescriptor})">
             <summary>
-            Installs a Castle InterceptorSelector (implements IModelInterceptorsSelector interface) which adds the 
-            given interceptors to classes that are in the given namespaces but not in the given ignore list.
-            </summary>
-            <param name="container">The Castle Windsor dependency injection container.</param>
-            <param name="store">Configuration for this container.</param>
-        </member>
-    </members>
-</doc>
-.IConfigurationSvc,BerwickHeights.Platform.Core.Logging.ILogger)">
-            <summary>
-            Production constructor (no PerfTest component)
+            Constructor.
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.MethodLoggingInterceptor.Intercept(Castle.DynamicProxy.IInvocation)">
+        <member name="M:BerwickHeights.Platform.IoC.Castle.InterceptorSelector.HasInterceptors(Castle.Core.ComponentModel)">
             <inheritDoc/>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.MethodLoggingInterceptor.ProceedWithMethodCall(System.Object)">
+        <member name="M:BerwickHeights.Platform.IoC.Castle.InterceptorSelector.SelectInterceptors(Castle.Core.ComponentModel,Castle.Core.InterceptorReference[])">
             <inheritDoc/>
-        </member>
-        <member name="T:BerwickHeights.Platform.IoC.Castle.InterceptorsInstaller">
-            <summary>
-            Castle Windsor Installer that handles the insertion of interceptors into Castle components.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.InterceptorsInstaller.#ctor(BerwickHeights.Platform.Core.IoC.InterceptorDescriptor[])">
-            <summary>
-            Sets up a Castle InterceptorSelector (implements IModelInterceptorsSelector interface) which adds the 
-            given interceptors to classes that are in the given namespaces but not in the given ignore list.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.InterceptorsInstaller.Install(Castle.Windsor.IWindsorContainer,Castle.MicroKernel.SubSystems.Configuration.IConfigurationStore)">
-            <summary>
-            Installs a Castle InterceptorSelector (implements IModelInterceptorsSelector interface) which adds the 
-            given interceptors to classes that are in the given namespaces but not in the given ignore list.
-            </summary>
-            <param name="container">The Castle Windsor dependency injection container.</param>
-            <param name="store">Configuration for this container.</param>
-        </member>
-    </members>
-</doc>
-"container">The Castle Windsor dependency injection container.</param>
-            <param name="store">Configuration for this container.</param>
         </member>
     </members>
 </doc>

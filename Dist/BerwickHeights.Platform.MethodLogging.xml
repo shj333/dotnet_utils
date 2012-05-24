@@ -88,11 +88,3 @@
         </member>
     </members>
 </doc>
-ameIgnoreList">
-            <summary>
-            Gets or sets the parameter names that are to be ignored when dumping
-            parameter values (e.g., don't dump password values).
-            </summary>
-        </member>
-    </members>
-</doc>
