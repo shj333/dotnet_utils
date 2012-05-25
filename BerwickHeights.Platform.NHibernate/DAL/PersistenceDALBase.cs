@@ -89,7 +89,7 @@ namespace BerwickHeights.Platform.NHibernate.DAL
         protected void AddAuditInfoVals(IQuery query)
         {
             query.SetDateTime("modified", DateTime.UtcNow);
-            query.SetGuid("modifiedBy", Guid.Parse(GetCurrentUserData().UserId));
+            query.SetString("modifiedBy", GetCurrentUserData().UserId);
         }
 
 
