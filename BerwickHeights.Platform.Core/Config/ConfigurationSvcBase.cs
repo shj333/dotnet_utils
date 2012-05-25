@@ -79,15 +79,15 @@ namespace BerwickHeights.Platform.Core.Config
         }
 
         /// <inheritDoc/>
-        public string[] GetStringArrayConfig(string key)
+        public IEnumerable<string> GetStringArrayConfig(string key)
         {
             return GetStringArrayConfig(key, true);
         }
 
         /// <inheritDoc/>
-        public string[] GetStringArrayConfig(string key, bool isMandatory)
+        public IEnumerable<string> GetStringArrayConfig(string key, bool isMandatory)
         {
-            return GetStringConfig(key, isMandatory).Split(',');
+            return GetStringConfig(key, isMandatory).Split(',').Where(val => !string.IsNullOrEmpty(val));
         }
 
         /// <inheritDoc/>

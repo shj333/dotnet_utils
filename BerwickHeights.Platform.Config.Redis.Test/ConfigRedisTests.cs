@@ -12,6 +12,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using BerwickHeights.Platform.Core.Config;
@@ -100,8 +101,8 @@ namespace BerwickHeights.Platform.Config.Redis.Test
             Assert.AreEqual(testDfltStr, configurationSvc.GetStringConfig(testStrCfgKey + Guid.NewGuid(), false, testDfltStr));
 
             // String array config
-            string[] val = configurationSvc.GetStringArrayConfig(testStrArrayCfgKey);
-            Assert.AreEqual(testStrArray.Length, val.Length);
+            IList<string> val = configurationSvc.GetStringArrayConfig(testStrArrayCfgKey).ToList();
+            Assert.AreEqual(testStrArray.Length, val.Count);
             for (int idx = 0; idx < testStrArray.Length; idx++) Assert.AreEqual(testStrArray[idx], val[idx]);
 
             string password = configurationSvc.GetStringConfig(testPasswordCfgKey);

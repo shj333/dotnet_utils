@@ -11,6 +11,7 @@
  *  
  */
 
+using System.Collections.Generic;
 using BerwickHeights.Platform.Core.IoC;
 
 namespace BerwickHeights.Platform.Core.Config
@@ -44,14 +45,14 @@ namespace BerwickHeights.Platform.Core.Config
         /// a string array using a comma as a separator. Throws a ConfigurationErrorsException if the given key
         /// does not match any configuration values.
         /// </summary>
-        string[] GetStringArrayConfig(string key);
+        IEnumerable<string> GetStringArrayConfig(string key);
 
         /// <summary>
         /// Returns a string array of configuration values by splitting the string value based on the given key into a 
         /// string array using a comma as a separator. Throws a ConfigurationErrorsException if isMandatory is true 
         /// and the given key does not match any configuration values.
         /// </summary>
-        string[] GetStringArrayConfig(string key, bool isMandatory);
+        IEnumerable<string> GetStringArrayConfig(string key, bool isMandatory);
 
         /// <summary>
         /// Returns an integer configuration value based on the given key. Throws a ConfigurationErrorsException if 

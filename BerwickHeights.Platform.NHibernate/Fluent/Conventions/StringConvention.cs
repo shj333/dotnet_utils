@@ -11,7 +11,7 @@
  *  
  */
 
-using System;
+using System.Collections.Generic;
 using System.Linq;
 using BerwickHeights.Platform.Core.Config;
 using BerwickHeights.Platform.IoC;
@@ -28,7 +28,7 @@ namespace BerwickHeights.Platform.NHibernate.Fluent.Conventions
     /// </summary>
     public class StringConvention : IPropertyConvention
     {
-        private readonly string[] bigStringPropertyNames;
+        private readonly IEnumerable<string> bigStringPropertyNames;
         private readonly string bigStringSqlType;
 
         /// <summary>
