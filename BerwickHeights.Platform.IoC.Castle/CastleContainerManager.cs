@@ -140,8 +140,9 @@ namespace BerwickHeights.Platform.IoC.Castle
         #region NHibernate, ASP.Net MVC integration
 
         /// <inheritDoc/>
-        public override void SetupNHibernateIntegration(IPersistenceConfigurer persistenceConfigurer, 
-            AutoPersistenceModel autoPersistenceModel, bool isPerWebRequest)
+        public override void SetupNHibernateIntegration(IPersistenceConfigurer persistenceConfigurer,
+            AutoPersistenceModel autoPersistenceModel, Action<NHibernate.Cfg.Configuration> setupConfig,
+            Action<CacheSettingsBuilder> setupCacheSettings, bool isPerWebRequest)
         {
             ILogger logger = container.Resolve<ILoggerFactory>().GetLogger(GetType());
             ComponentRegistration<ISession> sessionCompReg = Component.For<ISession>()
@@ -151,7 +152,7 @@ namespace BerwickHeights.Platform.IoC.Castle
 
             container.Kernel.Register(
                 Component.For<ISessionFactory>().UsingFactoryMethod(_ => base.ConfigureNHibernate(
-                    persistenceConfigurer, autoPersistenceModel, logger).BuildSessionFactory()),
+                    persistenceConfigurer, autoPersistenceModel, setupConfig, setupCacheSettings, logger).BuildSessionFactory()),
                 sessionCompReg
             );
         }

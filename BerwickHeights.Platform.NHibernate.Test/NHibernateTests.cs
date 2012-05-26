@@ -26,6 +26,7 @@ using BerwickHeights.Platform.PerfTest.DAL.NHibernate;
 using BerwickHeights.Platform.PerfTest.Test;
 using FluentNHibernate.Automapping;
 using NHibernate;
+using NHibernate.Caches.SysCache;
 using ServiceStack.Redis;
 using NHCfg = NHibernate.Cfg;
 using NUnit.Framework;
@@ -92,7 +93,12 @@ namespace BerwickHeights.Platform.NHibernate.Test
                 .Conventions.AddAssembly(typeof (StringConvention).Assembly);
             PerfTestFluentConfig.AutoMap(model);
 
-            container.SetupNHibernateIntegration(FluentConfigUtils.ConfigureSqlServer2008("TestDatabase"), model, false);
+            container.SetupNHibernateIntegration(
+                FluentConfigUtils.ConfigureSqlServer2008("TestDatabase"), 
+                model, 
+                FluentConfigUtils.ConfigureNHibernate, 
+                cacheSettings => FluentConfigUtils.BuildCacheSettings<SysCacheProvider>(cacheSettings, "TestPrefix"), 
+                false);
         }
 
         [Test]
