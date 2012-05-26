@@ -20,6 +20,24 @@
             by ShowSql in configuration.
             </summary>
         </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.FluentConfigUtils.ConfigureNHibernate(NHibernate.Cfg.Configuration)">
+            <summary>
+            Sets up AOP-based transaction management, configured NH interceptors if registered in IoC container, 
+            corrects handling of table and column name quoting by NHibernate and updates schema in database if 
+            configuration flag UpdateSchemaInDb is set to true. Inheriting classes can override this but the
+            override must call this base method as well. 
+            </summary>
+            <param name="config"></param>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.FluentConfigUtils.BuildCacheSettings``1(FluentNHibernate.Cfg.Db.CacheSettingsBuilder,System.String)">
+            <summary>
+            Sets up NHibernate caching for second level caching and query caching. The provider for the second
+            level cache is set as given as well as the region prefix used within the cache.
+            </summary>
+            <typeparam name="TCacheProviderType">The type of cache provider.</typeparam>
+            <param name="cacheSettings">The cache settings that are built.</param>
+            <param name="regionPrefix">The prefix used in second level cache region.</param>
+        </member>
         <member name="T:BerwickHeights.Platform.NHibernate.Fluent.Conventions.TableNameConvention">
             <summary>
             Sets table names in FluentNHibernate to the class name prefixed by the value in the SqlTableNamePrefix

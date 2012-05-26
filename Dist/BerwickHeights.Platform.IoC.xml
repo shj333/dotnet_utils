@@ -75,13 +75,17 @@
             <param name="instance">The instance to register as a component.</param>
             <param name="componentId">The id of the component.</param>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.SetupNHibernateIntegration(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Boolean)">
+        <member name="M:BerwickHeights.Platform.IoC.IIoCContainerManager.SetupNHibernateIntegration(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Action{NHibernate.Cfg.Configuration},System.Action{FluentNHibernate.Cfg.Db.CacheSettingsBuilder},System.Boolean)">
             <summary>
             NHibernate integration.
             </summary>
             <param name="persistenceConfigurer">Sets up FluentNHibernate configuration of database type, 
             connection string, etc.</param>
             <param name="autoPersistenceModel">Auto-mappings used by FluentNHibernate.</param>
+            <param name="setupConfig">Action that sets up configuration of NHibernate. See 
+            FluentConfigUtils.ConfigureNHibernate().</param>
+            <param name="setupCacheSettings">Action that sets up cache settings for NHibernate. See
+            FluentConfigUtils.BuildCacheSettings().</param>
             <param name="isPerWebRequest">Determines lifestyle of NHibernate ISession component; if true, then 
             the lifestyle is bound to the web request; otherwise, the lifestyle is transient and the instances
             are destroyed when disposed.</param>
@@ -145,7 +149,7 @@
             Abstract base class for IoC container managers.
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerBase.ConfigureNHibernate(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,BerwickHeights.Platform.Core.Logging.ILogger)">
+        <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerBase.ConfigureNHibernate(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Action{NHibernate.Cfg.Configuration},System.Action{FluentNHibernate.Cfg.Db.CacheSettingsBuilder},BerwickHeights.Platform.Core.Logging.ILogger)">
             <summary>
             Sets up configuration of NHibernate (database configuration via ConfigureDatabase(), mappings via 
             ConfigureMappings()) and exposes the configuration via supplied exposeConfigAction.
@@ -153,16 +157,11 @@
             <param name="persistenceConfigurer">Sets up FluentNHibernate configuration of database type, 
             connection string, etc.</param>
             <param name="autoPersistenceModel">Auto-mappings used by FluentNHibernate.</param>
+            <param name="setupConfig">Action that sets up configuration of NHibernate. See 
+            FluentConfigUtils.ConfigureNHibernate().</param>
+            <param name="setupCacheSettings">Action that sets up cache settings for NHibernate. See
+            FluentConfigUtils.BuildCacheSettings().</param>
             <param name="logger">Logger instance in case something goes wrong.</param>
-        </member>
-        <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerBase.ExposeConfigAction(NHibernate.Cfg.Configuration)">
-            <summary>
-            Sets up AOP-based transaction management, configured NH interceptors if registered in IoC container, 
-            corrects handling of table and column name quoting by NHibernate and updates schema in database if 
-            configuration flag UpdateSchemaInDb is set to true. Inheriting classes can override this but the
-            override must call this base method as well. 
-            </summary>
-            <param name="config"></param>
         </member>
         <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerBase.RegisterInterceptors(BerwickHeights.Platform.Core.IoC.InterceptorDescriptor[])">
             <inheritDoc/>
@@ -191,7 +190,7 @@
         <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerBase.RegisterComponentInstance(System.Type,System.Object,System.String)">
             <inheritDoc/>
         </member>
-        <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerBase.SetupNHibernateIntegration(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Boolean)">
+        <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerBase.SetupNHibernateIntegration(FluentNHibernate.Cfg.Db.IPersistenceConfigurer,FluentNHibernate.Automapping.AutoPersistenceModel,System.Action{NHibernate.Cfg.Configuration},System.Action{FluentNHibernate.Cfg.Db.CacheSettingsBuilder},System.Boolean)">
             <inheritDoc/>
         </member>
         <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerBase.SetupASPNetMVCIntegration">
