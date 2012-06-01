@@ -18,7 +18,7 @@ using FluentNHibernate.Automapping;
 namespace BerwickHeights.Platform.NHibernate.Fluent
 {
     /// <summary>
-    /// Configuration for FluentNHibernate AutoMapper that integrates with the Berwick Heights platform.
+    /// Sets up conventions used in configuring the mappings for NHibernate.
     /// </summary>
     public class AutomapConfig : DefaultAutomappingConfiguration
     {

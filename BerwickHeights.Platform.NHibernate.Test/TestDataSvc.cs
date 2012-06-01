@@ -12,7 +12,6 @@
  */
 
 using System;
-using Castle.Services.Transaction;
 using NHibernate;
 
 namespace BerwickHeights.Platform.NHibernate.Test
@@ -33,14 +32,12 @@ namespace BerwickHeights.Platform.NHibernate.Test
             this.sessionFactory = sessionFactory;
         }
 
-        [Transaction]
         public void SaveEntity(TestEntity testEntity)
         {
             ISession session = sessionFactory.GetCurrentSession();
             session.Save(testEntity);
         }
 
-        [Transaction]
         public TestEntity GetEntity(Guid testEntityId)
         {
             ISession session = sessionFactory.GetCurrentSession();

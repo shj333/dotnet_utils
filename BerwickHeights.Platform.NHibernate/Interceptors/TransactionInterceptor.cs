@@ -13,7 +13,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using BerwickHeights.Platform.Core.Config;
 using BerwickHeights.Platform.Core.Logging;
 using Castle.DynamicProxy;
 using Castle.Services.Transaction;
@@ -37,6 +39,7 @@ namespace BerwickHeights.Platform.NHibernate.Interceptors
 
         private readonly ISet<MethodInfo> normalMethods;
         private readonly ISet<MethodInfo> transactionalMethods;
+        private readonly IList<string> transactionalNamespaces; 
 
         #endregion
 
@@ -46,6 +49,7 @@ namespace BerwickHeights.Platform.NHibernate.Interceptors
         /// Constructor
         /// </summary>
         public TransactionInterceptor(ISessionFactory sessionFactory,
+            IConfigurationSvc configurationSvc,
             ILoggerFactory loggerFactory)
         {
             this.sessionFactory = sessionFactory;
@@ -53,6 +57,7 @@ namespace BerwickHeights.Platform.NHibernate.Interceptors
 
             normalMethods = new HashSet<MethodInfo>();
             transactionalMethods = new HashSet<MethodInfo>();
+            transactionalNamespaces = configurationSvc.GetStringArrayConfig("TransactionalNamespaces", false).ToList();
         }
 
         #endregion
@@ -99,8 +104,12 @@ namespace BerwickHeights.Platform.NHibernate.Interceptors
             }
             else
             {
-                // See if method has "Transaction" attribute defined on it
-                isTransactional = methodInfo.IsDefined(typeof(TransactionAttribute), false);
+                //
+                // See if namespace of target matches any of the configured transactional namespaces or method has 
+                // "Transaction" attribute defined on it
+                //
+                isTransactional = (transactionalNamespaces.Any(ns => invocation.TargetType.Namespace.StartsWith(ns)))
+                    || (methodInfo.IsDefined(typeof(TransactionAttribute), false));
 
                 // Cache result for next time
                 if (isTransactional) transactionalMethods.Add(methodInfo);
