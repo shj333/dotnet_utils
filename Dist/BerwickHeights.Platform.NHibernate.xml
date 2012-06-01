@@ -88,7 +88,12 @@
             Castle Windsor interceptor that provides transactional support to configured methods.
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.NHibernate.Interceptors.TransactionInterceptor.#ctor(NHibernate.ISessionFactory,BerwickHeights.Platform.Core.Config.IConfigurationSvc,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
+        <member name="F:BerwickHeights.Platform.NHibernate.Interceptors.TransactionInterceptor.ConfigPropertyName">
+            <summary>
+            Interceptor config property name.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.Interceptors.TransactionInterceptor.#ctor(NHibernate.ISessionFactory,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
             <summary>
             Constructor
             </summary>
@@ -96,6 +101,26 @@
         <member name="M:BerwickHeights.Platform.NHibernate.Interceptors.TransactionInterceptor.Intercept(Castle.DynamicProxy.IInvocation)">
             <summary>
             Determines if given invocation is bound to a transaction and supplies one if so.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.NHibernate.Interceptors.TransactionInterceptor.Config">
+            <summary>
+            Gets or sets interceptor's configuration data.
+            </summary>
+        </member>
+        <member name="T:BerwickHeights.Platform.NHibernate.Interceptors.TransactionInterceptor.ConfigData">
+            <summary>
+            Configuration used in the transaction interceptor.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.Interceptors.TransactionInterceptor.ConfigData.#ctor(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.NHibernate.Interceptors.TransactionInterceptor.ConfigData.TransactionalNamespaces">
+            <summary>
+            List of namespaces for types that are transactional.
             </summary>
         </member>
         <member name="T:BerwickHeights.Platform.NHibernate.Fluent.INHibernateEntity">

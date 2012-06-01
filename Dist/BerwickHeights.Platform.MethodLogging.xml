@@ -56,34 +56,27 @@
         </member>
         <member name="T:BerwickHeights.Platform.MethodLogging.MethodLoggingInterceptorBase.ConfigData">
             <summary>
-            Configuration structure used in the methods dump control.
+            Configuration used in the methods logging interceptor.
             </summary>
         </member>
         <member name="M:BerwickHeights.Platform.MethodLogging.MethodLoggingInterceptorBase.ConfigData.#ctor(System.Boolean,System.Boolean,System.Collections.Generic.IEnumerable{System.String})">
             <summary>
-            Creates method dump config data initializing <code>DumpMethodParameters</code> 
-            and <code>DumpMethodReturnValue</code>.
+            Constructor.
             </summary>
-            <param name="dumpMethodParameters">Sets <code>DumpMethodParameters</code></param>
-            <param name="dumpMethodReturnValue">Sets <code>DumpMethodReturnValue</code></param>
-            <param name="parameterNameIgnoreList">Sets <code>ParameterNameIgnoreList</code></param>
         </member>
         <member name="P:BerwickHeights.Platform.MethodLogging.MethodLoggingInterceptorBase.ConfigData.DumpMethodParameters">
             <summary>
-            Gets or sets parameter that controls if method call parameters are
-            to be dumped or not.
+            Controls if method call parameters are to be dumped or not.
             </summary>
         </member>
         <member name="P:BerwickHeights.Platform.MethodLogging.MethodLoggingInterceptorBase.ConfigData.DumpMethodReturnValue">
             <summary>
-            Gets or sets parameter that controls if method call returned value is
-            to be dumped or not.
+            Controls if method call returned value is to be dumped or not.
             </summary>
         </member>
         <member name="P:BerwickHeights.Platform.MethodLogging.MethodLoggingInterceptorBase.ConfigData.ParameterNameIgnoreList">
             <summary>
-            Gets or sets the parameter names that are to be ignored when dumping
-            parameter values (e.g., don't dump password values).
+            Parameter names that are to be ignored when dumping parameter values (e.g., don't dump password values).
             </summary>
         </member>
     </members>
