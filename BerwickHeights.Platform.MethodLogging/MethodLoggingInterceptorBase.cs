@@ -31,17 +31,13 @@ namespace BerwickHeights.Platform.MethodLogging
     public abstract class MethodLoggingInterceptorBase
     {
         /// <summary>
-        /// Configuration structure used in the methods dump control.
+        /// Configuration used in the methods logging interceptor.
         /// </summary>
         public class ConfigData
         {
             /// <summary>
-            /// Creates method dump config data initializing <code>DumpMethodParameters</code> 
-            /// and <code>DumpMethodReturnValue</code>.
+            /// Constructor.
             /// </summary>
-            /// <param name="dumpMethodParameters">Sets <code>DumpMethodParameters</code></param>
-            /// <param name="dumpMethodReturnValue">Sets <code>DumpMethodReturnValue</code></param>
-            /// <param name="parameterNameIgnoreList">Sets <code>ParameterNameIgnoreList</code></param>
             public ConfigData(bool dumpMethodParameters, bool dumpMethodReturnValue, 
                 IEnumerable<string> parameterNameIgnoreList)
             {
@@ -50,18 +46,15 @@ namespace BerwickHeights.Platform.MethodLogging
                 ParameterNameIgnoreList = parameterNameIgnoreList.Where(p => !string.IsNullOrEmpty(p));
             }
             /// <summary>
-            /// Gets or sets parameter that controls if method call parameters are
-            /// to be dumped or not.
+            /// Controls if method call parameters are to be dumped or not.
             /// </summary>
             public bool DumpMethodParameters { get; private set; }
             /// <summary>
-            /// Gets or sets parameter that controls if method call returned value is
-            /// to be dumped or not.
+            /// Controls if method call returned value is to be dumped or not.
             /// </summary>
             public bool DumpMethodReturnValue { get; private set; }
             /// <summary>
-            /// Gets or sets the parameter names that are to be ignored when dumping
-            /// parameter values (e.g., don't dump password values).
+            /// Parameter names that are to be ignored when dumping parameter values (e.g., don't dump password values).
             /// </summary>
             public IEnumerable<string> ParameterNameIgnoreList { get; private set; }
         }

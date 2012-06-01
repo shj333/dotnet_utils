@@ -47,6 +47,7 @@ namespace BerwickHeights.Platform.NHibernate.Test
             container.RegisterLoggerFactory(new Log4NetLoggerFactory());
 
             MethodLoggingInterceptorBase.ConfigData loggerCfg = new MethodLoggingInterceptorBase.ConfigData(true, true, new string[] { "pass" });
+            TransactionInterceptor.ConfigData transCfg = new TransactionInterceptor.ConfigData(new string[] { "BerwickHeights.Platform.NHibernate.Test" });
             container.RegisterInterceptors(
                 new InterceptorDescriptor(
                     typeof (MethodLoggingInterceptor), 
@@ -62,8 +63,8 @@ namespace BerwickHeights.Platform.NHibernate.Test
                         "BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL"
                     }),
                 new InterceptorDescriptor(
-                    typeof(TransactionInterceptor), 
-                    null, 
+                    typeof(TransactionInterceptor),
+                    new Hashtable { { TransactionInterceptor.ConfigPropertyName, transCfg } },
                     new string[] { "BerwickHeights" }, 
                     new string[]
                     {
