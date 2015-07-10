@@ -4,18 +4,6 @@
         <name>BerwickHeights.Platform.ServiceStack</name>
     </assembly>
     <members>
-        <member name="T:BerwickHeights.Platform.ServiceStack.Logging.BHSLogFactory">
-            <summary>
-            ServiceStack Log Factory that produces a logger that uses the logger provided by the 
-            BerwickHeights.Platform.Core interface (BerwickHeights.Platform.Core.Logging.ILogger).
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogFactory.GetLogger(System.Type)">
-            <inheritDoc/>
-        </member>
-        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogFactory.GetLogger(System.String)">
-            <inheritDoc/>
-        </member>
         <member name="T:BerwickHeights.Platform.ServiceStack.Logging.BHSLogger">
             <summary>
             ServiceStack Logger that uses the logger provided by BerwickHeights.Platform.Core interface 
@@ -74,6 +62,18 @@
             <inheritDoc/>
         </member>
         <member name="P:BerwickHeights.Platform.ServiceStack.Logging.BHSLogger.IsDebugEnabled">
+            <inheritDoc/>
+        </member>
+        <member name="T:BerwickHeights.Platform.ServiceStack.Logging.BHSLogFactory">
+            <summary>
+            ServiceStack Log Factory that produces a logger that uses the logger provided by the 
+            BerwickHeights.Platform.Core interface (BerwickHeights.Platform.Core.Logging.ILogger).
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogFactory.GetLogger(System.Type)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.ServiceStack.Logging.BHSLogFactory.GetLogger(System.String)">
             <inheritDoc/>
         </member>
     </members>

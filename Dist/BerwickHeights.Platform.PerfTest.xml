@@ -4,88 +4,10 @@
         <name>BerwickHeights.Platform.PerfTest</name>
     </assembly>
     <members>
-        <member name="T:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestFluentConfig">
+        <member name="T:BerwickHeights.Platform.PerfTest.Model.TimingData">
             <summary>
-            Configures FluentNHibernate to map the domain types used in PerfTest.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestFluentConfig.AutoMap(FluentNHibernate.Automapping.AutoPersistenceModel)">
-            <summary>
-            Configures FluentNHibernate to map the domain types used in PerfTest.
-            </summary>
-        </member>
-        <member name="T:BerwickHeights.Platform.PerfTest.DAL.IPerfTestDAL">
-            <summary>
-            Data access layer for storing and retrieving performance monitoring results in data store.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.DAL.IPerfTestDAL.SaveTestResults(BerwickHeights.Platform.PerfTest.Model.TestSuiteResult)">
-            <summary>
-            Save given performance test results in data store.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.DAL.IPerfTestDAL.GetTestResults(System.String)">
-            <summary>
-            Retrieve given performance test results from data store.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.DAL.IPerfTestDAL.GetTestResults(System.DateTime,System.DateTime)">
-            <summary>
-            Find performance test results for tests that started between the two given dates.
-            </summary>
-        </member>
-        <member name="T:BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc">
-            <summary>
-            This service provides persistence of performance test results data.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc.SaveTestResults(BerwickHeights.Platform.PerfTest.Model.TestSuiteResult)">
-            <summary>
-            Create or update the record for the given performance test results in data store. 
-            If the TestSuiteResultId property is set in the given data, then the record is
-            updated in the data store; otherwise, a new record is created in the data store.
-            All data associated with the test suite results (e.g., test results, system 
-            information, timing data) are cascade persisted.
-            </summary>
-            <param name="testSuiteResult">The performance results to store.</param>
-        </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc.GetTestResults(System.String)">
-            <summary>
-            Retrieve given performance test results from data store.
-            </summary>
-            <param name="testSuiteResultId">The unique ID of the performance test results to retrieve.</param>
-            <returns>The matching performance test results, or <code>null</code> if no matching
-            record is found.</returns>
-        </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc.GetTestResults(System.DateTime,System.DateTime)">
-            <summary>
-            Find performance test results for tests that started between the two given dates.
-            </summary>
-            <param name="startTime">The earliest time that a performance test started.</param>
-            <param name="endTime">The latest time that a performance test started.</param>
-            <returns>The list of matching performance test results, or an empty list if
-            no matching records are found.</returns>
-        </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc.GetCurrentTestResult">
-            <summary>
-            Retrieves the current performance test results from the thread local storage for 
-            this thread. By using thread local storage, the current performance test results 
-            can be retrieved at any point in the architecture stack.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc.SetCurrentTestResult(BerwickHeights.Platform.PerfTest.Model.TestResult)">
-            <summary>
-            Saves the given performance test result in the thread local storage for this
-            thread. By using thread local storage, the current performance test results 
-            can be retrieved at any point in the architecture stack.
-            </summary>
-            <param name="currentTestResult">The test result object used to store results for 
-            the current performance test.</param>
-        </member>
-        <member name="T:BerwickHeights.Platform.PerfTest.Model.TestResult">
-            <summary>
-            Performance data associated with a performance test (e.g., class and method that generated 
-            this data, when it took place, how long it took, whether or not it was successful etc).
+            Timing data for a performance test showing individual performance for sub-sections
+            of the test.
             </summary>
         </member>
         <member name="T:BerwickHeights.Platform.PerfTest.Model.TestResultBase">
@@ -188,67 +110,105 @@
             The method that generated this test data.
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Model.TestResult.#ctor">
+        <member name="M:BerwickHeights.Platform.PerfTest.Model.TimingData.#ctor">
             <summary>
             Parameterless constructor needed for NHibernate.
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Model.TestResult.#ctor(System.String,System.String)">
+        <member name="M:BerwickHeights.Platform.PerfTest.Model.TimingData.#ctor(System.DateTime,System.DateTime,System.String,System.String,System.String)">
             <summary>
             Constructor.
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Model.TestResult.ToString">
+        <member name="M:BerwickHeights.Platform.PerfTest.Model.TimingData.ToString">
             <inheritDoc/>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Model.TestResult.Equals(BerwickHeights.Platform.PerfTest.Model.TestResult)">
+        <member name="M:BerwickHeights.Platform.PerfTest.Model.TimingData.Equals(BerwickHeights.Platform.PerfTest.Model.TimingData)">
             <inheritDoc/>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Model.TestResult.Equals(System.Object)">
+        <member name="M:BerwickHeights.Platform.PerfTest.Model.TimingData.Equals(System.Object)">
             <inheritDoc/>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Model.TestResult.GetHashCode">
+        <member name="M:BerwickHeights.Platform.PerfTest.Model.TimingData.GetHashCode">
             <inheritDoc/>
         </member>
-        <member name="P:BerwickHeights.Platform.PerfTest.Model.TestResult.TestResultId">
+        <member name="P:BerwickHeights.Platform.PerfTest.Model.TimingData.TimingDataId">
             <summary>
-            Unique ID for this test data.
+            Unique ID for this timing data.
             </summary>
         </member>
-        <member name="P:BerwickHeights.Platform.PerfTest.Model.TestResult.IsSuccess">
+        <member name="P:BerwickHeights.Platform.PerfTest.Model.TimingData.TestResult">
             <summary>
-            Whether or not this test was successful.
+            The parent test result to which this timing data belongs.
             </summary>
-        </member>
-        <member name="P:BerwickHeights.Platform.PerfTest.Model.TestResult.TimingDataList">
-            <summary>
-            A list of timing data for this test showing individual performance for sub-sections
-            of this test.
-            </summary>
-        </member>
-        <member name="P:BerwickHeights.Platform.PerfTest.Model.TestResult.TestSuiteResult">
-            <summary>
-            The parent test run to which this data belongs.
-            </summary>
-        </member>
-        <member name="T:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL">
-            <inheritDoc/>
-        </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL.#ctor(NHibernate.ISessionFactory,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
-            <inheritDoc/>
-        </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL.SaveTestResults(BerwickHeights.Platform.PerfTest.Model.TestSuiteResult)">
-            <inheritDoc/>
-        </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL.GetTestResults(System.String)">
-            <inheritDoc/>
-        </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL.GetTestResults(System.DateTime,System.DateTime)">
-            <inheritDoc/>
         </member>
         <member name="T:BerwickHeights.Platform.PerfTest.Attrib.PerfTestAttribute">
             <summary>
             Method attribute to identify methods as a performance test.
+            </summary>
+        </member>
+        <member name="T:BerwickHeights.Platform.PerfTest.Model.SystemInfo">
+            <summary>
+            One piece of system information associated with a performance test run. Examples
+            include CPU type, amount of memory, OS type, etc.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.PerfTest.Model.SystemInfo.#ctor">
+            <summary>
+            Parameterless constructor needed for NHibernate.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.PerfTest.Model.SystemInfo.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.PerfTest.Model.SystemInfo.ToString">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.PerfTest.Model.SystemInfo.Equals(BerwickHeights.Platform.PerfTest.Model.SystemInfo)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.PerfTest.Model.SystemInfo.Equals(System.Object)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.PerfTest.Model.SystemInfo.GetHashCode">
+            <inheritDoc/>
+        </member>
+        <member name="P:BerwickHeights.Platform.PerfTest.Model.SystemInfo.SystemInfoId">
+            <summary>
+            Unique identifier for this piece of system information.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.PerfTest.Model.SystemInfo.Component">
+            <summary>
+            The type of component that this piece of system information applies to
+            (e.g., cpu, memory).
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.PerfTest.Model.SystemInfo.Name">
+            <summary>
+            The name of this piece of system information.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.PerfTest.Model.SystemInfo.Value">
+            <summary>
+            The value of this piece of system information.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.PerfTest.Model.SystemInfo.TestSuiteResult">
+            <summary>
+            The parent test run to which this system information belongs.
+            </summary>
+        </member>
+        <member name="T:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestFluentConfig">
+            <summary>
+            Configures FluentNHibernate to map the domain types used in PerfTest.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestFluentConfig.AutoMap(FluentNHibernate.Automapping.AutoPersistenceModel)">
+            <summary>
+            Configures FluentNHibernate to map the domain types used in PerfTest.
             </summary>
         </member>
         <member name="T:BerwickHeights.Platform.PerfTest.Model.TestSuiteResult">
@@ -299,7 +259,39 @@
             List of test results for each performance test in this test run.
             </summary>
         </member>
-        <member name="T:BerwickHeights.Platform.PerfTest.Test.PerfTestController">
+        <member name="T:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL">
+            <inheritDoc/>
+        </member>
+        <member name="T:BerwickHeights.Platform.PerfTest.DAL.IPerfTestDAL">
+            <summary>
+            Data access layer for storing and retrieving performance monitoring results in data store.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.PerfTest.DAL.IPerfTestDAL.SaveTestResults(BerwickHeights.Platform.PerfTest.Model.TestSuiteResult)">
+            <summary>
+            Save given performance test results in data store.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.PerfTest.DAL.IPerfTestDAL.GetTestResults(System.String)">
+            <summary>
+            Retrieve given performance test results from data store.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.PerfTest.DAL.IPerfTestDAL.GetTestResults(System.DateTime,System.DateTime)">
+            <summary>
+            Find performance test results for tests that started between the two given dates.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL.#ctor(NHibernate.ISessionFactory,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL.SaveTestResults(BerwickHeights.Platform.PerfTest.Model.TestSuiteResult)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL.GetTestResults(System.String)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.PerfTest.DAL.NHibernate.PerfTestDAL.GetTestResults(System.DateTime,System.DateTime)">
             <inheritDoc/>
         </member>
         <member name="T:BerwickHeights.Platform.PerfTest.Test.IPerfTestController">
@@ -363,25 +355,53 @@
             <param name="testId">Application-defined, unique ID for the current suite of tests. 
             Used to aggregate test suite results into a single record in data store.</param>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Test.PerfTestController.#ctor(BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc,BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
+        <member name="T:BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc">
             <summary>
-            Constructor
+            This service provides persistence of performance test results data.
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Test.PerfTestController.RunPerfTestsInAssemblies(System.String,System.String[])">
-            <inheritDoc/>
+        <member name="M:BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc.SaveTestResults(BerwickHeights.Platform.PerfTest.Model.TestSuiteResult)">
+            <summary>
+            Create or update the record for the given performance test results in data store. 
+            If the TestSuiteResultId property is set in the given data, then the record is
+            updated in the data store; otherwise, a new record is created in the data store.
+            All data associated with the test suite results (e.g., test results, system 
+            information, timing data) are cascade persisted.
+            </summary>
+            <param name="testSuiteResult">The performance results to store.</param>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Test.PerfTestController.BeginPerfTest(System.String,System.String,System.String,System.String)">
-            <inheritDoc/>
+        <member name="M:BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc.GetTestResults(System.String)">
+            <summary>
+            Retrieve given performance test results from data store.
+            </summary>
+            <param name="testSuiteResultId">The unique ID of the performance test results to retrieve.</param>
+            <returns>The matching performance test results, or <code>null</code> if no matching
+            record is found.</returns>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Test.PerfTestController.EndPerfTest(System.String)">
-            <inheritDoc/>
+        <member name="M:BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc.GetTestResults(System.DateTime,System.DateTime)">
+            <summary>
+            Find performance test results for tests that started between the two given dates.
+            </summary>
+            <param name="startTime">The earliest time that a performance test started.</param>
+            <param name="endTime">The latest time that a performance test started.</param>
+            <returns>The list of matching performance test results, or an empty list if
+            no matching records are found.</returns>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Test.PerfTestController.SavePerfTestResults(System.String)">
-            <inheritDoc/>
+        <member name="M:BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc.GetCurrentTestResult">
+            <summary>
+            Retrieves the current performance test results from the thread local storage for 
+            this thread. By using thread local storage, the current performance test results 
+            can be retrieved at any point in the architecture stack.
+            </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Test.PerfTestController.ClearPerfTestResults(System.String)">
-            <inheritDoc/>
+        <member name="M:BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc.SetCurrentTestResult(BerwickHeights.Platform.PerfTest.Model.TestResult)">
+            <summary>
+            Saves the given performance test result in the thread local storage for this
+            thread. By using thread local storage, the current performance test results 
+            can be retrieved at any point in the architecture stack.
+            </summary>
+            <param name="currentTestResult">The test result object used to store results for 
+            the current performance test.</param>
         </member>
         <member name="T:BerwickHeights.Platform.PerfTest.Svc.PerfTestSvc">
             <inheritDoc/>
@@ -406,43 +426,77 @@
         <member name="M:BerwickHeights.Platform.PerfTest.Svc.PerfTestSvc.SetCurrentTestResult(BerwickHeights.Platform.PerfTest.Model.TestResult)">
             <inheritDoc/>
         </member>
-        <member name="T:BerwickHeights.Platform.PerfTest.Model.TimingData">
+        <member name="T:BerwickHeights.Platform.PerfTest.Model.TestResult">
             <summary>
-            Timing data for a performance test showing individual performance for sub-sections
-            of the test.
+            Performance data associated with a performance test (e.g., class and method that generated 
+            this data, when it took place, how long it took, whether or not it was successful etc).
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Model.TimingData.#ctor">
+        <member name="M:BerwickHeights.Platform.PerfTest.Model.TestResult.#ctor">
             <summary>
             Parameterless constructor needed for NHibernate.
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Model.TimingData.#ctor(System.DateTime,System.DateTime,System.String,System.String,System.String)">
+        <member name="M:BerwickHeights.Platform.PerfTest.Model.TestResult.#ctor(System.String,System.String)">
             <summary>
             Constructor.
             </summary>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Model.TimingData.ToString">
+        <member name="M:BerwickHeights.Platform.PerfTest.Model.TestResult.ToString">
             <inheritDoc/>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Model.TimingData.Equals(BerwickHeights.Platform.PerfTest.Model.TimingData)">
+        <member name="M:BerwickHeights.Platform.PerfTest.Model.TestResult.Equals(BerwickHeights.Platform.PerfTest.Model.TestResult)">
             <inheritDoc/>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Model.TimingData.Equals(System.Object)">
+        <member name="M:BerwickHeights.Platform.PerfTest.Model.TestResult.Equals(System.Object)">
             <inheritDoc/>
         </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Model.TimingData.GetHashCode">
+        <member name="M:BerwickHeights.Platform.PerfTest.Model.TestResult.GetHashCode">
             <inheritDoc/>
         </member>
-        <member name="P:BerwickHeights.Platform.PerfTest.Model.TimingData.TimingDataId">
+        <member name="P:BerwickHeights.Platform.PerfTest.Model.TestResult.TestResultId">
             <summary>
-            Unique ID for this timing data.
+            Unique ID for this test data.
             </summary>
         </member>
-        <member name="P:BerwickHeights.Platform.PerfTest.Model.TimingData.TestResult">
+        <member name="P:BerwickHeights.Platform.PerfTest.Model.TestResult.IsSuccess">
             <summary>
-            The parent test result to which this timing data belongs.
+            Whether or not this test was successful.
             </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.PerfTest.Model.TestResult.TimingDataList">
+            <summary>
+            A list of timing data for this test showing individual performance for sub-sections
+            of this test.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.PerfTest.Model.TestResult.TestSuiteResult">
+            <summary>
+            The parent test run to which this data belongs.
+            </summary>
+        </member>
+        <member name="T:BerwickHeights.Platform.PerfTest.Test.PerfTestController">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.PerfTest.Test.PerfTestController.#ctor(BerwickHeights.Platform.PerfTest.Svc.IPerfTestSvc,BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc,BerwickHeights.Platform.Core.Logging.ILoggerFactory)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.PerfTest.Test.PerfTestController.RunPerfTestsInAssemblies(System.String,System.String[])">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.PerfTest.Test.PerfTestController.BeginPerfTest(System.String,System.String,System.String,System.String)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.PerfTest.Test.PerfTestController.EndPerfTest(System.String)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.PerfTest.Test.PerfTestController.SavePerfTestResults(System.String)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.PerfTest.Test.PerfTestController.ClearPerfTestResults(System.String)">
+            <inheritDoc/>
         </member>
         <member name="T:BerwickHeights.Platform.PerfTest.Test.IPerfTestApp">
             <summary>
@@ -466,60 +520,6 @@
             <summary>
             This is run after all the methods marked with the "PerfTest" attribute are run. Allows app-specific
             logic to clean up after the performance tests have run.
-            </summary>
-        </member>
-        <member name="T:BerwickHeights.Platform.PerfTest.Model.SystemInfo">
-            <summary>
-            One piece of system information associated with a performance test run. Examples
-            include CPU type, amount of memory, OS type, etc.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Model.SystemInfo.#ctor">
-            <summary>
-            Parameterless constructor needed for NHibernate.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Model.SystemInfo.#ctor(System.String,System.String,System.String)">
-            <summary>
-            Constructor.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Model.SystemInfo.ToString">
-            <inheritDoc/>
-        </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Model.SystemInfo.Equals(BerwickHeights.Platform.PerfTest.Model.SystemInfo)">
-            <inheritDoc/>
-        </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Model.SystemInfo.Equals(System.Object)">
-            <inheritDoc/>
-        </member>
-        <member name="M:BerwickHeights.Platform.PerfTest.Model.SystemInfo.GetHashCode">
-            <inheritDoc/>
-        </member>
-        <member name="P:BerwickHeights.Platform.PerfTest.Model.SystemInfo.SystemInfoId">
-            <summary>
-            Unique identifier for this piece of system information.
-            </summary>
-        </member>
-        <member name="P:BerwickHeights.Platform.PerfTest.Model.SystemInfo.Component">
-            <summary>
-            The type of component that this piece of system information applies to
-            (e.g., cpu, memory).
-            </summary>
-        </member>
-        <member name="P:BerwickHeights.Platform.PerfTest.Model.SystemInfo.Name">
-            <summary>
-            The name of this piece of system information.
-            </summary>
-        </member>
-        <member name="P:BerwickHeights.Platform.PerfTest.Model.SystemInfo.Value">
-            <summary>
-            The value of this piece of system information.
-            </summary>
-        </member>
-        <member name="P:BerwickHeights.Platform.PerfTest.Model.SystemInfo.TestSuiteResult">
-            <summary>
-            The parent test run to which this system information belongs.
             </summary>
         </member>
     </members>

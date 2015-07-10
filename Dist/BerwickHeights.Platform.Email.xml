@@ -4,30 +4,6 @@
         <name>BerwickHeights.Platform.Email</name>
     </assembly>
     <members>
-        <member name="T:BerwickHeights.Platform.Email.EmailDeliveryResult">
-            <summary>
-            Result type for the EmailDeliverySvc.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.Email.EmailDeliveryResult.#ctor(System.String)">
-            <summary>
-            Constructor.
-            </summary>
-            <param name="failureMessage">Message indicating nature of failure. Set to null if successful.</param>
-        </member>
-        <member name="M:BerwickHeights.Platform.Email.EmailDeliveryResult.ToString">
-            <inheritDoc/>
-        </member>
-        <member name="P:BerwickHeights.Platform.Email.EmailDeliveryResult.IsSuccess">
-            <summary>
-            Whether or not the email was delivered successfully to SMTP server.
-            </summary>
-        </member>
-        <member name="P:BerwickHeights.Platform.Email.EmailDeliveryResult.FailureMessage">
-            <summary>
-            A message as to why the email was not delivered successfully to SMTP server.
-            </summary>
-        </member>
         <member name="T:BerwickHeights.Platform.Email.IEmailDeliverySvc">
             <summary>
             Interface to a service that sends email to an SMTP server for delivery.
@@ -59,6 +35,30 @@
         </member>
         <member name="M:BerwickHeights.Platform.Email.EmailDeliverySvc.DeliverEmail(System.String,System.Collections.Generic.IEnumerable{System.String},System.String,System.String,System.Boolean,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.Net.Mail.Attachment})">
             <inheritDoc/>
+        </member>
+        <member name="T:BerwickHeights.Platform.Email.EmailDeliveryResult">
+            <summary>
+            Result type for the EmailDeliverySvc.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.Email.EmailDeliveryResult.#ctor(System.String)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="failureMessage">Message indicating nature of failure. Set to null if successful.</param>
+        </member>
+        <member name="M:BerwickHeights.Platform.Email.EmailDeliveryResult.ToString">
+            <inheritDoc/>
+        </member>
+        <member name="P:BerwickHeights.Platform.Email.EmailDeliveryResult.IsSuccess">
+            <summary>
+            Whether or not the email was delivered successfully to SMTP server.
+            </summary>
+        </member>
+        <member name="P:BerwickHeights.Platform.Email.EmailDeliveryResult.FailureMessage">
+            <summary>
+            A message as to why the email was not delivered successfully to SMTP server.
+            </summary>
         </member>
     </members>
 </doc>

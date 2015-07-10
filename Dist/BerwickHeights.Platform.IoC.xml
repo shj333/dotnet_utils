@@ -122,28 +122,6 @@
             </summary>
             <typeparam name="T">The requested component interface.</typeparam>
         </member>
-        <member name="T:BerwickHeights.Platform.IoC.IoCContainerManagerFactory">
-            <summary>
-            Static class factory to get singleton instance of the IoC container manager.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerFactory.GetIoCContainerManager">
-            <summary>
-            Returns the singleton instance of the IoC container manager configured in application configuration 
-            according to the key "IoCContainerType". The configured value should be the fully qualified type name 
-            of the IoC container manager (full type name and assembly).
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerFactory.GetIoCContainerManager(System.String)">
-            <summary>
-            Returns the singleton instance of the IoC container manager specified by containerType. If containerType
-            is empty, then uses the container manager configured in application configuration according to the key 
-            "IoCContainerType". The configured value should be the fully qualified type name of the IoC container 
-            manager (full type name and assembly).
-            </summary>
-            <param name="containerType">The fully qualified type name of the IoC container manager (full type name 
-            and assembly).</param>
-        </member>
         <member name="T:BerwickHeights.Platform.IoC.IoCContainerManagerBase">
             <summary>
             Abstract base class for IoC container managers.
@@ -207,6 +185,28 @@
         </member>
         <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerBase.ResolveAll``1">
             <inheritDoc/>
+        </member>
+        <member name="T:BerwickHeights.Platform.IoC.IoCContainerManagerFactory">
+            <summary>
+            Static class factory to get singleton instance of the IoC container manager.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerFactory.GetIoCContainerManager">
+            <summary>
+            Returns the singleton instance of the IoC container manager configured in application configuration 
+            according to the key "IoCContainerType". The configured value should be the fully qualified type name 
+            of the IoC container manager (full type name and assembly).
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.IoCContainerManagerFactory.GetIoCContainerManager(System.String)">
+            <summary>
+            Returns the singleton instance of the IoC container manager specified by containerType. If containerType
+            is empty, then uses the container manager configured in application configuration according to the key 
+            "IoCContainerType". The configured value should be the fully qualified type name of the IoC container 
+            manager (full type name and assembly).
+            </summary>
+            <param name="containerType">The fully qualified type name of the IoC container manager (full type name 
+            and assembly).</param>
         </member>
     </members>
 </doc>

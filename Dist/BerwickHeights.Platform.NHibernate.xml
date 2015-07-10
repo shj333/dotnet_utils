@@ -4,9 +4,105 @@
         <name>BerwickHeights.Platform.NHibernate</name>
     </assembly>
     <members>
-        <member name="T:BerwickHeights.Platform.NHibernate.Fluent.INHibernateComponent">
+        <member name="T:BerwickHeights.Platform.NHibernate.Fluent.Conventions.ForeignKeyConvention">
             <summary>
-            Empty interface to indicate which domain types are mapped as NHibernate components using FluentNHibernate.
+            Conventions for handling foreign keys in FluentNHibernate
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.Conventions.ForeignKeyConvention.GetKeyName(FluentNHibernate.Member,System.Type)">
+            <summary>
+            Get foreign key name
+            </summary>
+        </member>
+        <member name="T:BerwickHeights.Platform.NHibernate.Fluent.Conventions.TableNameConvention">
+            <summary>
+            Sets table names in FluentNHibernate to the class name prefixed by the value in the SqlTableNamePrefix
+            configuration key. 
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.Conventions.TableNameConvention.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.Conventions.TableNameConvention.Apply(FluentNHibernate.Conventions.Instances.IClassInstance)">
+            <summary>
+            Sets table names in FluentNHibernate to the class name prefixed by the value in the SqlTableNamePrefix
+            configuration key. 
+            </summary>
+        </member>
+        <member name="T:BerwickHeights.Platform.NHibernate.Fluent.Conventions.NotNullableConvention">
+            <summary>
+            Sets all properties to "not nullable" in FluentNHibernate.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.Conventions.NotNullableConvention.Apply(FluentNHibernate.Conventions.Instances.IPropertyInstance)">
+            <summary>
+            Sets all properties to "not nullable" in FluentNHibernate.
+            </summary>
+        </member>
+        <member name="T:BerwickHeights.Platform.NHibernate.Fluent.Conventions.EnumConvention">
+            <summary>
+            Conventions for handling enum properties in FluentNHibernate. The SQL type is set by default to TINYINT but
+            this can be overridden by the EnumSqlType configuration key.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.Conventions.EnumConvention.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.Conventions.EnumConvention.Accept(FluentNHibernate.Conventions.AcceptanceCriteria.IAcceptanceCriteria{FluentNHibernate.Conventions.Inspections.IPropertyInspector})">
+            <summary>
+            Only use with enums
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.Conventions.EnumConvention.Apply(FluentNHibernate.Conventions.Instances.IPropertyInstance)">
+            <summary>
+            The SQL type is set by default to TINYINT but this can be overridden by the EnumSqlType configuration key.
+            </summary>
+        </member>
+        <member name="T:BerwickHeights.Platform.NHibernate.Interceptors.AuditInterceptor">
+            <summary>
+            NHibernate interceptor that fills in the Created, CreatedBy, Modified and
+            ModifiedBy columns before the record is written to the database.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.Interceptors.AuditInterceptor.#ctor(BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc)">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.Interceptors.AuditInterceptor.OnFlushDirty(System.Object,System.Object,System.Object[],System.Object[],System.String[],NHibernate.Type.IType[])">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.Interceptors.AuditInterceptor.OnSave(System.Object,System.Object,System.Object[],System.String[],NHibernate.Type.IType[])">
+            <inheritDoc/>
+        </member>
+        <member name="T:BerwickHeights.Platform.NHibernate.Fluent.Conventions.StringConvention">
+            <summary>
+            Conventions for handling string properties in FluentNHibernate. If the property name contains any of the 
+            configured strings in BigStringPropertyNames, then the SQL type of the property is set to NVARCHAR(MAX); the
+            SQL type can be overridden by the BigStringSqlType configuration key. Also adds a unique constraint for
+            domain ids and external ids.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.Conventions.StringConvention.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.Conventions.StringConvention.Apply(FluentNHibernate.Conventions.Instances.IPropertyInstance)">
+            <summary>
+            Conventions for handling string properties in FluentNHibernate. If the property name contains any of the 
+            configured strings in BigStringPropertyNames, then the SQL type of the property is set to NVARCHAR(MAX); the
+            SQL type can be overridden by the BigStringSqlType configuration key. Also adds a unique constraint for
+            domain ids and external ids.
+            </summary>
+        </member>
+        <member name="T:BerwickHeights.Platform.NHibernate.Fluent.INHibernateEntity">
+            <summary>
+            Empty interface to indicate which domain types are mapped as NHibernate entities using FluentNHibernate.
             </summary>
         </member>
         <member name="T:BerwickHeights.Platform.NHibernate.Fluent.FluentConfigUtils">
@@ -38,23 +134,6 @@
             <param name="cacheSettings">The cache settings that are built.</param>
             <param name="regionPrefix">The prefix used in second level cache region.</param>
         </member>
-        <member name="T:BerwickHeights.Platform.NHibernate.Fluent.Conventions.TableNameConvention">
-            <summary>
-            Sets table names in FluentNHibernate to the class name prefixed by the value in the SqlTableNamePrefix
-            configuration key. 
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.Conventions.TableNameConvention.#ctor">
-            <summary>
-            Constructor
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.Conventions.TableNameConvention.Apply(FluentNHibernate.Conventions.Instances.IClassInstance)">
-            <summary>
-            Sets table names in FluentNHibernate to the class name prefixed by the value in the SqlTableNamePrefix
-            configuration key. 
-            </summary>
-        </member>
         <member name="T:BerwickHeights.Platform.NHibernate.Fluent.AutomapConfig">
             <summary>
             Sets up conventions used in configuring the mappings for NHibernate.
@@ -81,6 +160,21 @@
             <summary>
             Declares the given domain type member as the identity (primary key) if it is named SystemId or 
             {TypeName}Id.
+            </summary>
+        </member>
+        <member name="T:BerwickHeights.Platform.NHibernate.Fluent.Conventions.IdConvention">
+            <summary>
+            Sets identities (primary keys) in FluentNHibernate mappings to use UNIQUEIDENTIFIER as the SQL type
+            but this can be overridden by the IdSqlType configuration key. Sets the GuidComb algorithm to be used
+            to generate new identifiers (see Jimmy Nilsson's article at 
+            http://www.informit.com/articles/article.aspx?p=25862&amp;seqNum=7).
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.Conventions.IdConvention.Apply(FluentNHibernate.Conventions.Instances.IIdentityInstance)">
+            <summary>
+            If identity is a Guid, then sets the GuidComb algorithm to be used to generate new identifiers (see 
+            Jimmy Nilsson's article at 
+            http://www.informit.com/articles/article.aspx?p=25862&amp;seqNum=7).
             </summary>
         </member>
         <member name="T:BerwickHeights.Platform.NHibernate.Interceptors.TransactionInterceptor">
@@ -123,103 +217,9 @@
             List of namespaces for types that are transactional.
             </summary>
         </member>
-        <member name="T:BerwickHeights.Platform.NHibernate.Fluent.INHibernateEntity">
+        <member name="T:BerwickHeights.Platform.NHibernate.Fluent.INHibernateComponent">
             <summary>
-            Empty interface to indicate which domain types are mapped as NHibernate entities using FluentNHibernate.
-            </summary>
-        </member>
-        <member name="T:BerwickHeights.Platform.NHibernate.Fluent.Conventions.NotNullableConvention">
-            <summary>
-            Sets all properties to "not nullable" in FluentNHibernate.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.Conventions.NotNullableConvention.Apply(FluentNHibernate.Conventions.Instances.IPropertyInstance)">
-            <summary>
-            Sets all properties to "not nullable" in FluentNHibernate.
-            </summary>
-        </member>
-        <member name="T:BerwickHeights.Platform.NHibernate.Fluent.Conventions.IdConvention">
-            <summary>
-            Sets identities (primary keys) in FluentNHibernate mappings to use UNIQUEIDENTIFIER as the SQL type
-            but this can be overridden by the IdSqlType configuration key. Sets the GuidComb algorithm to be used
-            to generate new identifiers (see Jimmy Nilsson's article at 
-            http://www.informit.com/articles/article.aspx?p=25862&amp;seqNum=7).
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.Conventions.IdConvention.Apply(FluentNHibernate.Conventions.Instances.IIdentityInstance)">
-            <summary>
-            If identity is a Guid, then sets the GuidComb algorithm to be used to generate new identifiers (see 
-            Jimmy Nilsson's article at 
-            http://www.informit.com/articles/article.aspx?p=25862&amp;seqNum=7).
-            </summary>
-        </member>
-        <member name="T:BerwickHeights.Platform.NHibernate.Interceptors.AuditInterceptor">
-            <summary>
-            NHibernate interceptor that fills in the Created, CreatedBy, Modified and
-            ModifiedBy columns before the record is written to the database.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.NHibernate.Interceptors.AuditInterceptor.#ctor(BerwickHeights.Platform.Core.CurrentUser.ICurrentUserSvc)">
-            <summary>
-            Constructor.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.NHibernate.Interceptors.AuditInterceptor.OnFlushDirty(System.Object,System.Object,System.Object[],System.Object[],System.String[],NHibernate.Type.IType[])">
-            <inheritDoc/>
-        </member>
-        <member name="M:BerwickHeights.Platform.NHibernate.Interceptors.AuditInterceptor.OnSave(System.Object,System.Object,System.Object[],System.String[],NHibernate.Type.IType[])">
-            <inheritDoc/>
-        </member>
-        <member name="T:BerwickHeights.Platform.NHibernate.Fluent.Conventions.ForeignKeyConvention">
-            <summary>
-            Conventions for handling foreign keys in FluentNHibernate
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.Conventions.ForeignKeyConvention.GetKeyName(FluentNHibernate.Member,System.Type)">
-            <summary>
-            Get foreign key name
-            </summary>
-        </member>
-        <member name="T:BerwickHeights.Platform.NHibernate.Fluent.Conventions.StringConvention">
-            <summary>
-            Conventions for handling string properties in FluentNHibernate. If the property name contains any of the 
-            configured strings in BigStringPropertyNames, then the SQL type of the property is set to NVARCHAR(MAX); the
-            SQL type can be overridden by the BigStringSqlType configuration key. Also adds a unique constraint for
-            domain ids and external ids.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.Conventions.StringConvention.#ctor">
-            <summary>
-            Constructor
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.Conventions.StringConvention.Apply(FluentNHibernate.Conventions.Instances.IPropertyInstance)">
-            <summary>
-            Conventions for handling string properties in FluentNHibernate. If the property name contains any of the 
-            configured strings in BigStringPropertyNames, then the SQL type of the property is set to NVARCHAR(MAX); the
-            SQL type can be overridden by the BigStringSqlType configuration key. Also adds a unique constraint for
-            domain ids and external ids.
-            </summary>
-        </member>
-        <member name="T:BerwickHeights.Platform.NHibernate.Fluent.Conventions.EnumConvention">
-            <summary>
-            Conventions for handling enum properties in FluentNHibernate. The SQL type is set by default to TINYINT but
-            this can be overridden by the EnumSqlType configuration key.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.Conventions.EnumConvention.#ctor">
-            <summary>
-            Constructor
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.Conventions.EnumConvention.Accept(FluentNHibernate.Conventions.AcceptanceCriteria.IAcceptanceCriteria{FluentNHibernate.Conventions.Inspections.IPropertyInspector})">
-            <summary>
-            Only use with enums
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.NHibernate.Fluent.Conventions.EnumConvention.Apply(FluentNHibernate.Conventions.Instances.IPropertyInstance)">
-            <summary>
-            The SQL type is set by default to TINYINT but this can be overridden by the EnumSqlType configuration key.
+            Empty interface to indicate which domain types are mapped as NHibernate components using FluentNHibernate.
             </summary>
         </member>
         <member name="T:BerwickHeights.Platform.NHibernate.DAL.PersistenceDALBase">
