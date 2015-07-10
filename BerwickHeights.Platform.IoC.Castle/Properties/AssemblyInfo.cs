@@ -33,6 +33,6 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.12146.2217")]
+[assembly: AssemblyFileVersion("1.0.15191.1454")]
 
 [assembly: InternalsVisibleTo("BerwickHeights.Platform.IoC")]
