@@ -17,9 +17,9 @@ using BerwickHeights.Platform.Core.Logging;
 namespace BerwickHeights.Platform.Core.Config.AppConfig
 {
     /// <summary>
-    /// Implementation of IConfiguration service using application configuration as source.
+    /// Implementation of IConfiguration service using application configuration (ConfigurationManager) as source.
     /// </summary>
-    class ConfigurationSvc : ConfigurationSvcBase
+    public class ConfigurationSvc : ConfigurationSvcBase
     {
         #region Constructors
 
@@ -34,6 +34,10 @@ namespace BerwickHeights.Platform.Core.Config.AppConfig
 
         #region Overrides
 
+        /// <summary>
+        /// Gets configuration value for given key from application configuration (ConfigurationManager).
+        /// </summary>
+        /// <param name="key">Key to configuration value.</param>
         protected override string GetValue(string key)
         {
             return ConfigurationManager.AppSettings[key];
