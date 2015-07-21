@@ -13,7 +13,6 @@
 
 using System;
 using System.Collections;
-using System.Configuration;
 using BerwickHeights.Platform.Core.IoC;
 using BerwickHeights.Platform.Core.Test;
 using BerwickHeights.Platform.IoC;
@@ -27,7 +26,6 @@ using BerwickHeights.Platform.PerfTest.Test;
 using FluentNHibernate.Automapping;
 using NHibernate;
 using NHibernate.Caches.SysCache;
-using ServiceStack.Redis;
 using NHCfg = NHibernate.Cfg;
 using NUnit.Framework;
 using ILoggerFactory = BerwickHeights.Platform.Logging;
@@ -55,7 +53,7 @@ namespace BerwickHeights.Platform.NHibernate.Test
                     new string[] { "BerwickHeights.Platform" }, 
                     new string[]
                     {
-                        "BerwickHeights.Platform.Config.Redis.ConfigurationSvc",
+                        "BerwickHeights.Platform.Core.Config.AppConfig.ConfigurationSvc",
                         "BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc", 
                         "BerwickHeights.Platform.IoC.Castle.Logger",
                         "BerwickHeights.Platform.NHibernate.Interceptors.AuditInterceptor",
@@ -68,23 +66,15 @@ namespace BerwickHeights.Platform.NHibernate.Test
                     new string[] { "BerwickHeights" }, 
                     new string[]
                     {
-                        "BerwickHeights.Platform.Config.Redis.ConfigurationSvc",
+                        "BerwickHeights.Platform.Core.Config.AppConfig.ConfigurationSvc",
                         "BerwickHeights.Platform.Core.CurrentUser.CurrentUserSvc", 
                         "BerwickHeights.Platform.IoC.Castle.Logger",
                         "BerwickHeights.Platform.NHibernate.Interceptors.AuditInterceptor"
                     }));
 
-            string redisNetAddr = ConfigurationManager.AppSettings["RedisNetAddr"];
-            if (string.IsNullOrEmpty(redisNetAddr)) throw new Exception("Network address for Redis server not configured (RedisNetAddr)");
-            string redisDbNumStr = ConfigurationManager.AppSettings["RedisDbNumber"];
-            int redisDbNum = (string.IsNullOrEmpty(redisDbNumStr)) ? 0 : int.Parse(redisDbNumStr);
-            container.RegisterComponentInstance(typeof(IRedisClientsManager),
-                new PooledRedisClientManager(redisDbNum, redisNetAddr), "RedisClientsManager");
-
             // Register components in assemblies
             container.RegisterInProcComponents(
                 "BerwickHeights.Platform.Core",
-                "BerwickHeights.Platform.Config.Redis",
                 "BerwickHeights.Platform.PerfTest");
             container.RegisterComponent(typeof(ITestDataSvc), typeof(TestDataSvc));
             container.RegisterComponent(typeof(IInterceptor), typeof(AuditInterceptor));
