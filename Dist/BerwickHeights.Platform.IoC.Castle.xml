@@ -25,27 +25,6 @@
         <member name="M:BerwickHeights.Platform.IoC.Castle.MethodLoggingInterceptor.ProceedWithMethodCall(System.Object)">
             <inheritDoc/>
         </member>
-        <member name="T:BerwickHeights.Platform.IoC.Castle.InterceptorSelector">
-            <summary>
-            Adds configured Castle Windsor interceptors to components matching configured parameters.
-            </summary>
-        </member>
-        <member name="F:BerwickHeights.Platform.IoC.Castle.InterceptorSelector.InterceptorNamePrefix">
-            <summary>
-            Prefix for the names of the interceptors.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.InterceptorSelector.#ctor(System.Collections.Generic.IEnumerable{BerwickHeights.Platform.Core.IoC.InterceptorDescriptor})">
-            <summary>
-            Constructor.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.InterceptorSelector.HasInterceptors(Castle.Core.ComponentModel)">
-            <inheritDoc/>
-        </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.InterceptorSelector.SelectInterceptors(Castle.Core.ComponentModel,Castle.Core.InterceptorReference[])">
-            <inheritDoc/>
-        </member>
         <member name="T:BerwickHeights.Platform.IoC.Castle.CastleContainerManager">
             <summary>
             Manages the IoC container for Windsor Castle.
@@ -104,6 +83,38 @@
         <member name="M:BerwickHeights.Platform.IoC.Castle.CastleContainerManager.Dispose">
             <inheritDoc/>
         </member>
+        <member name="T:BerwickHeights.Platform.IoC.Castle.CastleMVCControllerFactory">
+            <summary>
+            Factory that manages ASP.Net MVC controller instances using a Castle Windsor container.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleMVCControllerFactory.GetControllerInstance(System.Web.Routing.RequestContext,System.Type)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleMVCControllerFactory.ReleaseController(System.Web.Mvc.IController)">
+            <inheritDoc/>
+        </member>
+        <member name="T:BerwickHeights.Platform.IoC.Castle.InterceptorSelector">
+            <summary>
+            Adds configured Castle Windsor interceptors to components matching configured parameters.
+            </summary>
+        </member>
+        <member name="F:BerwickHeights.Platform.IoC.Castle.InterceptorSelector.InterceptorNamePrefix">
+            <summary>
+            Prefix for the names of the interceptors.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.Castle.InterceptorSelector.#ctor(System.Collections.Generic.IEnumerable{BerwickHeights.Platform.Core.IoC.InterceptorDescriptor})">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.Castle.InterceptorSelector.HasInterceptors(Castle.Core.ComponentModel)">
+            <inheritDoc/>
+        </member>
+        <member name="M:BerwickHeights.Platform.IoC.Castle.InterceptorSelector.SelectInterceptors(Castle.Core.ComponentModel,Castle.Core.InterceptorReference[])">
+            <inheritDoc/>
+        </member>
         <member name="T:BerwickHeights.Platform.IoC.Castle.InterceptorsInstaller">
             <summary>
             Castle Windsor Installer that handles the insertion of interceptors into Castle components.
@@ -122,17 +133,6 @@
             </summary>
             <param name="container">The Castle Windsor dependency injection container.</param>
             <param name="store">Configuration for this container.</param>
-        </member>
-        <member name="T:BerwickHeights.Platform.IoC.Castle.CastleMVCControllerFactory">
-            <summary>
-            Factory that manages ASP.Net MVC controller instances using a Castle Windsor container.
-            </summary>
-        </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleMVCControllerFactory.GetControllerInstance(System.Web.Routing.RequestContext,System.Type)">
-            <inheritDoc/>
-        </member>
-        <member name="M:BerwickHeights.Platform.IoC.Castle.CastleMVCControllerFactory.ReleaseController(System.Web.Mvc.IController)">
-            <inheritDoc/>
         </member>
     </members>
 </doc>
