@@ -51,13 +51,13 @@ namespace BerwickHeights.Platform.Config.Redis.Test
 
             using (IRedisClient redis = iocContainer.Resolve<IRedisClientsManager>().GetClient())
             {
-                redis.SetEntry(testKeyPrefix + testBoolCfgTrueKey, "true");
-                redis.SetEntry(testKeyPrefix + testBoolCfgFalseKey, "false");
-                redis.SetEntry(testKeyPrefix + testIntCfgKey, testInt + "");
-                redis.SetEntry(testKeyPrefix + testStrCfgKey, testStr);
+                redis.SetValue(testKeyPrefix + testBoolCfgTrueKey, "true");
+                redis.SetValue(testKeyPrefix + testBoolCfgFalseKey, "false");
+                redis.SetValue(testKeyPrefix + testIntCfgKey, testInt + "");
+                redis.SetValue(testKeyPrefix + testStrCfgKey, testStr);
                 string val = testStrArray.Aggregate("", (current, str) => current + (str + ","));
                 val = val.Substring(0, val.Length - 1);
-                redis.SetEntry(testKeyPrefix + testStrArrayCfgKey, val);
+                redis.SetValue(testKeyPrefix + testStrArrayCfgKey, val);
             }
         }
 

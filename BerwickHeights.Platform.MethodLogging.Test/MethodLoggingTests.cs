@@ -47,7 +47,7 @@ namespace BerwickHeights.Platform.MethodLogging.Test
             iocContainer.RegisterComponentInstance(typeof(IRedisClientsManager), new PooledRedisClientManager(redisNetAddr), "RedisClientsManager");
             using (IRedisClient redis = iocContainer.Resolve<IRedisClientsManager>().GetClient())
             {
-                redis.SetEntry("BHS:ConfigKey:" + ConfigurationSvcBase.TraceMethodsConfigKey, "true");
+                redis.SetValue("BHS:ConfigKey:" + ConfigurationSvcBase.TraceMethodsConfigKey, "true");
             }
 
             MethodLoggingInterceptorBase.ConfigData loggerCfg = new MethodLoggingInterceptorBase.ConfigData(true, true, new string[] { "pass" });
@@ -67,7 +67,7 @@ namespace BerwickHeights.Platform.MethodLogging.Test
         {
             using (IRedisClient redis = iocContainer.Resolve<IRedisClientsManager>().GetClient())
             {
-                redis.SetEntry(ConfigurationSvcBase.TraceMethodsConfigKey, "false");
+                redis.SetValue(ConfigurationSvcBase.TraceMethodsConfigKey, "false");
             }
         }
 

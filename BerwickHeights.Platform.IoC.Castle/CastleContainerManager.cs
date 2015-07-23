@@ -97,7 +97,7 @@ namespace BerwickHeights.Platform.IoC.Castle
                 try
                 {
                     // Get types in assembly to see if they need to be registered
-                    FromAssemblyDescriptor types = AllTypes.FromAssemblyNamed(assemblyName);
+                    FromAssemblyDescriptor types = Types.FromAssemblyNamed(assemblyName);
                     
                     // Register components whose interface inherits from IIocComponent interface
                     container.Register(types.BasedOn<IIoCComponent>()
